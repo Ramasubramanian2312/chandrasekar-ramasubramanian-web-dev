@@ -17,85 +17,50 @@
         <div class="navbar-header">
 
             <p class="navbar-text pull-left">
-                <a href="/assignment/widget/widget-list.html" class="navbar-link">
+                <a href="/assignment/page/page-list.html" class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left">
                     </span>
                 </a>
             </p>
 
             <a class="navbar-brand" href="#">
-                Choose Widget
+                Edit Page
             </a>
 
+            <p class="navbar-text pull-right">
+                <a href="/assignment/page/page-list.html" class="navbar-link">
+                    <span class="glyphicon glyphicon-ok">
+                    </span>
+                </a>
+            </p>
+            
         </div>
     </div>
 
 </nav>
 
 <div class="container">
-    <ul class="list-group">
 
-        <li class="list-group-item">
-            <a href="/assignment/widget/widget-heading.html">
-                Header
-            </a>
-        </li>
+    <div class="form-group">
+        <label for="page-name">Name</label>
+        <input type="text"
+               class="form-control"
+               id="page-name"
+               value="Blog Post"
+               placeholder="Page Name">
+    </div>
 
-        <li class="list-group-item">
-            <a href="#">
-                Label
-            </a>
-        </li>
+    <div class="form-group">
+        <label for="page-title">Title</label>
+        <input type="text"
+               class="form-control"
+               id="page-title"
+               placeholder="Page Title">
+    </div>
 
-        <li class="list-group-item">
-            <a href="#">
-                HTML
-            </a>
-        </li>
+    <a class="btn btn-danger btn-block"
+       href="/assignment/page/page-list.html">Delete</a>
 
-        <li class="list-group-item">
-            <a href="#">
-                Text Input
-            </a>
-        </li>
-
-        <li class="list-group-item">
-            <a href="#">
-                Link
-            </a>
-        </li>
-
-        <li class="list-group-item">
-            <a href="#">
-                Button
-            </a>
-        </li>
-
-        <li class="list-group-item">
-            <a href="/assignment/widget/widget-image.html">
-                Image
-            </a>
-        </li>
-
-        <li class="list-group-item">
-            <a href="/assignment/widget/widget-youtube.html">
-                YouTube
-            </a>
-        </li>
-
-        <li class="list-group-item">
-            <a href="#">
-                Data Table
-            </a>
-        </li>
-
-        <li class="list-group-item">
-            <a href="#">
-                Repeater
-            </a>
-        </li>
-
-    </ul>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
@@ -117,5 +82,6 @@
     </div>
 
 </nav>
+
 </body>
 </html>
