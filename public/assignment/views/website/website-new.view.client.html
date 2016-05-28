@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="viewport" content="initial-scale=1.25, user-scalable = no">
-    <title>New Website Page</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/assignment/css/style.css" rel="stylesheet" />
-</head>
-
-<body>
 <nav class="navbar navbar-default navbar-fixed-top">
-
     <div class="container-fluid">
         <div class="navbar-header">
 
@@ -28,7 +14,7 @@
             </a>
 
             <p class="navbar-text pull-right">
-                <a href="/assignment/website/website-list.html" class="navbar-link">
+                <a ng-click="model.createWebsite(name, description)" class="navbar-link">
                     <span class="glyphicon glyphicon-ok">
                     </span>
                 </a>
@@ -36,14 +22,13 @@
 
         </div>
     </div>
-
 </nav>
 
 <div class="container">
-
     <div class="form-group">
         <label for="website-name">Name</label>
-        <input type="text"
+        <input ng-model="name"
+               type="text"
                class="form-control"
                id="website-name"
                placeholder="Name">
@@ -51,9 +36,8 @@
 
     <div class="form-group">
         <label for="website-description">Description</label>
-        <textarea rows="4" id="website-description" class="form-control" placeholder="Description"></textarea>
+        <textarea ng-model="description" rows="4" id="website-description" class="form-control" placeholder="Description"></textarea>
     </div>
-
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
@@ -75,5 +59,3 @@
 
     </div>
 </nav>
-</body>
-</html>

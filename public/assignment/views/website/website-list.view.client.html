@@ -7,7 +7,7 @@
             </a>
 
             <p class="navbar-text pull-right">
-                <a href="/assignment/website/website-new.html" class="navbar-link">
+                <a href="#/user/{{model.userId}}/website/new" class="navbar-link">
                     <span class="glyphicon glyphicon-plus">
                     </span>
                 </a>
@@ -21,14 +21,14 @@
 
 <div class="container">
     <ul class="list-group">
-        <li class="list-group-item">
+        <li ng-repeat="website in model.websites" class="list-group-item">
             <a href="/assignment/page/page-list.html">
-                Blogging App
+                {{website.name}}
             </a>
             <a href="" class="pull-right">
                 <span class="glyphicon glyphicon-play"></span>
             </a>
-            <a href="/assignment/website/website-edit.html" class="pull-right">
+            <a href="#/user/{{website.developerId}}/website/{{website._id}}" class="pull-right">
                 <span class="glyphicon glyphicon-cog"></span>
             </a>
         </li>

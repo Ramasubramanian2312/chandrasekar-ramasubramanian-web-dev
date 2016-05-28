@@ -14,9 +14,32 @@
 
     function WebsiteService() {
         var api = {
-            findWebsitesForUserId: findWebsitesForUserId
+            createWebsite: createWebsite,
+            findWebsitesForUserId: findWebsitesForUserId,
+            deleteWebsite: deleteWebsite
         }
         return api;
+        
+        function deleteWebsite(websiteId) {
+            for(var i in websites) {
+                if(websites[i]._id === websiteId) {
+                    websites.splice(i, 1);
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        function createWebsite(developerId, name, description) {
+            var newWebsite = {
+                _id: (new Date()).getTime()+"",
+                name: name,
+                description: description,
+                developerId: developerId
+            }
+            websites.push(newWebsite);
+            return newWebsite;
+        }
 
         function findWebsitesForUserId(userId) {
             var resultSet = [];
