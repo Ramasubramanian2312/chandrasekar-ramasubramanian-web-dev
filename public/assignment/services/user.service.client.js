@@ -20,6 +20,14 @@
         };
         return api;
         
+        function createUser() {
+            
+        }
+        
+        function deleteUser() {
+            
+        }
+        
         function updateUser(id, newUser) {
             for(var i in users) {
                 if(users[i]._id == id) {

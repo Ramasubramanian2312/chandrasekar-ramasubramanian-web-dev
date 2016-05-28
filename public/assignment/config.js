@@ -21,6 +21,11 @@
                 controller: "ProfileController",
                 controllerAs: "model"
             })
+            .when("/user/:userId/website", {
+                templateUrl: "views/website/website-list.view.client.html",
+                controller: "WebsiteListController",
+                controllerAs: "model"
+            })
             .otherwise({
                 redirectTo: "/login"
             });
