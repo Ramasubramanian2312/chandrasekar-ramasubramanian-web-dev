@@ -9,16 +9,21 @@
         vm.createWebsite = createWebsite;
 
         function createWebsite(name, description) {
-            var website = {
-                name: name,
-                description: description
-            }
-            var newWebsite = WebsiteService.createWebsite(vm.userId, website);
-            if(newWebsite) {
-                $location.url("/user/"+vm.userId+"/website");
+            if(name) {
+                var website = {
+                    name: name,
+                    description: description
+                }
+                var newWebsite = WebsiteService.createWebsite(vm.userId, website);
+                if(newWebsite) {
+                    $location.url("/user/"+vm.userId+"/website");
+                }
+                else {
+                    vm.error = "Unable to create website";
+                }
             }
             else {
-                vm.error = "Unable to create website";
+                vm.error = "Website name cannot be blank";
             }
         }
     }

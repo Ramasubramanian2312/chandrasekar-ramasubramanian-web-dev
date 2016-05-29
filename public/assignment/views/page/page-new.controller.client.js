@@ -10,16 +10,21 @@
         vm.createPage = createPage;
 
         function createPage(name, title) {
-            var page = {
-                name: name,
-                title: title
-            }
-            var newPage = PageService.createPage(vm.websiteId, page);
-            if(newPage) {
-                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
+            if(name) {
+                var page = {
+                    name: name,
+                    title: title
+                }
+                var newPage = PageService.createPage(vm.websiteId, page);
+                if(newPage) {
+                    $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
+                }
+                else {
+                    vm.error = "Unable to create page";
+                }
             }
             else {
-                vm.error = "Unable to create page";
+                vm.error = "Page name cannot be blank";
             }
         }
     }
