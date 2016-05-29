@@ -59,7 +59,6 @@
             for(var i in widgets) {
                 if(widgets[i]._id === widgetId) {
                     widgets[i].widgetType = widget.widgetType;
-                    websites[i].pageId = widget.pageId;
                     return true;
                 }
             }
