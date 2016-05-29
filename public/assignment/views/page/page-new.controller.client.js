@@ -9,10 +9,10 @@
         vm.wid = $routeParams.wid;
         vm.createPage = createPage;
 
-        function createPage(name, description) {
+        function createPage(name, title) {
             var page = {
                 name: name,
-                description: description
+                title: title
             }
             var newPage = PageService.createPage(vm.wid, page);
             if(newPage) {
@@ -22,6 +22,5 @@
                 vm.error = "Unable to create page";
             }
         }
-
     }
 })();
