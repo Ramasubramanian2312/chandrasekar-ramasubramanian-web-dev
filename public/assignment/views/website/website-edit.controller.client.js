@@ -12,6 +12,7 @@
         
         function init() {
             vm.website = angular.copy(WebsiteService.findWebsiteById(vm.wid));
+            console.log(vm.website);
         }
         init();
         

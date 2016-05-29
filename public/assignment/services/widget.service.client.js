@@ -51,8 +51,8 @@
                 if(widgets[i]._id === widgetId) {
                     return widgets[i];
                 }
-                return null;
             }
+            return null;
         }
         
         function updateWidget(widgetId, widget) {

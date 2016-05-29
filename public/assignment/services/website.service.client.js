@@ -48,8 +48,8 @@
                 if(websites[i]._id === websiteId) {
                     return websites[i];
                 }
-                return null;
             }
+            return null;
         }
         
         function updateWebsite(websiteId, website) {

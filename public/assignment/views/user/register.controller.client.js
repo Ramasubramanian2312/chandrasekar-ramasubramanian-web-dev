@@ -8,7 +8,7 @@
         vm.registerUser = registerUser;
 
         function registerUser (username, password, verifypassword) {
-            if(username === "" || password === ""){
+            if(username && password && verifypassword){
                 if(password === verifypassword) {
                     var newUser = {
                         username: username,
