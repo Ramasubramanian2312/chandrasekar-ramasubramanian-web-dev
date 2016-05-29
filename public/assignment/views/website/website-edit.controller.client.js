@@ -9,7 +9,12 @@
         vm.websiteId = $routeParams.websiteId;
         vm.deleteWebsite = deleteWebsite;
         vm.updateWebsite = updateWebsite;
-
+        
+        function init() {
+            vm.website = angular.copy(WebsiteService.findWebsiteById(vm.websiteId));
+        }
+        init();
+        
         function deleteWebsite(websiteId) {
             var result = WebsiteService.deleteWebsite(websiteId);
             if(result) {
@@ -20,11 +25,7 @@
             }
         }
 
-        function updateWebsite(name, description) {
-            var website = {
-                name: name,
-                description: description
-            }
+        function updateWebsite(website) {
             var result = WebsiteService.updateWebsite(vm.websiteId, website);
             if(result) {
                 $location.url("/user/"+vm.userId+"/website");
