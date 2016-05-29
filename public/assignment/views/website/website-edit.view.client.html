@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="#/user/{{model.userId}}/website" class="navbar-link">
+                <a href="#/user/{{model.uid}}/website" class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left">
                     </span>
                 </a>
@@ -31,7 +31,7 @@
         <label for="website-description">Website Description</label>
         <textarea rows="4" ng-model="model.website.description" id="website-description" class="form-control" placeholder="Description"></textarea>
     </div>
-    <a ng-click="model.deleteWebsite(model.websiteId)" class="btn btn-danger btn-block">Delete</a>
+    <a ng-click="model.deleteWebsite(model.wid)" class="btn btn-danger btn-block">Delete</a>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
@@ -46,7 +46,7 @@
             <div class="col-xs-4 text-center">
             </div>
             <div class="col-xs-3 text-center">
-                <a href="#/user/{{model.userId}}">
+                <a href="#/user/{{model.uid}}">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </div>
