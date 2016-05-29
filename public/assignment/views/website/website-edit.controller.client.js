@@ -34,6 +34,5 @@
                 vm.error = "Unable to edit Website";
             }
         }
-
     }
 })();
