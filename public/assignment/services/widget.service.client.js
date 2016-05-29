@@ -29,8 +29,8 @@
         function createWidget(pageId, widget) {
             var newWidget = {
                 _id: (new Date()).getTime()+"",
-                type: widget.widgetType,
-                pageId: widget.pageId
+                widgetType: widget.widgetType,
+                pageId: pageId
             }
             widgets.push(newWidget);
             return newWidget;

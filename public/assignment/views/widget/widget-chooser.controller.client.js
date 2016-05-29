@@ -3,28 +3,22 @@
         .module("WebAppMaker")
         .controller("NewWidgetController", NewWidgetController);
 
-    function NewWidgetController($sce, $routeParams, WidgetService) {
+    function NewWidgetController($location, $routeParams, WidgetService) {
         var vm = this;
         vm.uid = $routeParams.uid;
         vm.wid = $routeParams.wid;
         vm.pid = $routeParams.pid;
-        vm.getSafeHtml = getSafeHtml;
-        vm.getSafeUrl = getSafeUrl;
-
-        function init() {
-            vm.widgets = WidgetService.findWidgetsByPageId(vm.pid);
-        }
-        init();
-
-        function getSafeUrl(widget) {
-            var urlParts = widget.url.split("/");
-            var id = urlParts[urlParts.length - 1];
-            var url = "https://www.youtube.com/embed/" + id;
-            return $sce.trustAsResourceUrl(url);
+        vm.createWidget = createWidget;
+        
+        function createWidget(widgetType) {
+            var widget = {
+                widgetType: widgetType
+            }
+            var newWidget = WidgetService.createWidget(vm.pid, widget);
+            if(newWidget) {
+                $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget/"+newWidget._id);
+            }
         }
 
-        function getSafeHtml(widget) {
-            return $sce.trustAsHtml(widget.text);
-        }
     }
 })();
