@@ -2,18 +2,16 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="/assignment/website/website-list.html" class="navbar-link">
-                    <span class="glyphicon glyphicon-chevron-left">
-                    </span>
+                <a href="#/user/{{model.uid}}/website" class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </p>
             <a class="navbar-brand" href="">
                 Pages
             </a>
             <p class="navbar-text pull-right">
-                <a href="/assignment/page/page-new.html" class="navbar-link">
-                    <span class="glyphicon glyphicon-plus">
-                    </span>
+                <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/new" class="navbar-link">
+                    <span class="glyphicon glyphicon-plus"></span>
                 </a>
             </p>
         </div>
@@ -41,7 +39,7 @@
             <div class="col-xs-3 text-center">
             </div>
             <div class="col-xs-3 text-center">
-                <a href="/assignment/user/profile.html">
+                <a href="#/user/{{model.uid}}">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </div>
