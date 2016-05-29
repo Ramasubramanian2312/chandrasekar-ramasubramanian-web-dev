@@ -14,9 +14,13 @@
         init();
 
         function updateUser(newUser) {
-            UserService.updateUser(id, newUser);
+            var result = UserService.updateUser(id, newUser);
+            if(result) {
+                vm.success = "Success! Your Profile was saved.";
+            }
+            else {
+                vm.error = "Error updating profile";
+            }
         }
-
     }
-
 })();
