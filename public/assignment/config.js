@@ -6,7 +6,7 @@
     function Config($routeProvider) {
         $routeProvider
             .when("/", {
-                templateUrl: "views/home.html"
+                templateUrl: "views/user/login.view.client.html"
             })
             .when("/login", {
                 templateUrl: "views/user/login.view.client.html",
@@ -14,9 +14,11 @@
                 controllerAs: "model"
             })
             .when("/register", {
-                templateUrl: "views/user/register.view.client.html"
+                templateUrl: "views/user/register.view.client.html",
+                controller: "RegisterController",
+                controllerAs: "model"
             })
-            .when("/profile/:id", {
+            .when("/user/:uid", {
                 templateUrl: "views/user/profile.view.client.html",
                 controller: "ProfileController",
                 controllerAs: "model"
@@ -34,6 +36,11 @@
             .when("/user/:userId/website/:websiteId", {
                 templateUrl: "views/website/website-edit.view.client.html",
                 controller: "EditWebsiteController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/website/:wid/page/:pid/widget", {
+                templateUrl: "views/widget/widget-list.view.client.html",
+                controller: "WidgetListController",
                 controllerAs: "model"
             })
             .otherwise({
