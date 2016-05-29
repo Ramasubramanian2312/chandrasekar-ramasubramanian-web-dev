@@ -17,7 +17,7 @@
         </div>
     </div>
 </nav>
-<div class="container">
+<div class="container-fluid">
     <div class="form-group">
         <label for="page-name">Name</label>
         <input ng-model="model.page.name"
@@ -34,7 +34,8 @@
                id="page-title"
                placeholder="Page Title">
     </div>
-    <a ng-click="model.deletePage(model.pageId)" class="btn btn-danger btn-block">Delete</a>
+    <a ng-click="model.deletePage(model.pageId)"
+       class="btn btn-danger btn-block">Delete</a>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
