@@ -6,14 +6,13 @@
             </a>
             <p class="navbar-text pull-right">
                 <a href="#/user/{{model.userId}}/website/new" class="navbar-link">
-                    <span class="glyphicon glyphicon-plus">
-                    </span>
+                    <span class="glyphicon glyphicon-plus"></span>
                 </a>
             </p>
         </div>
     </div>
 </nav>
-<div class="container">
+<div class="container-fluid">
     <ul class="list-group">
         <li ng-repeat="website in model.websites" class="list-group-item">
             <a href="#/user/{{website.developerId}}/website/{{website._id}}/page">
