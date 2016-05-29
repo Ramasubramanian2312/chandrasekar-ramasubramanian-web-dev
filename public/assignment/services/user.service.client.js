@@ -25,17 +25,15 @@
             var newUser = {
                 _id: (new Date()).getTime()+"",
                 username: user.username,
-                password: user.password,
-                firstName: user.firstName,
-                lastName: user.lastName
+                password: user.password
             }
             users.push(newUser);
             return newUser;
         }
 
-        function findUserById(id) {
+        function findUserById(userId) {
             for(var i in users) {
-                if(users[i]._id === id) {
+                if(users[i]._id === userId) {
                     return users[i];
                 }
             }
