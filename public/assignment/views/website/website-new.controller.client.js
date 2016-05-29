@@ -5,7 +5,7 @@
 
     function NewWebsiteController($location, $routeParams, WebsiteService) {
         var vm = this;
-        vm.userId = $routeParams.userId;
+        vm.uid = $routeParams.uid;
         vm.createWebsite = createWebsite;
 
         function createWebsite(name, description) {
@@ -13,7 +13,7 @@
                 name: name,
                 description: description
             }
-            var newWebsite = WebsiteService.createWebsite(vm.userId, website);
+            var newWebsite = WebsiteService.createWebsite(vm.uid, website);
             if(newWebsite) {
                 $location.url("/user/"+vm.userId+"/website");
             }
