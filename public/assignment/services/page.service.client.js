@@ -31,12 +31,13 @@
         }
 
         function findPageByWebsiteId(websiteId) {
+            var resultSet = [];
             for(var i in pages) {
                 if(pages[i].websiteId === websiteId) {
-                    return pages[i];
+                    resultSet.push(pages[i]);
                 }
             }
-            return null;
+            return resultSet;
         }
 
         function findPageById(pageId) {
