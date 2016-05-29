@@ -17,43 +17,63 @@
 
     function WidgetService() {
         var api = {
-            //createWebsite: createWebsite,
-            findWidgetsForPageId: findWidgetsForPageId
-            //deleteWebsite: deleteWebsite
+            createWidget: createWidget,
+            findWidgetsByPageId: findWidgetsByPageId,
+            findWidgetById: findWidgetById,
+            updateWidget: updateWidget,
+            deleteWidget: deleteWidget
         }
         return api;
+
+
+        function createWidget(pageId, widget) {
+            var newWidget = {
+                _id: (new Date()).getTime()+"",
+                type: widget.widgetType,
+                pageId: widget.pageId
+            }
+            widgets.push(newWidget);
+            return newWidget;
+        }
+
+        function findWidgetsByPageId(pageId) {
+             var resultSet = [];
+             for(var i in widgets) {
+                 if(widgets[i].pageId === pageId) {
+                    resultSet.push(widgets[i]);
+                 }
+             }
+             return resultSet;
+        }
         
-/*        function deleteWebsite(websiteId) {
-            for(var i in websites) {
-                if(websites[i]._id === websiteId) {
-                    websites.splice(i, 1);
+        function findWidgetById(widgetId) {
+            for(var i in widgets) {
+                if(widgets[i]._id === widgetId) {
+                    return widgets[i];
+                }
+                return null;
+            }
+        }
+        
+        function updateWidget(widgetId, widget) {
+            for(var i in widgets) {
+                if(widgets[i]._id === widgetId) {
+                    widgets[i].widgetType = widget.widgetType;
+                    websites[i].pageId = widget.pageId;
                     return true;
                 }
             }
             return false;
-        }*/
+        }
         
-/*        function createWebsite(developerId, name, description) {
-            var newWebsite = {
-                _id: (new Date()).getTime()+"",
-                name: name,
-                description: description,
-                developerId: developerId
-            }
-            websites.push(newWebsite);
-            return newWebsite;
-        }*/
-
-        function findWidgetsForPageId(pageId) {
-/*            var resultSet = [];
-            for(var i in websites) {
-                if(websites[i].developerId === userId) {
-                    resultSet.push(websites[i]);
+        function deleteWidget(widgetId) {
+            for(var i in widgets) {
+                if(widgets[i]._id === widgetId) {
+                    widgets.splice(i, 1);
+                    return true;
                 }
             }
-            return resultSet;*/
-
-            return widgets;
+            return false;
         }
     }
 })();
