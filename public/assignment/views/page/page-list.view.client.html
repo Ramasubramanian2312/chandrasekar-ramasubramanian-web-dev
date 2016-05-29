@@ -21,43 +21,11 @@
 </nav>
 <div class="container">
     <ul class="list-group">
-        <li class="list-group-item">
-            <a href="/assignment/widget/widget-list.html">
-                Blog Post
+        <li ng-repeat="page in model.pages" class="list-group-item">
+            <a href="#/user/{{model.uid}}/website/{{page.websiteId}}/page/{{page._id}}/widget">
+                {{page.name}}
             </a>
-            <a href="/assignment/page/page-edit.html" class="pull-right">
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="/assignment/widget/widget-list.html">
-                Blogs
-            </a>
-            <a href="/assignment/page/page-edit.html" class="pull-right">
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="/assignment/widget/widget-list.html">
-                Home
-            </a>
-            <a href="/assignment/page/page-edit.html" class="pull-right">
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="/assignment/widget/widget-list.html">
-                About
-            </a>
-            <a href="/assignment/page/page-edit.html" class="pull-right">
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="/assignment/widget/widget-list.html">
-                Contact Us
-            </a>
-            <a href="/assignment/page/page-edit.html" class="pull-right">
+            <a href="#/user/{{model.uid}}/website/{{page.websiteId}}/page/{{page._id}}" class="pull-right">
                 <span class="glyphicon glyphicon-cog"></span>
             </a>
         </li>
