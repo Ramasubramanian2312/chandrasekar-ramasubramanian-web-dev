@@ -58,7 +58,11 @@
         function updateWidget(widgetId, widget) {
             for(var i in widgets) {
                 if(widgets[i]._id === widgetId) {
-                    widgets[i].widgetType = widget.widgetType;
+                    if(widgets[i].widgetType === 'HEADER') {
+                        widgets[i].size = widget.size;
+                        widgets[i].text = widget.text;
+                        widgets[i].name = widget.name;
+                    }
                     return true;
                 }
             }
