@@ -5,13 +5,13 @@
 
     function EditWebsiteController($location, $routeParams, WebsiteService) {
         var vm = this;
-        vm.uid = $routeParams.uid;
-        vm.wid = $routeParams.wid;
+        vm.userId = $routeParams.userId;
+        vm.websiteId = $routeParams.websiteId;
         vm.deleteWebsite = deleteWebsite;
         vm.updateWebsite = updateWebsite;
         
         function init() {
-            vm.website = angular.copy(WebsiteService.findWebsiteById(vm.wid));
+            vm.website = angular.copy(WebsiteService.findWebsiteById(vm.websiteId));
             console.log(vm.website);
         }
         init();
@@ -19,7 +19,7 @@
         function deleteWebsite(websiteId) {
             var result = WebsiteService.deleteWebsite(websiteId);
             if(result) {
-                $location.url("/user/"+vm.uid+"/website");
+                $location.url("/user/"+vm.userId+"/website");
             }
             else {
                 vm.error = "Unable to delete Website";
@@ -27,9 +27,9 @@
         }
 
         function updateWebsite(website) {
-            var result = WebsiteService.updateWebsite(vm.wid, website);
+            var result = WebsiteService.updateWebsite(vm.websiteId, website);
             if(result) {
-                $location.url("/user/"+vm.uid+"/website");
+                $location.url("/user/"+vm.userId+"/website");
             }
             else {
                 vm.error = "Unable to edit Website";

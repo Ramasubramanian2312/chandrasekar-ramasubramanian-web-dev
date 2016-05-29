@@ -5,8 +5,8 @@
 
     function NewPageController($location, $routeParams, PageService) {
         var vm = this;
-        vm.uid = $routeParams.uid;
-        vm.wid = $routeParams.wid;
+        vm.userId = $routeParams.userId;
+        vm.websiteId = $routeParams.websiteId;
         vm.createPage = createPage;
 
         function createPage(name, title) {
@@ -14,9 +14,9 @@
                 name: name,
                 title: title
             }
-            var newPage = PageService.createPage(vm.wid, page);
+            var newPage = PageService.createPage(vm.websiteId, page);
             if(newPage) {
-                $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page");
+                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
             }
             else {
                 vm.error = "Unable to create page";
