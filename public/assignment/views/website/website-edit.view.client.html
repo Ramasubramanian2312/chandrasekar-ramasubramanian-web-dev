@@ -34,22 +34,11 @@
     <a ng-click="model.deleteWebsite(model.websiteId)" class="btn btn-danger btn-block">Delete</a>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container">
-        <div class="row navbar-text">
-            <div class="col-xs-2 text-center">
-                <a href="" class="navbar-link">
-                    <span class="glyphicon glyphicon-share-alt"></span>
-                </a>
-            </div>
-            <div class="col-xs-3 text-center">
-            </div>
-            <div class="col-xs-4 text-center">
-            </div>
-            <div class="col-xs-3 text-center">
-                <a href="#/user/{{model.userId}}">
-                    <span class="glyphicon glyphicon-user"></span>
-                </a>
-            </div>
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <a href="#/user/{{model.userId}}">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
         </div>
     </div>
 </nav>
