@@ -21,6 +21,5 @@
                 vm.error = "Unable to create website";
             }
         }
-
     }
 })();
