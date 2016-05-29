@@ -26,6 +26,7 @@
             var newWebsite = {
                 _id: (new Date()).getTime()+"",
                 name: website.name,
+                description: website.description,
                 developerId: userId
             }
             websites.push(newWebsite);
@@ -55,7 +56,7 @@
             for(var i in websites) {
                 if(websites[i]._id === websiteId) {
                     websites[i].name = website.name;
-                    websites[i].developerId = website.developerId;
+                    websites[i].description = website.description;
                     return true;
                 }
             }
