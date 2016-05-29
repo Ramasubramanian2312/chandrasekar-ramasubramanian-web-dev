@@ -5,11 +5,12 @@
 
     function LoginController($location, UserService) {
         var vm = this;
+        vm.login = login;
 
-        vm.login = function (username, password) {
-            var user = UserService.findUserByUsernameAndPassword(username, password);
+        function login(username, password) {
+            var user = UserService.findUserByCredentials(username, password);
             if(user) {
-                $location.url("/profile/"+user._id);
+                $location.url("/user/"+user._id);
             } else {
                 vm.error = "User not found";
             }

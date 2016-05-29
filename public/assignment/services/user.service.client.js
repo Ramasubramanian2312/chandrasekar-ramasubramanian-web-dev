@@ -13,32 +13,26 @@
     function UserService() {
         var api = {
             createUser: createUser,
-            findUserByUsernameAndPassword : findUserByUsernameAndPassword,
             findUserById: findUserById,
+            findUserByUsername: findUserByUsername,
+            findUserByCredentials : findUserByCredentials,
             updateUser: updateUser,
             deleteUser: deleteUser
         };
         return api;
         
-        function createUser() {
-            
-        }
-        
-        function deleteUser() {
-            
-        }
-        
-        function updateUser(id, newUser) {
-            for(var i in users) {
-                if(users[i]._id == id) {
-                    users[i].firstName = newUser.firstName;
-                    users[i].lastName = newUser.lastName;
-                    return true;
-                }
+        function createUser(user) {
+            var newUser = {
+                _id: (new Date()).getTime()+"",
+                username: user.username,
+                password: user.password,
+                firstName: user.firstName,
+                lastName: user.lastName
             }
-            return false;
+            users.push(newUser);
+            return newUser;
         }
-        
+
         function findUserById(id) {
             for(var i in users) {
                 if(users[i]._id == id) {
@@ -47,14 +41,44 @@
             }
             return null;
         }
-        
-        function findUserByUsernameAndPassword(username, password) {
+
+        function findUserByUsername(username) {
+            for(var i in users) {
+                if(users[i].username === username) {
+                    return users[i];
+                }
+            }
+            return null;
+        }
+
+        function findUserByCredentials(username, password) {
             for(var i in users) {
                 if(users[i].username === username && users[i].password === password) {
                     return users[i];
                 }
             }
             return null;
+        }
+
+        function updateUser(userId, user) {
+            for(var i in users) {
+                if(users[i]._id == userId) {
+                    users[i].firstName = user.firstName;
+                    users[i].lastName = user.lastName;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function deleteUser(userId) {
+            for(var i in users) {
+                if(users[i]._id === userId) {
+                    users.splice(i, 1);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 })();
