@@ -23,6 +23,7 @@
             var newPage = {
                 _id: (new Date()).getTime()+"",
                 name: page.name,
+                description: page.description,
                 websiteId: websiteId
             }
             pages.push(newPage);
@@ -51,7 +52,7 @@
             for(var i in pages) {
                 if(pages[i]._id === pageId) {
                     pages[i].name = page.name;
-                    pages[i].websiteId = page.websiteId;
+                    pages[i].description = page.description;
                     return true;
                 }
             }
