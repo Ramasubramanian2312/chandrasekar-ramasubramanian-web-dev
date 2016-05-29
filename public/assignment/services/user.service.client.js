@@ -35,7 +35,7 @@
 
         function findUserById(id) {
             for(var i in users) {
-                if(users[i]._id == id) {
+                if(users[i]._id === id) {
                     return users[i];
                 }
             }
@@ -62,7 +62,7 @@
 
         function updateUser(userId, user) {
             for(var i in users) {
-                if(users[i]._id == userId) {
+                if(users[i]._id === userId) {
                     users[i].firstName = user.firstName;
                     users[i].lastName = user.lastName;
                     return true;
