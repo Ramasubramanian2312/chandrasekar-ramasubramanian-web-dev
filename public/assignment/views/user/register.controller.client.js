@@ -14,12 +14,16 @@
                         username: username,
                         password: password
                     }
-                    var user = UserService.createUser(newUser);
-                    if(user) {
-                        $location.url("/user/"+user._id);
-                    } else {
-                        vm.error = "User not created";
-                    }
+                    UserService
+                        .createUser(newUser)
+                        .then(function (response) {
+                            var user = response.data;
+                            if(user) {
+                                $location.url("/user/"+user._id);
+                            } else {
+                                vm.error = "User not created";
+                            }
+                        });
                 } else {
                     vm.error = "Passwords do not match";
                 }

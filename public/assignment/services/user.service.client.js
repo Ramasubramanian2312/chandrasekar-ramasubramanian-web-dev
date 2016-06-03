@@ -16,21 +16,16 @@
         
         function createUser(user) {
             var newUser = {
-                _id: (new Date()).getTime()+"",
                 username: user.username,
                 password: user.password
-            }
-            users.push(newUser);
-            return newUser;
+            };
+
+            return $http.post("/api/user", newUser);
         }
 
         function findUserById(userId) {
-            for(var i in users) {
-                if(users[i]._id === userId) {
-                    return users[i];
-                }
-            }
-            return null;
+            var url = "/api/user/"+userId;
+            return $http.get(url);
         }
 
         function findUserByUsername(username) {

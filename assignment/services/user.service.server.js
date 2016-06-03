@@ -6,9 +6,17 @@ module.exports = function (app) {
         {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
     ];
 
+    app.post("/api/user", createUser);
     app.get("/api/user", getUsers);
     app.get("/api/user/:userId", findUserById);
-    
+
+    function createUser(req, res) {
+        var user = req.body;
+        user._id = (new Date()).getTime()+"";
+        users.push(user);
+        res.send(user);
+    }
+
     function  findUserById(req, res) {
         var id = req.params.userId;
         for(var i in users) {
