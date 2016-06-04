@@ -1,36 +1,53 @@
 module.exports = function (app) {
-    var users = [
-        {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
-        {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
-        {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
-        {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
+
+    var pages = [
+        { "_id": "321", "name": "Post 1", "websiteId": "456" },
+        { "_id": "432", "name": "Post 2", "websiteId": "456" },
+        { "_id": "543", "name": "Post 3", "websiteId": "456" }
     ];
 
-    app.post("/api/user", createUser);
-    app.get("/api/user", getUsers);
-    app.get("/api/user/:userId", findUserById);
-    app.put("/api/user/:userId", updateuser);
-    app.delete("/api/user/:userId", deleteUser);
+    app.post("/api/website/:websiteId/page", createPage);
+    app.get("/api/website/:websiteId/page", findAllPagesForWebsite);
+    app.get("/api/page/:pageId", findPageById);
+    app.put("/api/page/:pageId", updatePage);
+    app.delete("/api/page/:pageId", deletePage);
 
-    function deleteUser(req, res) {
-        var id = req.params.userId;
-        for(var i in users) {
-            if(users[i]._id === id) {
-                users.splice(i, 1);
-                res.send(200)
+    function createPage(req, res) {
+        var page = req.body;
+        page._id = (new Date()).getTime()+"";
+        pages.push(page);
+        res.send(page);
+    }
+
+    function findAllPagesForWebsite(req, res) {
+        var websiteId = req.params.websiteId;
+        var result = [];
+        for(var p in pages) {
+            if(pages[p].websiteId === websiteId) {
+                result.push(pages[p]);
+            }
+        }
+        res.json(result);
+    }
+
+    function findPageById(req, res) {
+        var pageId = req.params.pageId;
+        for(var p in pages) {
+            if(pages[p]._id === pageId) {
+                res.send(pages[p]);
                 return;
             }
         }
-        res.send(400);
+        res.send({});
     }
 
-    function updateuser(req, res) {
-        var id = req.params.userId;
-        var newUser = req.body;
-        for(var i in users) {
-            if(users[i]._id === id) {
-                users[i].firstName = newUser.firstName;
-                users[i].lastName = newUser.lastName;
+    function updatePage(req, res) {
+        var id = req.params.pageId;
+        var newPage = req.body;
+        for(var p in pages) {
+            if(pages[p]._id === id) {
+                pages[p].name = newPage.name;
+                pages[p].title = newPage.title;
                 res.send(200);
                 return;
             }
@@ -38,55 +55,15 @@ module.exports = function (app) {
         res.send(400);
     }
 
-    function createUser(req, res) {
-        var user = req.body;
-        user._id = (new Date()).getTime()+"";
-        users.push(user);
-        res.send(user);
-    }
-
-    function  findUserById(req, res) {
-        var id = req.params.userId;
-        for(var i in users) {
-            if(users[i]._id === id) {
-                res.send(users[i]);
+    function deletePage(req, res) {
+        var id = req.params.pageId;
+        for(var p in pages) {
+            if(pages[p]._id === id) {
+                pages.splice(p, 1);
+                res.send(200)
                 return;
             }
         }
-        res.send({});
-    }
-    
-    function getUsers(req, res) {
-        var username = req.query['username'];
-        var password = req.query['password'];
-        if(username && password) {
-            findUserByCredentials(username, password, res);
-        }
-        else if(username) {
-            findUserByUsername(username, res);
-        }
-        else {
-            res.send(users);
-        }
-    }
-
-    function findUserByCredentials(username, password, res) {
-        for(var i in users) {
-            if(users[i].username === username && users[i].password === password) {
-                res.send(users[i]);
-                return;
-            }
-        }
-        res.send({});
-    }
-
-    function findUserByUsername(username, res) {
-        for(var i in users) {
-            if(users[i].username === username) {
-                res.send(users[i]);
-                return;
-            }
-        }
-        res.send({});
+        res.send(400);
     }
 };

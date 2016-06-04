@@ -49,8 +49,8 @@ module.exports = function (app) {
         var newWebsite = req.body;
         for(var w in websites) {
             if(websites[w]._id === id) {
-                websites[w].name = website.name;
-                websites[w].description = website.description;
+                websites[w].name = newWebsite.name;
+                websites[w].description = newWebsite.description;
                 res.send(200);
                 return;
             }
