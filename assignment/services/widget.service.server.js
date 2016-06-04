@@ -3,7 +3,24 @@ module.exports = function (app) {
     var multer = require('multer'); // npm install multer --save
     var upload = multer({ dest: __dirname+'/../../public/uploads' });
 
+    var widgets = [
+        { "_id": "123", "widgetType": "HEADER", "pageId": "321", "size": 2, "text": "GIZMODO"},
+        { "_id": "234", "widgetType": "HEADER", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
+        { "_id": "345", "widgetType": "IMAGE", "pageId": "321", "width": "100%",
+            "url": "http://lorempixel.com/400/200/"},
+        { "_id": "456", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"},
+        { "_id": "567", "widgetType": "HEADER", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
+        { "_id": "678", "widgetType": "YOUTUBE", "pageId": "321", "width": "100%",
+            "url": "https://youtu.be/AM2Ivdi9c4E" },
+        { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
+    ];
+
     app.post ("/api/uploads", upload.single('myFile'), uploadImage);
+    app.post("/api/page/:pageId/widget", createWidget);
+    app.get("/api/page/:pageId/widget", findAllWidgetsForPage);
+    app.get("/api/widget/:widgetId", findWidgetById);
+    app.put("/api/widget/:widgetId", updateWidget);
+    app.delete("/api/widget/:widgetId", deleteWidget);
 
     function uploadImage(req, res) {
         var widgetId      = req.body.widgetId;
@@ -19,87 +36,65 @@ module.exports = function (app) {
         res.send(200);
     }
 
-/*    app.post("/api/user", createUser);
-    app.get("/api/user", getUsers);
-    app.get("/api/user/:userId", findUserById);
-    app.put("/api/user/:userId", updateuser);
-    app.delete("/api/user/:userId", deleteUser);
+    function createWidget(req, res) {
+        var widget = req.body;
+        widget._id = (new Date()).getTime()+"";
+        widgets.push(widget);
+        res.send(widget);
+    }
 
-    function deleteUser(req, res) {
-        var id = req.params.userId;
-        for(var i in users) {
-            if(users[i]._id === id) {
-                users.splice(i, 1);
+    function findAllWidgetsForPage(req, res) {
+        var pageId = req.params.pageId;
+        var result = [];
+        for(var w in widgets) {
+            if(widgets[w].pageId === pageId) {
+                result.push(widgets[w]);
+            }
+        }
+        res.json(result);
+    }
+
+    function findWidgetById(req, res) {
+        var widgetId = req.params.widgetId;
+        for(var w in widgets) {
+            if(widgets[w]._id === widgetId) {
+                res.send(widgets[w]);
+                return;
+            }
+        }
+        res.send({});
+    }
+
+    function updateWidget(req, res) {
+        var id = req.params.widgetId;
+        var newWidget = req.body;
+        for(var w in widgets) {
+            if(widgets[w]._id === id) {
+                if(widgets[w].widgetType === 'HEADER') {
+                    widgets[w].size = newWidget.size;
+                    res.send(200);
+                    return;
+                }
+                if(widgets[w].widgetType === 'IMAGE' || widgets[w].widgetType === 'YOUTUBE') {
+                    widgets[w].url = newWidget.url;
+                    widgets[w].width = newWidget.width;
+                    res.send(200);
+                    return;
+                }
+            }
+        }
+        res.send(400);
+    }
+
+    function deleteWidget(req, res) {
+        var id = req.params.widgetId;
+        for(var w in widgets) {
+            if(widgets[w]._id === id) {
+                widgets.splice(w, 1);
                 res.send(200)
                 return;
             }
         }
         res.send(400);
     }
-
-    function updateuser(req, res) {
-        var id = req.params.userId;
-        var newUser = req.body;
-        for(var i in users) {
-            if(users[i]._id === id) {
-                users[i].firstName = newUser.firstName;
-                users[i].lastName = newUser.lastName;
-                res.send(200);
-                return;
-            }
-        }
-        res.send(400);
-    }
-
-    function createUser(req, res) {
-        var user = req.body;
-        user._id = (new Date()).getTime()+"";
-        users.push(user);
-        res.send(user);
-    }
-
-    function  findUserById(req, res) {
-        var id = req.params.userId;
-        for(var i in users) {
-            if(users[i]._id === id) {
-                res.send(users[i]);
-                return;
-            }
-        }
-        res.send({});
-    }
-    
-    function getUsers(req, res) {
-        var username = req.query['username'];
-        var password = req.query['password'];
-        if(username && password) {
-            findUserByCredentials(username, password, res);
-        }
-        else if(username) {
-            findUserByUsername(username, res);
-        }
-        else {
-            res.send(users);
-        }
-    }
-
-    function findUserByCredentials(username, password, res) {
-        for(var i in users) {
-            if(users[i].username === username && users[i].password === password) {
-                res.send(users[i]);
-                return;
-            }
-        }
-        res.send({});
-    }
-
-    function findUserByUsername(username, res) {
-        for(var i in users) {
-            if(users[i].username === username) {
-                res.send(users[i]);
-                return;
-            }
-        }
-        res.send({});
-    }*/
 };
