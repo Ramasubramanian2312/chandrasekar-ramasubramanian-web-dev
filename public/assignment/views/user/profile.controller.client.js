@@ -3,9 +3,10 @@
         .module("WebAppMaker")
         .controller("ProfileController", ProfileController);
     
-    function ProfileController($routeParams, UserService) {
+    function ProfileController($location, $routeParams, UserService) {
         var vm = this;
         vm.updateUser = updateUser;
+        vm.unregister = unregister;
 
         var id = $routeParams.userId;
         function init() {
@@ -16,6 +17,19 @@
                 });
         }
         init();
+
+        function unregister() {
+            UserService
+                .deleteUser(id)
+                .then(
+                    function () {
+                        $location.url("/login");
+                    },
+                    function () {
+                        vm.error = "Unable to remove user";
+                    }
+                );
+        }
 
         function updateUser(newUser) {
             UserService
