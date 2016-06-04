@@ -9,6 +9,21 @@ module.exports = function (app) {
     app.post("/api/user", createUser);
     app.get("/api/user", getUsers);
     app.get("/api/user/:userId", findUserById);
+    app.put("/api/user/:userId", updateuser);
+
+    function updateuser(req, res) {
+        var id = req.params.userId;
+        var newUser = req.body;
+        for(var i in users) {
+            if(users[i]._id === id) {
+                users[i].firstName = newUser.firstName;
+                users[i].lastName = newUser.lastName;
+                res.send(200);
+                return;
+            }
+        }
+        res.send(400);
+    }
 
     function createUser(req, res) {
         var user = req.body;

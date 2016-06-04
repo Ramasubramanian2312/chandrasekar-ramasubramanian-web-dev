@@ -14,10 +14,12 @@
 </nav>
 <div class="container-fluid">
     <div ng-if="model.success" class="alert alert-success alert-dismissible" role="alert">
-        {{model.success}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+        <strong>Success!</strong>  {{model.success}}
     </div>
     <div ng-if="model.error" class="alert alert-danger alert-dismissible" role="alert">
-        {{model.error}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+        <strong>Error!</strong> {{model.error}}
     </div>
     <div class="form-group">
         <label for="username">Username</label>
