@@ -24,8 +24,17 @@ module.exports = function (app) {
 
     function uploadImage(req, res) {
         var widgetId      = req.body.widgetId;
+        var userId      = req.body.userId;
+        var pageId      = req.body.pageId;
+        var websiteId      = req.body.websiteId;
         var width         = req.body.width;
         var myFile        = req.file;
+
+        if(myFile == null) {
+            res.redirect("/assignment/#/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId);
+            return;
+        }
+
         var originalname  = myFile.originalname; // file name on user's computer
         var filename      = myFile.filename;     // new file name in upload folder
         var path          = myFile.path;         // full path of uploaded file
@@ -39,7 +48,7 @@ module.exports = function (app) {
             }
         }
 
-        res.redirect("/assignment/#/user/456/website/456/page/321/widget/" + widgetId);
+        res.redirect("/assignment/#/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/" + widgetId);
     }
 
     function createWidget(req, res) {
@@ -76,6 +85,8 @@ module.exports = function (app) {
         var newWidget = req.body;
         for(var w in widgets) {
             if(widgets[w]._id === id) {
+                widgets[w].name = newWidget.name;
+                widgets[w].text = newWidget.text;
                 if(widgets[w].widgetType === 'HEADER') {
                     widgets[w].size = newWidget.size;
                     res.send(200);
