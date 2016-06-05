@@ -57,10 +57,10 @@
         <input  name="pageId" value="{{model.pageId}}" style="display: none"/>
         <input  name="websiteId" value="{{model.websiteId}}" style="display: none"/>
         <input  name="widgetId" value="{{model.widget._id}}" style="display: none"/>
-        <a class="btn btn-primary btn-block"
-           href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}/flickr">Search Image</a>
         <button type="submit" class="btn btn-block btn-primary new-upload">Upload Image</button>
     </form>
+    <a class="btn btn-primary btn-block"
+       href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}/flickr">Search Image</a>
     <a ng-click="model.deleteWidget(model.widgetId)"
        class="btn btn-danger btn-block">Delete</a>
 </div>
