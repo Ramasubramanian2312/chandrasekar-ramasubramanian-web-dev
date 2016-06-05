@@ -9,11 +9,6 @@
             <a class="navbar-brand" href="">
                 Search Flickr
             </a>
-            <p class="navbar-text pull-right">
-                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new" class="navbar-link">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </a>
-            </p>
         </div>
     </div>
 </nav>
@@ -28,7 +23,9 @@
     </div>
     <div class="row">
         <div ng-repeat="photo in model.photos.photo" class="col-xs-4">
-            <img width="100%" ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_s.jpg" />
+            <!--<img width="100%" ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_s.jpg" />-->
+            <img ng-click="model.selectPhoto(photo)"
+                 ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_s.jpg"/>
         </div>
     </div>
 </div>

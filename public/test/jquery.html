@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../css/jquery-ui.css" rel="stylesheet" />
+    <script src="../js/jquery.js"></script>
+    <script src="../js/jquery-ui.js"></script>
+    <style>
+        h1 {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello World</h1>
+
+    <ul class="list">
+
+    </ul>
+
+    <script>
+        jQuery("h1")
+                .html("Hello from JQuery")
+                .css("background-color", "green");
+
+        var  list = jQuery(".list");
+
+        list.append("<li>Item 123</li>");
+        for( var i=0; i<9; i++) {
+            var li = $("<li>Item " + i + "</li>");
+            list.append(li);
+        }
+
+        list.sortable({
+            axis: 'y'
+        });
+
+    </script>
+</body>
+</html>

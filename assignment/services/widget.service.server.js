@@ -33,7 +33,13 @@ module.exports = function (app) {
         var size          = myFile.size;
         var mimetype      = myFile.mimetype;
 
-        res.send(200);
+        for(var w in widgets) {
+            if(widgets[w]._id === widgetId) {
+                widgets[w].url = "/uploads/" + filename;
+            }
+        }
+
+        res.redirect("/assignment/#/user/456/website/456/page/321/widget/" + widgetId);
     }
 
     function createWidget(req, res) {
