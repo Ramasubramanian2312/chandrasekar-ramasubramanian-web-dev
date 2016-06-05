@@ -13,29 +13,38 @@
         vm.deleteWidget = deleteWidget;
 
         function init() {
-            vm.widget = angular.copy(WidgetService.findWidgetById(vm.widgetId));
-            console.log(vm.widget.widgetType);
+            WidgetService
+                .findWidgetById(vm.widgetId)
+                .then(function (response) {
+                    vm.widget = response.data;
+                });
         }
         init();
         
         function updateWidget(widget) {
-            var result = WidgetService.updateWidget(vm.widgetId, widget);
-            if(result) {
-                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
-            }
-            else {
-                vm.error = "Unable to update widget";
-            }
+            WidgetService
+                .updateWidget(vm.widgetId, widget)
+                .then(
+                    function (response) {
+                        $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+                    },
+                    function (error) {
+                        vm.error = "Unable to update widget";
+                    }
+                );
         }
 
         function deleteWidget(widgetId) {
-            var result = WidgetService.deleteWidget(widgetId);
-            if(result) {
-                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
-            }
-            else {
-                vm.error = "Unable to delete widget";
-            }
+            WidgetService
+                .deleteWidget(widgetId)
+                .then(
+                    function (response) {
+                        $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+                    },
+                    function (error) {
+                        vm.error = "Unable to delete widget"; 
+                    }
+                );
         }
     }
 })();
