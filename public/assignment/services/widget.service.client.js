@@ -19,7 +19,7 @@
                 widgetType: widget.widgetType,
                 pageId: pageId
             };
-            return $http.post("/api/page/"+pageId+"/widget", newPage);
+            return $http.post("/api/page/"+pageId+"/widget", newWidget);
         }
 
         function findWidgetsByPageId(pageId) {
