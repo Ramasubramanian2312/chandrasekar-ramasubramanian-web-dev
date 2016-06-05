@@ -13,7 +13,7 @@
             UserService
                 .findUserById(id)
                 .then(function (response) {
-                    vm.user = angular.copy(response.data);
+                    vm.user = response.data;
                 });
         }
         init();
