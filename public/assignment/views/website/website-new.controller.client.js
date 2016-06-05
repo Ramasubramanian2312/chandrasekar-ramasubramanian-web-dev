@@ -18,7 +18,7 @@
                     .createWebsite(vm.userId, website)
                     .then(function (response) {
                         var newWebsite = response.data;
-                        if(newWebsite) {
+                        if(newWebsite._id) {
                             $location.url("/user/"+vm.userId+"/website");
                         }
                         else {

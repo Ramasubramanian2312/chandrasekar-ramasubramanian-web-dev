@@ -19,7 +19,7 @@
                     .createPage(vm.websiteId, page)
                     .then(function (response) {
                         var newPage = response.data;
-                        if(newPage) {
+                        if(newPage._id) {
                             $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
                         }
                         else {

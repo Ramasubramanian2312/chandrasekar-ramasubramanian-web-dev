@@ -18,7 +18,7 @@
                 .createWidget(vm.pageId, widget)
                 .then(function (response) {
                     var newWidget = response.data;
-                    if(newWidget) {
+                    if(newWidget._id) {
                         $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/"+newWidget._id);
                     }
                     else {
