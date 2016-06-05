@@ -32,7 +32,7 @@
                 width: "100%"
             };
             WidgetService
-                .updateWidget(widgetId, newWidget)
+                .updateWidget(vm.widgetId, newWidget)
                 .then(
                     function (response) {
                         $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/"+vm.widgetId);
