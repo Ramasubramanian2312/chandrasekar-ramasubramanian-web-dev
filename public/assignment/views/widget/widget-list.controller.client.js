@@ -35,4 +35,5 @@
             return $sce.trustAsHtml(widget.text);
         }
     }
+    
 })();
