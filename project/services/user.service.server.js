@@ -1,6 +1,4 @@
-module.exports = function (app, models) {
-
-    var userModel = models.userModel;
+module.exports = function (app) {
 
     var users = [
         {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
@@ -18,20 +16,9 @@ module.exports = function (app, models) {
 
     function createUser(req, res) {
         var user = req.body;
-        userModel
-            .createUser(user)
-            .then(
-                function (user) {
-                    console.log(user);
-                    res.json(user);
-                },
-                function (error) {
-                    res.statusCode(400).send(error);
-                }
-            );
-/*        user._id = (new Date()).getTime()+"";
+        user._id = (new Date()).getTime()+"";
         users.push(user);
-        res.send(user);*/
+        res.send(user);
     }
 
     function getUsers(req, res) {
@@ -49,77 +36,40 @@ module.exports = function (app, models) {
     }
 
     function findUserByUsername(username, res) {
-        userModel
-            .findUserByUsername(username)
-            .then(
-                function (user) {
-                    res.json(user);
-                },
-                function (error) {
-                    res.statusCode(404).send(error);
-                }
-            );
+        for(var i in users) {
+            if(users[i].username === username) {
+                res.send(users[i]);
+                return;
+            }
+        }
+        res.send({});
     }
 
     function findUserByCredentials(username, password, res) {
-        userModel
-            .findUserByCredentials(username, password)
-            .then(
-                function (user) {
-                    res.json(user);
-                },
-                function (error) {
-                    res.statusCode(404).send(error);
-                }
-            );
-
-/*        for(var i in users) {
+        for(var i in users) {
             if(users[i].username === username && users[i].password === password) {
                 res.send(users[i]);
                 return;
             }
         }
-        res.send({});*/
+        res.send({});
     }
 
     function  findUserById(req, res) {
         var id = req.params.userId;
-        
-        userModel
-            .findUserById(id)
-            .then(
-                function (user) {
-                    res.json(user);
-                },
-                function (error) {
-                    res.statusCode(404).send(error);
-                }
-            );
-/*        for(var i in users) {
+        for(var i in users) {
             if(users[i]._id === id) {
                 res.send(users[i]);
                 return;
             }
         }
-        res.send({});*/
+        res.send({});
     }
 
     function updateUser(req, res) {
         var id = req.params.userId;
         var newUser = req.body;
-        
-        userModel
-            .updateUser(id, newUser)
-            .then(
-                function (stats) {
-                    console.log(stats);
-                    res.send(200);
-                },
-                function (error) {
-                    res.statusCode(404).send(error);
-                }
-            );
-/*        for(var i in users) {
+        for(var i in users) {
             if(users[i]._id === id) {
                 users[i].firstName = newUser.firstName;
                 users[i].lastName = newUser.lastName;
@@ -127,30 +77,18 @@ module.exports = function (app, models) {
                 return;
             }
         }
-        res.send(400);*/
+        res.send(400);
     }
 
     function deleteUser(req, res) {
         var id = req.params.userId;
-
-        userModel
-            .deleteUser(id)
-            .then(
-                function (stats) {
-                    console.log(stats);
-                    res.send(200);
-                },
-                function (error) {
-                    res.statusCode(404).send(error);
-                }
-            );
-/*        for(var i in users) {
+        for(var i in users) {
             if(users[i]._id === id) {
                 users.splice(i, 1);
                 res.send(200)
                 return;
             }
         }
-        res.send(400);*/
+        res.send(400);
     }
 };
