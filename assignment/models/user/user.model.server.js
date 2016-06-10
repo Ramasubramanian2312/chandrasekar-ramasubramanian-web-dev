@@ -4,7 +4,6 @@ module.exports = function () {
     var UserSchema = require("./user.schema.server")();
     var User = mongoose.model("User", UserSchema);
 
-
     var api = {
         createUser: createUser,
         findUserById: findUserById,
