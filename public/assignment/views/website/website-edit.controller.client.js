@@ -13,9 +13,15 @@
         function init() {
             WebsiteService
                 .findWebsiteById(vm.websiteId)
-                .then(function (response) {
-                    vm.website = response.data;
-                });
+                .then(
+                    function (response) {
+                        console.log(response.data);
+                        vm.website = response.data;
+                    },
+                    function (error) {
+                        console.log(error);
+                    }
+                );
         }
         init();
         
