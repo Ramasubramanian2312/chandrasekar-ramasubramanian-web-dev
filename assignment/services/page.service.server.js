@@ -1,5 +1,7 @@
-module.exports = function (app) {
+module.exports = function (app, models) {
 
+    var pageModel = models.pageModel;
+    
     var pages = [
         { "_id": "321", "name": "Post 1", "websiteId": "456" },
         { "_id": "432", "name": "Post 2", "websiteId": "456" },
@@ -14,56 +16,82 @@ module.exports = function (app) {
 
     function createPage(req, res) {
         var page = req.body;
-        page._id = (new Date()).getTime()+"";
-        pages.push(page);
-        res.send(page);
+        
+        pageModel
+            .createPage(page)
+            .then(
+                function (page) {
+                    console.log(page);
+                    res.json(page);
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
+                }
+            );
+        
     }
 
     function findAllPagesForWebsite(req, res) {
         var websiteId = req.params.websiteId;
-        var result = [];
-        for(var p in pages) {
-            if(pages[p].websiteId === websiteId) {
-                result.push(pages[p]);
-            }
-        }
-        res.json(result);
+        
+        pageModel
+            .findAllPagesForWebsite(websiteId)
+            .then(
+                function (pages) {
+                    res.json(pages);
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
+                }
+            );
     }
 
     function findPageById(req, res) {
         var pageId = req.params.pageId;
-        for(var p in pages) {
-            if(pages[p]._id === pageId) {
-                res.send(pages[p]);
-                return;
-            }
-        }
-        res.send({});
+
+        pageModel
+            .findPageById(pageId)
+            .then(
+                function (page) {
+                    console.log(page);
+                    res.json(page);
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
+                }
+            );
     }
 
     function updatePage(req, res) {
         var id = req.params.pageId;
         var newPage = req.body;
-        for(var p in pages) {
-            if(pages[p]._id === id) {
-                pages[p].name = newPage.name;
-                pages[p].title = newPage.title;
-                res.send(200);
-                return;
-            }
-        }
-        res.send(400);
+
+        pageModel
+            .updatePage(id, newPage)
+            .then(
+                function (stats) {
+                    console.log(stats);
+                    res.send(200);
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
+                }
+            );
     }
 
     function deletePage(req, res) {
         var id = req.params.pageId;
-        for(var p in pages) {
-            if(pages[p]._id === id) {
-                pages.splice(p, 1);
-                res.send(200)
-                return;
-            }
-        }
-        res.send(400);
+        
+        pageModel
+            .deletePage(id)
+            .then(
+                function (stats) {
+                    console.log(stats);
+                    res.send(200);
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
+                }
+            );
     }
 };

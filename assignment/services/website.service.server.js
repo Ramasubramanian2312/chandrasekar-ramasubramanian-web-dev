@@ -30,10 +30,7 @@ module.exports = function (app, models) {
                 function (error) {
                     res.statusCode(404).send(error);
                 }
-            )
-/*        website._id = (new Date()).getTime()+"";
-        websites.push(website);
-        res.send(website);*/
+            );
     }
 
     function findAllWebsitesForUser(req, res) {
@@ -49,13 +46,6 @@ module.exports = function (app, models) {
                     res.statusCode(404).send(error);
                 }
             );
-/*        var result = [];
-        for(var w in websites) {
-            if(websites[w].developerId === userId) {
-                result.push(websites[w]);
-            }
-        }
-        res.json(result);*/
     }
 
     function findWebsiteById(req, res) {
@@ -70,38 +60,38 @@ module.exports = function (app, models) {
                     res.statusCode(404).send(error);
                 }
             );
-/*        for(var w in websites) {
-            if(websites[w]._id === websiteId) {
-                res.send(websites[w]);
-                return;
-            }
-        }
-        res.send({});*/
     }
 
     function updateWebsite(req, res) {
         var id = req.params.websiteId;
         var newWebsite = req.body;
-        for(var w in websites) {
-            if(websites[w]._id === id) {
-                websites[w].name = newWebsite.name;
-                websites[w].description = newWebsite.description;
-                res.send(200);
-                return;
-            }
-        }
-        res.send(400);
+        
+        websiteModel
+            .updateWebsite(id, newWebsite)
+            .then(
+                function (stats) {
+                    console.log(stats);
+                    res.send(200);
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
+                }
+            );
     }
 
     function deleteWebsite(req, res) {
         var id = req.params.websiteId;
-        for(var w in websites) {
-            if(websites[w]._id === id) {
-                websites.splice(w, 1);
-                res.send(200)
-                return;
-            }
-        }
-        res.send(400);
+        
+        websiteModel
+            .deleteWebsite(id)
+            .then(
+                function (stats) {
+                    console.log(stats);
+                    res.send(200);
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
+                }
+            );
     }
 };

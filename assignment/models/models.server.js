@@ -9,5 +9,6 @@ module.exports = function () {
         pageModel: require("./page/page.model.server")(),
         widgetModel: require("./widget/widget.model.server")()
     };
+    
     return models;
 };
