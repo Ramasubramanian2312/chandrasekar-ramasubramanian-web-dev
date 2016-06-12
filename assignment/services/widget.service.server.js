@@ -61,7 +61,6 @@ module.exports = function (app, models) {
             .createWidget(pageId, widget)
             .then(
                 function (widget) {
-                    console.log(widget);
                     res.json(widget);
                 },
                 function (error) {

@@ -12,13 +12,14 @@
         
         function createWidget(widgetType) {
             var widget = {
-                widgetType: widgetType
+                type: widgetType
             }
             WidgetService
                 .createWidget(vm.pageId, widget)
                 .then(function (response) {
                     var newWidget = response.data;
-                    if(newWidget._id) {
+                    console.log(newWidget);
+                    if(newWidget) {
                         $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/"+newWidget._id);
                     }
                     else {
