@@ -29,7 +29,7 @@
                 }
             }
             else {
-                vm.error = "Username/password cannot be blank"
+                vm.error = "Username/passwords cannot be blank"
             }
         }
     }

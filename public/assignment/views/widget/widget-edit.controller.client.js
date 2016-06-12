@@ -25,25 +25,7 @@
         init();
         
         function updateWidget(widget) {
-
-            if (widget.name != null) {
-                if(widget.name) {
-                    WidgetService
-                        .updateWidget(vm.widgetId, widget)
-                        .then(
-                            function (response) {
-                                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
-                            },
-                            function (error) {
-                                vm.error = "Unable to update widget";
-                            }
-                        );
-                }
-                else {
-                    vm.error = "Name is required";
-                }
-            }
-            else {
+            if(widget.name) {
                 WidgetService
                     .updateWidget(vm.widgetId, widget)
                     .then(
@@ -54,6 +36,9 @@
                             vm.error = "Unable to update widget";
                         }
                     );
+            }
+            else {
+                vm.error = "Widget name cannot be blank";
             }
         }
 

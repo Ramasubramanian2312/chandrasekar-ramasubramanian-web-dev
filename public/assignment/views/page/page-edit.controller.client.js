@@ -34,16 +34,21 @@
         }
 
         function updatePage(page) {
-            PageService
-                .updatePage(vm.pageId, page)
-                .then(
-                    function (reponse) {
-                        $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
-                    },
-                    function (error) {
-                        vm.error = "Unable to edit page";
-                    }
-                );
+            if(page.name) {
+                PageService
+                    .updatePage(vm.pageId, page)
+                    .then(
+                        function (reponse) {
+                            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
+                        },
+                        function (error) {
+                            vm.error = "Unable to edit page";
+                        }
+                    );
+            }
+            else {
+                vm.error = "Page name cannot be blank";
+            }
         }
     }
 })();

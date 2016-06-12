@@ -39,16 +39,21 @@
         }
 
         function updateWebsite(website) {
-            WebsiteService
-                .updateWebsite(vm.websiteId, website)
-                .then(
-                    function (response) {
-                        $location.url("/user/"+vm.userId+"/website");
-                    },
-                    function (error) {
-                        vm.error = "Unable to edit Website";
-                    }
-                );
+            if(website.name) {
+                WebsiteService
+                    .updateWebsite(vm.websiteId, website)
+                    .then(
+                        function (response) {
+                            $location.url("/user/"+vm.userId+"/website");
+                        },
+                        function (error) {
+                            vm.error = "Unable to edit Website";
+                        }
+                    );
+            }
+            else {
+                vm.error = "Website name cannot be blank"
+            }
         }
     }
 })();

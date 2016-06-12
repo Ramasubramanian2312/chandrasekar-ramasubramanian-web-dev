@@ -7,7 +7,7 @@
                 </a>
             </p>
             <a class="navbar-brand" href="">
-                Widget Edit
+                HTML Widget
             </a>
             <p class="navbar-text pull-right">
                 <a ng-click="model.updateWidget(model.widget)" class="navbar-link">
@@ -38,32 +38,28 @@
                placeholder="Widget Text">
     </div>
     <div class="form-group">
-        <label for="widget-url">URL</label>
-        <input ng-model="model.widget.url"
-               type="url"
+        <label for="widget-rows">Rows</label>
+        <input ng-model="model.widget.rows"
+               type="number"
                class="form-control"
-               id="widget-url"
-               placeholder="Image URL">
+               id="widget-rows"
+               placeholder="Widget Rows">
     </div>
     <div class="form-group">
-        <label for="widget-width">Width</label>
-        <input ng-model="model.widget.width"
+        <label for="widget-placeholder">Placeholder</label>
+        <input ng-model="model.widget.placeholder"
                type="text"
                class="form-control"
-               id="widget-width"
-               placeholder="Image Width">
+               id="widget-placeholder"
+               placeholder="Widget Placeholder">
     </div>
-    <form action="/api/uploads"  method="post" enctype="multipart/form-data">
-        <input  name="myFile" type="file" class="form-control"/>
-        <input  name="width" value="{{model.widget.width}}" style="display: none"/>
-        <input  name="userId" value="{{model.userId}}" style="display: none"/>
-        <input  name="pageId" value="{{model.pageId}}" style="display: none"/>
-        <input  name="websiteId" value="{{model.websiteId}}" style="display: none"/>
-        <input  name="widgetId" value="{{model.widget._id}}" style="display: none"/>
-        <button type="submit" class="btn btn-block btn-primary new-upload">Upload Image</button>
-    </form>
-    <a class="btn btn-primary btn-block"
-       href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}/flickr">Search Image</a>
+    <div class="form-group">
+        <label for="widget-formatted">Formatted</label>
+        <input ng-model="model.widget.formatted"
+               type="checkbox"
+               id="widget-formatted"
+               placeholder="Widget Formatted">
+    </div>
     <a ng-click="model.deleteWidget(model.widgetId)"
        class="btn btn-danger btn-block">Delete</a>
 </div>
