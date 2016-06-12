@@ -15,10 +15,11 @@ module.exports = function (app, models) {
     app.delete("/api/page/:pageId", deletePage);
 
     function createPage(req, res) {
+        var websiteId = req.params.websiteId;
         var page = req.body;
         
         pageModel
-            .createPage(page)
+            .createPage(websiteId, page)
             .then(
                 function (page) {
                     console.log(page);
