@@ -17,21 +17,44 @@
                 .findWidgetById(vm.widgetId)
                 .then(function (response) {
                     vm.widget = response.data;
+                    if(vm.widget.size) {
+                        vm.widget.size = vm.widget.size + "";
+                    }
                 });
         }
         init();
         
         function updateWidget(widget) {
-            WidgetService
-                .updateWidget(vm.widgetId, widget)
-                .then(
-                    function (response) {
-                        $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
-                    },
-                    function (error) {
-                        vm.error = "Unable to update widget";
-                    }
-                );
+
+            if (widget.name != null) {
+                if(widget.name) {
+                    WidgetService
+                        .updateWidget(vm.widgetId, widget)
+                        .then(
+                            function (response) {
+                                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+                            },
+                            function (error) {
+                                vm.error = "Unable to update widget";
+                            }
+                        );
+                }
+                else {
+                    vm.error = "Name is required";
+                }
+            }
+            else {
+                WidgetService
+                    .updateWidget(vm.widgetId, widget)
+                    .then(
+                        function (response) {
+                            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+                        },
+                        function (error) {
+                            vm.error = "Unable to update widget";
+                        }
+                    );
+            }
         }
 
         function deleteWidget(widgetId) {

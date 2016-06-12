@@ -1,3 +1,14 @@
-/**
- * Created by rchandrasekar on 6/11/2016.
- */
+(function () {
+    angular
+        .module("TodoApp", ["MyDirectives"])
+        .controller("TodosController", TodoController);
+
+    function TodoController($http) {
+        var vm = this;
+
+        $http.get("/api/todos")
+            .then(function (response) {
+                vm.data = response.data;
+            });
+    }
+})();
