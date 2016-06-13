@@ -34,10 +34,7 @@ module.exports = function () {
         delete user._id;
         return User
             .update({_id: userId}, {
-                $set: {
-                    firstName: user.firstName,
-                    lastName: user.lastName
-                }
+                $set: user
             });
     }
 

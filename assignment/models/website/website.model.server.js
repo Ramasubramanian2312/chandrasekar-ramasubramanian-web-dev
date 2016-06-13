@@ -30,10 +30,7 @@ module.exports = function () {
         delete website._id;
         return Website
             .update({_id: websiteId}, {
-                $set: {
-                    name: website.name,
-                    description: website.description
-                }
+                $set: website
             });
     }
     

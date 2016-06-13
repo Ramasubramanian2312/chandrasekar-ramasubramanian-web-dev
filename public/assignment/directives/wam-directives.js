@@ -24,7 +24,7 @@
         }
         
         return {
-            templateUrl: "directives/widgets.view.client.html",
+            templateUrl: "views/widget/widgets.view.client.html",
             scope: {
                 model: "=data",
                 callback: "&"

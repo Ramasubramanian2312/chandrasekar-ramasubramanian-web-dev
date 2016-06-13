@@ -31,11 +31,7 @@ module.exports = function () {
         delete page._id;
         return Page
             .update({_id: pageId}, {
-                $set: {
-                    name: page.name,
-                    title: page.title,
-                    description: page.description
-                }
+                $set: page
             });
     }
 
