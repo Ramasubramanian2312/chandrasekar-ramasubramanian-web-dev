@@ -13,6 +13,7 @@ module.exports = function () {
         height: String,
         rows: Number,
         size: Number,
+        order: Number,
         class: String,
         icon: String,
         deletable: Boolean,

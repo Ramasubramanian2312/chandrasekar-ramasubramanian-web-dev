@@ -17,7 +17,9 @@
         </div>
     </div>
 </nav>
-<wam-sortable data="model"></wam-sortable>
+<wam-sortable data="model"
+              callback="model.reorderWidgets(start, end)">
+</wam-sortable>
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="navbar-text pull-left">

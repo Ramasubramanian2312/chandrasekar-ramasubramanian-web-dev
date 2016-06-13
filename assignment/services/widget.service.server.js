@@ -5,23 +5,12 @@ module.exports = function (app, models) {
     var multer = require('multer'); // npm install multer --save
     var upload = multer({ dest: __dirname+'/../../public/uploads' });
 
-    var widgets = [
-        { "_id": "123", "widgetType": "HEADER", "pageId": "321", "size": "2", "text": "GIZMODO"},
-        { "_id": "234", "widgetType": "HEADER", "pageId": "321", "size": "4", "text": "Lorem ipsum"},
-        { "_id": "345", "widgetType": "IMAGE", "pageId": "321", "width": "100%",
-            "url": "http://lorempixel.com/400/200/"},
-        { "_id": "456", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"},
-        { "_id": "567", "widgetType": "HEADER", "pageId": "321", "size": "4", "text": "Lorem ipsum"},
-        { "_id": "678", "widgetType": "YOUTUBE", "pageId": "321", "width": "100%",
-            "url": "https://youtu.be/AM2Ivdi9c4E" },
-        { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
-    ];
-
     app.post ("/api/uploads", upload.single('myFile'), uploadImage);
     app.post("/api/page/:pageId/widget", createWidget);
     app.get("/api/page/:pageId/widget", findAllWidgetsForPage);
     app.get("/api/widget/:widgetId", findWidgetById);
     app.put("/api/widget/:widgetId", updateWidget);
+    app.put("/page/:pageId/widget", reorderWidgets);
     app.delete("/api/widget/:widgetId", deleteWidget);
 
     function uploadImage(req, res) {
@@ -44,13 +33,22 @@ module.exports = function (app, models) {
         var size          = myFile.size;
         var mimetype      = myFile.mimetype;
 
-        for(var w in widgets) {
-            if(widgets[w]._id === widgetId) {
-                widgets[w].url = "/uploads/" + filename;
-            }
+        var newWidget = {
+            url: "/uploads/" +filename
         }
 
-        res.redirect("/assignment/#/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/" + widgetId);
+        widgetModel
+            .updateWidget(widgetId, newWidget)
+            .then(
+                function (stats) {
+                    console.log(stats);
+                    res.redirect("/assignment/#/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/" + widgetId);
+                },
+                function (error) {
+                    res.statusCode(404).send(error);
+                }
+            );
+
     }
 
     function createWidget(req, res) {
@@ -115,25 +113,24 @@ module.exports = function (app, models) {
                     res.statusCode(404).send(error);
                 }
             );
-
-/*        for(var w in widgets) {
-            if(widgets[w]._id === id) {
-                widgets[w].name = newWidget.name;
-                widgets[w].text = newWidget.text;
-                if(widgets[w].widgetType === 'HEADER') {
-                    widgets[w].size = newWidget.size;
+    }
+    
+    function reorderWidgets(req, res) {
+        var start = req.query.start;
+        var end = req.query.end;
+        var pageId = req.params.pageId;
+        console.log([start, end]);
+        
+        widgetModel
+            .reorderWidgets(pageId, start, end)
+            .then(
+                function (res) {
                     res.send(200);
-                    return;
+                },
+                function (error) {
+                    res.statusCode(400).send(error);
                 }
-                if(widgets[w].widgetType === 'IMAGE' || widgets[w].widgetType === 'YOUTUBE') {
-                    widgets[w].url = newWidget.url;
-                    widgets[w].width = newWidget.width;
-                    res.send(200);
-                    return;
-                }
-            }
-        }
-        res.send(400);*/
+            );
     }
 
     function deleteWidget(req, res) {

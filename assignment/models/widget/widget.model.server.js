@@ -10,13 +10,20 @@ module.exports = function () {
         findWidgetById: findWidgetById,
         updateWidget: updateWidget,
         deleteWidget: deleteWidget,
-        reorderWidget: reorderWidget
+        reorderWidgets: reorderWidgets
     };
     return api;
     
     function createWidget(pageId, widget) {
         widget._page = pageId;
-        return Widget.create(widget);
+        return Widget
+            .find({_page: pageId})
+            .then(
+                function (widgets) {
+                    widget.order = widgets.length;
+                    return Widget.create(widget);
+                }
+            );
     }
 
     function findAllWidgetsForPage(pageId) {
@@ -40,7 +47,39 @@ module.exports = function () {
         return Widget.remove({_id: widgetId});
     }
 
-    function reorderWidget(pageId, start, end) {
-        
+    function reorderWidgets(pageId, start, end) {
+        var start = parseInt(start);
+        var end = parseInt(end);
+
+        console.log(pageId);
+
+        return Widget
+            .find({_page: pageId},
+                function (err, widgets) {
+                widgets.forEach(function (widget) {
+                    if(start > end) {
+                        if(widget.order >= end && widget.order < start) {
+                            widget.order++;
+                            widget.save(function () {
+                            });
+                        } else if (widget.order === start) {
+                            widget.order = end;
+                            widget.save(function () {
+                            });
+                        }
+                    }
+                    else {
+                        if(widget.order === start) {
+                            widget.order = end;
+                            widget.save(function () {
+                            });
+                        } else if(widget.order > start && widget.order <= end) {
+                            widget.order--;
+                            widget.save(function () {
+                            });
+                        }
+                    }
+                });
+            });
     }
 }

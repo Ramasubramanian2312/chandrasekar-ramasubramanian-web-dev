@@ -10,6 +10,7 @@
         vm.pageId = $routeParams.pageId;
         vm.getSafeHtml = getSafeHtml;
         vm.getSafeUrl = getSafeUrl;
+        vm.reorderWidgets = reorderWidgets;
 
         function init() {
             console.log("Init");
@@ -30,6 +31,12 @@
 
         function getSafeHtml(widget) {
             return $sce.trustAsHtml(widget.text);
+        }
+
+        function reorderWidgets(start, end) {
+            WidgetService
+                .reorderWidgets(vm.pageId, start, end)
+                .then(init);
         }
     }
     
