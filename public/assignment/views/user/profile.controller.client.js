@@ -7,6 +7,7 @@
         var vm = this;
         vm.updateUser = updateUser;
         vm.unregister = unregister;
+        vm.logout = logout;
 
         var id = $routeParams.userId;
         function init() {
@@ -41,6 +42,19 @@
                     function (error) {
                     vm.error = "Error updating profile";
                     });
+        }
+        
+        function logout() {
+            UserService
+                .logout()
+                .then(
+                    function (response) {
+                        $location.url("/login");
+                    },
+                    function () {
+                        $location.url("/login");
+                    }
+                )
         }
     }
 })();
