@@ -82,13 +82,13 @@
                 redirectTo: "/login"
             });
         
-        function checkLoggedIn(UserService, $q) {
+        function checkLoggedIn(UserService, $q, $location) {
             var deferred = $q.defer();
 
             UserService
                 .loggedIn()
                 .then(
-                    function (response, $location) {
+                    function (response) {
                         var user = response.data;
                         console.log(user);
                         if(user == '0'){

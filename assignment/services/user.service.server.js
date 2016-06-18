@@ -22,13 +22,13 @@ module.exports = function (app, models) {
 
     function localStrategy(username, password, done) {
         userModel
-            .findUserByCredentials(username, password)
+            .findUserByUsername(username)
             .then(
                 function (user) {
-                    if (!user) {
-                        return done(null, false);
+                    if (user && bcrypt.compareSync(password, user.password)) {
+                        return done(null, user);
                     }
-                    return done(null, user);
+                    return done(null, false);
                 },
                 function (error) {
                     if (err) {
@@ -101,7 +101,7 @@ module.exports = function (app, models) {
                         res.statusCode(400).send("Username already in use");
                         return;
                     } else {
-                        user.password = bcrypt.hashSync(req.body.password);
+                        req.body.password = bcrypt.hashSync(req.body.password);
                         return userModel
                             .createUser(req.body);
                     }
@@ -115,7 +115,7 @@ module.exports = function (app, models) {
                     if(user) {
                         req.login(user, function (err) {
                             if(err) {
-                                res.status(400).send(err);
+                                res.statusCode(400).send(err);
                             } else {
                                 res.json(user);
                             }
@@ -123,7 +123,7 @@ module.exports = function (app, models) {
                     }
                 },
                 function (err) {
-                    res.sendStatus(400).send(err);
+                    res.statusCode(400).send(err);
                 }
             )
     }
