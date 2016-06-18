@@ -33,6 +33,7 @@ module.exports = function (app, models) {
         callbackURL  : process.env.FACEBOOK_CALLBACK_URL
     };
 
+    
     passport.use('facebook', new FacebookStrategy(facebookConfig, facebookLogin));
 
     function localStrategy(username, password, done) {
