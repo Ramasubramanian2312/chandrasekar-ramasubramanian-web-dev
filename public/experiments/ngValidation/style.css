@@ -1,0 +1,20 @@
+form {
+    padding: 25px;
+}
+
+form.ng-submitted {
+    border: solid 10px yellow;
+}
+
+form.ng-invalid.ng-submitted {
+    background-color: red;
+}
+
+#age.ng-invalid-min {
+    background-color: beige;
+}
+
+#age.ng-invalid-max {
+    background-color: orange;
+}
+
