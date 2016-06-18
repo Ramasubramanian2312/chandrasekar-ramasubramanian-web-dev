@@ -20,7 +20,7 @@
                 controller: "RegisterController",
                 controllerAs: "model"
             })
-            .when("/user/:userId", {
+            .when("/user/", {
                 templateUrl: "views/user/profile.view.client.html",
                 controller: "ProfileController",
                 controllerAs: "model",
@@ -82,7 +82,7 @@
                 redirectTo: "/login"
             });
         
-        function checkLoggedIn(UserService, $q, $location) {
+        function checkLoggedIn(UserService, $q, $location, $rootScope) {
             var deferred = $q.defer();
 
             UserService
@@ -92,9 +92,11 @@
                         var user = response.data;
                         console.log(user);
                         if(user == '0'){
+                            $rootScope.currentUser = null;
                             deferred.reject();
                             $location.url("/login");
                         } else {
+                            $rootScope.currentUser = user;
                             deferred.resolve();
                         }
                     },
