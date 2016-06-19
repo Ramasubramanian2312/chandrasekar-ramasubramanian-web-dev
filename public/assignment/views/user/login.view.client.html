@@ -2,16 +2,34 @@
     <div ng-if="model.error" class="alert alert-danger" role="alert">
         {{model.error}}
     </div>
+    <div class="alert alert-danger" ng-show="loginForm.$invalid && loginForm.$submitted">
+        There are errors in the form
+    </div>
     <h1>Login</h1>
-    <input ng-model="username"
-           type="text"
-           class="form-control"
-           placeholder="username" />
-    <input ng-model="password"
-           type="password"
-           class="form-control"
-           placeholder="password">
-    <a ng-click="model.login(username, password)" class="btn btn-primary btn-block">Login</a>
+    <form name="loginForm" novalidate>
+        <input ng-model="username"
+               name="username"
+               type="text"
+               required
+               class="form-control"
+               placeholder="username" />
+        <span class="error-text"
+              ng-show="loginForm.username.$error.required && loginForm.$submitted">
+            *Please enter a username
+        </span>
+        <input ng-model="password"
+               name="password"
+               type="password"
+               required
+               class="form-control"
+               placeholder="password">
+        <span class="error-text" ng-show="loginForm.$error.required && loginForm.$submitted">
+            *Please enter a password
+        </span>
+        <button ng-click="model.login(username, password)"
+                type="submit"
+                class="btn btn-primary btn-block">Login</button>
+    </form>
     <a class="btn btn-success btn-block"
        href="#/register">Register</a>
     <a href="/auth/facebook" class="btn btn-primary btn-block">
