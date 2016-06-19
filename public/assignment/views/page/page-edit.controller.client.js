@@ -33,8 +33,12 @@
                 );
         }
 
-        function updatePage(page) {
-            if(page.name) {
+        function updatePage(page, pageForm) {
+            if(pageForm.$invalid) {
+                vm.error = "This form has errors";
+                vm.nameError = "Page should have a name";
+            }
+            else {
                 PageService
                     .updatePage(vm.pageId, page)
                     .then(
@@ -45,9 +49,6 @@
                             vm.error = "Unable to edit page";
                         }
                     );
-            }
-            else {
-                vm.error = "Page name cannot be blank";
             }
         }
     }

@@ -8,8 +8,11 @@
         vm.userId = $routeParams.userId;
         vm.createWebsite = createWebsite;
 
-        function createWebsite(name, description) {
-            if(name) {
+        function createWebsite(name, description, websiteForm) {
+            if(websiteForm.$invalid) {
+                vm.error = "This form has errors";
+                vm.nameError = "Website should have a name";
+            } else {
                 var website = {
                     name: name,
                     description: description
@@ -25,9 +28,6 @@
                             vm.error = "Unable to create website";
                         }
                     });
-            }
-            else {
-                vm.error = "Website name cannot be blank";
             }
         }
     }

@@ -38,8 +38,12 @@
                 );
         }
 
-        function updateWebsite(website) {
-            if(website.name) {
+        function updateWebsite(website, websiteForm) {
+            if(websiteForm.$invalid) {
+                vm.error = "This form has errors";
+                vm.nameError = "Website should have a name";
+            }
+            else {
                 WebsiteService
                     .updateWebsite(vm.websiteId, website)
                     .then(
@@ -50,9 +54,6 @@
                             vm.error = "Unable to edit Website";
                         }
                     );
-            }
-            else {
-                vm.error = "Website name cannot be blank"
             }
         }
     }

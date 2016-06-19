@@ -46,3 +46,7 @@ p.navbar-text.pull-left {
 span.error-text {
     color: red;
 }
+
+input.ng-invalid {
+    background-color: beige;
+}

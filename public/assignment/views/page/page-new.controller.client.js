@@ -9,8 +9,12 @@
         vm.websiteId = $routeParams.websiteId;
         vm.createPage = createPage;
 
-        function createPage(name, title) {
-            if(name) {
+        function createPage(name, title, pageForm) {
+            if(pageForm.$invalid) {
+                vm.error = "This form has errors";
+                vm.nameError = "Page should have a name";
+            }
+            else {
                 var page = {
                     name: name,
                     title: title
@@ -26,9 +30,6 @@
                             vm.error = "Unable to create page";
                         }
                     });
-            }
-            else {
-                vm.error = "Page name cannot be blank";
             }
         }
     }

@@ -10,7 +10,7 @@
                 Edit Website
             </a>
             <p class="navbar-text pull-right">
-                <a ng-click="model.updateWebsite(model.website)" class="navbar-link">
+                <a ng-click="model.updateWebsite(model.website, websiteForm)" class="navbar-link">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
             </p>
@@ -21,19 +21,26 @@
     <div ng-if="model.error" class="alert alert-danger" role="alert">
         {{model.error}}
     </div>
-    <div class="form-group">
-        <label for="website-name">Website Name</label>
-        <input ng-model="model.website.name"
-               type="text"
-               class="form-control"
-               id="website-name"
-               placeholder="Google">
-    </div>
-    <div class="form-group">
-        <label for="website-description">Website Description</label>
-        <textarea rows="4" ng-model="model.website.description" id="website-description" class="form-control" placeholder="Description"></textarea>
-    </div>
-    <a ng-click="model.deleteWebsite(model.websiteId)" class="btn btn-danger btn-block">Delete</a>
+    <form name="websiteForm" novalidate>
+        <div class="form-group">
+            <label for="website-name">Website Name</label>
+            <input ng-model="model.website.name"
+                   name="name"
+                   required
+                   type="text"
+                   class="form-control"
+                   id="website-name"
+                   placeholder="Google">
+            <span ng-if="model.error" class="error-text">
+                *{{model.nameError}}
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="website-description">Website Description</label>
+            <textarea rows="4" ng-model="model.website.description" id="website-description" class="form-control" placeholder="Description"></textarea>
+        </div>
+        <a ng-click="model.deleteWebsite(model.websiteId)" class="btn btn-danger btn-block">Delete</a>
+    </form>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">

@@ -10,7 +10,7 @@
                 New Page
             </a>
             <p class="navbar-text pull-right">
-                <a ng-click="model.createPage(name, title)" class="navbar-link">
+                <a ng-click="model.createPage(name, title, pageForm)" class="navbar-link">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
             </p>
@@ -21,22 +21,28 @@
     <div ng-if="model.error" class="alert alert-danger" role="alert">
         {{model.error}}
     </div>
-    <div class="form-group">
-        <label for="page-name">Name</label>
-        <input ng-model="name"
-               type="text"
-               class="form-control"
-               id="page-name"
-               placeholder="Page Name">
-    </div>
-    <div class="form-group">
-        <label for="page-title">Title</label>
-        <input ng-model="title"
-               type="text"
-               class="form-control"
-               id="page-title"
-               placeholder="Page Title">
-    </div>
+    <form name="pageForm" novalidate>
+        <div class="form-group">
+            <label for="page-name">Name</label>
+            <input ng-model="name"
+                   type="text"
+                   required
+                   class="form-control"
+                   id="page-name"
+                   placeholder="Page Name">
+            <span ng-if="model.error" class="error-text">
+                *{{model.nameError}}
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="page-title">Title</label>
+            <input ng-model="title"
+                   type="text"
+                   class="form-control"
+                   id="page-title"
+                   placeholder="Page Title">
+        </div>
+    </form>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">

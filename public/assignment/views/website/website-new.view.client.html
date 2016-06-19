@@ -11,7 +11,7 @@
                 New Website
             </a>
             <p class="navbar-text pull-right">
-                <a ng-click="model.createWebsite(name, description)" class="navbar-link">
+                <a ng-click="model.createWebsite(name, description, websiteForm)" class="navbar-link">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
             </p>
@@ -22,18 +22,25 @@
     <div ng-if="model.error" class="alert alert-danger" role="alert">
         {{model.error}}
     </div>
-    <div class="form-group">
-        <label for="website-name">Name</label>
-        <input ng-model="name"
-               type="text"
-               class="form-control"
-               id="website-name"
-               placeholder="Name">
-    </div>
-    <div class="form-group">
-        <label for="website-description">Description</label>
-        <textarea ng-model="description" rows="4" id="website-description" class="form-control" placeholder="Description"></textarea>
-    </div>
+    <form name="websiteForm" novalidate>
+        <div class="form-group">
+            <label for="website-name">Name</label>
+            <input ng-model="name"
+                   name="name"
+                   required
+                   type="text"
+                   class="form-control"
+                   id="website-name"
+                   placeholder="Name">
+            <span ng-if="model.error" class="error-text">
+                *{{model.nameError}}
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="website-description">Description</label>
+            <textarea ng-model="description" rows="4" id="website-description" class="form-control" placeholder="Description"></textarea>
+        </div>
+    </form>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
