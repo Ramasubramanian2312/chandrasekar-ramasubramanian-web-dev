@@ -10,7 +10,7 @@
                 Widget Edit
             </a>
             <p class="navbar-text pull-right">
-                <a ng-click="model.updateWidget(model.widget)" class="navbar-link">
+                <a ng-click="model.updateWidget(model.widget, widgetForm)" class="navbar-link">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
             </p>
@@ -21,40 +21,47 @@
     <div ng-if="model.error" class="alert alert-danger" role="alert">
         {{model.error}}
     </div>
-    <div class="form-group">
-        <label for="widget-name">Name</label>
-        <input ng-model="model.widget.name"
-               type="text"
-               class="form-control"
-               id="widget-name"
-               placeholder="Widget Name">
-    </div>
-    <div class="form-group">
-        <label for="widget-text">Text</label>
-        <input ng-model="model.widget.text"
-               type="text"
-               class="form-control"
-               id="widget-text"
-               placeholder="Widget Text">
-    </div>
-    <div class="form-group">
-        <label for="widget-url">URL</label>
-        <input ng-model="model.widget.url"
-               type="url"
-               class="form-control"
-               id="widget-url"
-               placeholder="YouTube URL">
-    </div>
-    <div class="form-group">
-        <label for="widget-width">Width</label>
-        <input ng-model="model.widget.width"
-               type="text"
-               class="form-control"
-               id="widget-width"
-               placeholder="Content Width">
-    </div>
-    <a ng-click="model.deleteWidget(model.widgetId)"
-       class="btn btn-danger btn-block">Delete</a>
+    <form name="widgetForm" novalidate>
+        <div class="form-group">
+            <label for="widget-name">Name</label>
+            <input ng-model="model.widget.name"
+                   name="name"
+                   required
+                   type="text"
+                   class="form-control"
+                   id="widget-name"
+                   placeholder="Widget Name">
+        <span ng-if="model.error" class="error-text">
+                *{{model.nameError}}
+        </span>
+        </div>
+        <div class="form-group">
+            <label for="widget-text">Text</label>
+            <input ng-model="model.widget.text"
+                   type="text"
+                   class="form-control"
+                   id="widget-text"
+                   placeholder="Widget Text">
+        </div>
+        <div class="form-group">
+            <label for="widget-url">URL</label>
+            <input ng-model="model.widget.url"
+                   type="url"
+                   class="form-control"
+                   id="widget-url"
+                   placeholder="YouTube URL">
+        </div>
+        <div class="form-group">
+            <label for="widget-width">Width</label>
+            <input ng-model="model.widget.width"
+                   type="text"
+                   class="form-control"
+                   id="widget-width"
+                   placeholder="Content Width">
+        </div>
+        <a ng-click="model.deleteWidget(model.widgetId)"
+           class="btn btn-danger btn-block">Delete</a>
+    </form>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">

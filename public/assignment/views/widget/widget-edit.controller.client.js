@@ -24,21 +24,22 @@
         }
         init();
         
-        function updateWidget(widget) {
-            if(widget.name) {
-                WidgetService
-                    .updateWidget(vm.widgetId, widget)
-                    .then(
-                        function (response) {
-                            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
-                        },
-                        function (error) {
-                            vm.error = "Unable to update widget";
-                        }
-                    );
+        function updateWidget(widget, widgetForm) {
+            if(widgetForm.$invalid) {
+                vm.error = "This form has errors";
+                vm.nameError = "Widget should have a name";
             }
             else {
-                vm.error = "Widget name cannot be blank";
+                WidgetService
+                    .updateWidget(vm.widgetId, widget)
+                .then(
+                    function (response) {
+                        $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+                    },
+                    function (error) {
+                        vm.error = "Unable to update widget";
+                    }
+                );
             }
         }
 
