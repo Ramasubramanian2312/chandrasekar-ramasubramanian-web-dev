@@ -56,11 +56,28 @@
         <div class="input-group">
             <input ng-model="searchText" type="text" class="form-control">
         <span class="input-group-btn">
-            <a ng-click="model.searchProjects(searchText)" class="btn btn-default" type="button">
+            <a ng-click="model.findAllBusinessByTerm(searchText)" class="btn btn-default" type="button">
                 <span class="glyphicon glyphicon-search"></span>
             </a>
         </span>
         </div>
+        <div class="row">
+            <div ng-repeat="business in model.data.businesses" class="col-lg-4">
+<!--                <img width="100%" ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_s.jpg" />
+                <img width="100%"
+                     ng-click="model.selectPhoto(photo)"
+                     ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_s.jpg"/>-->
+                <div ng-click="model.find" class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Panel title</h3>
+                    </div>
+                    <div class="panel-body">
+                        Panel content
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{model.data}}
     </div>
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         <div class="panel panel-default">
@@ -120,20 +137,20 @@
                 </div>
             </div>
         </a>
-        <!--<a ng-click="model.searchProjectById(proposal.id)" class="project-card">
+        <!--<a ng-click="model.searchProjectById(proposal.id)" class="business-card">
             <div class="container-fluid">
                 <div class="col col-6">
                     <span></span>
 
                 </div>
-                <div class="project-fulfillmentTrailer">
+                <div class="business-fulfillmentTrailer">
                     "{{proposal.fulfillmentTrailer}}"
                 </div>
-                <div class="project-teacherName">
+                <div class="business-teacherName">
                     <span></span>
                     {{proposal.teacherName}}
                 </div>
-                <div class="project-schoolName">
+                <div class="business-schoolName">
                     {{proposal.schoolName}}
                 </div>
             </div>

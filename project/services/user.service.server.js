@@ -7,6 +7,12 @@ module.exports = function (app, models) {
 
     var userModel = models.userModel;
 
+    app.post("/api/user", createUser);
+    app.get("/api/user", getUsers);
+    app.get("/api/user/:userId", findUserById);
+    app.put("/api/user/:userId", updateUser);
+    app.delete("/api/user/:userId", deleteUser);
+
     app.get("/projectAuth/facebook", passport.authenticate('projectFacebook'));
     app.get('/projectAuth/facebook/callback',
         passport.authenticate('facebook', {

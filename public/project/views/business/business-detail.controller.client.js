@@ -1,15 +1,15 @@
 (function () {
     angular
-        .module("SupportAClassroom")
-        .controller("ProjectDetailController", ProjectDetailController);
+        .module("Project")
+        .controller("BusinessDetailController", BusinessDetailController);
 
-    function ProjectDetailController(ProjectService, $routeParams) {
+    function BusinessDetailController(ProjectService, $routeParams) {
         var vm = this;
         var projectId = $routeParams.projectId;
 
         function init() {
             ProjectService
-                .findProjectById(projectId)
+                .findBusinessById(projectId)
                 .then(
                     function (response) {
                         vm.proposal = response.data;

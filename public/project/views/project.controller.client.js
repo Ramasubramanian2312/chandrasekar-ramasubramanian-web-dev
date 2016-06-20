@@ -12,12 +12,12 @@
                 .findProjectById(projectId)
                 .then(
                     function (project) {
-                        console.log("Retrieving project details for project id " + projectId);
+                        console.log("Retrieving business details for business id " + projectId);
                         vm.project = project;
                     },
                     function (error) {
-                        console.log("Unable to retrieve details for project " + projectId);
-                        vm.error = "Unable to retrieve details for project " + projectId;
+                        console.log("Unable to retrieve details for business " + projectId);
+                        vm.error = "Unable to retrieve details for business " + projectId;
                     }
                 );
         }
