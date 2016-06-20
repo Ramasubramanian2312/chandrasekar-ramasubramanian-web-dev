@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module("SupportAClassroom")
+        .module("Project")
         .config(Config);
 
     function Config($routeProvider) {
@@ -11,20 +11,20 @@
                 controllerAs: "model"
             })
             .when("/search", {
-                templateUrl: "views/search.view.client.html",
-                controller: "SearchController",
+                templateUrl: "views/business/business-list.view.client.html",
+                controller: "BusinessListController",
                 controllerAs: "model"
             })
-            .when("/search/project/:projectId", {
-                templateUrl: "views/project/project-detail.view.client.html",
+/*            .when("/search/business/:projectId", {
+                templateUrl: "views/business/business-detail.view.client.html",
                 controller: "ProjectDetailController",
                 controllerAs: "model"
             })
-            .when("/project/:projectId", {
-                templateUrl: "views/project.view.client.html",
+            .when("/business/:businessId", {
+                templateUrl: "views/business.view.client.html",
                 controller: "ProjectController",
                 controllerAs: "model"
-            })
+            })*/
             .when("/login", {
                 templateUrl: "views/user/login.view.client.html",
                 controller: "LoginController",
