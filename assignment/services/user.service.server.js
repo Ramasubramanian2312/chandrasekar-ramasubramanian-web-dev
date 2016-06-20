@@ -130,7 +130,7 @@ module.exports = function (app, models) {
                     res.json(user);
                 },
                 function (error) {
-                    res.statusCode(404).send(error);
+                    res.status(404).send(error);
                 }
             );
     }
@@ -144,8 +144,7 @@ module.exports = function (app, models) {
             .then(
                 function (user) {
                     if(user) {
-                        res.statusCode(400).send("Username already in use");
-                        return;
+                        res.status(400).send("Username already in use");
                     } else {
                         req.body.password = bcrypt.hashSync(req.body.password);
                         return userModel
@@ -153,7 +152,7 @@ module.exports = function (app, models) {
                     }
                 },
                 function (err) {
-                    res.statusCode(400).send(err);
+                    res.status(400).send(err);
                 }
             )
             .then(
@@ -161,7 +160,7 @@ module.exports = function (app, models) {
                     if(user) {
                         req.login(user, function (err) {
                             if(err) {
-                                res.statusCode(400).send(err);
+                                res.status(400).send(err);
                             } else {
                                 res.json(user);
                             }
@@ -169,7 +168,7 @@ module.exports = function (app, models) {
                     }
                 },
                 function (err) {
-                    res.statusCode(400).send(err);
+                    res.status(400).send(err);
                 }
             )
     }
