@@ -1,4 +1,4 @@
 (function () {
     angular
-        .module("SupportAClassroom", ["ngRoute"]);
+        .module("Project", ["ngRoute"]);
 })();
