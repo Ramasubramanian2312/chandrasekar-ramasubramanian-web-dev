@@ -1,5 +1,6 @@
 module.exports = function () {
     var mongoose =  require("mongoose");
+    var BusinessSchema = require("../business/business.schema.server")();
 
     var UserSchema = mongoose.Schema({
         username: {type: String, required: true},
@@ -11,6 +12,7 @@ module.exports = function () {
             id: String,
             displayName: String
         },
+        businesses: [BusinessSchema],
         lastName: String,
         email: String,
         phone: String,

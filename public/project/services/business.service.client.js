@@ -5,47 +5,43 @@
 
     function BusinessService($http) {
         var api = {
-/*            search: search,
-            searchProjects: searchProjects,*/
-            findBusinessById: findBusinessById,
-            findAllBusinessByTerm: findAllBusinessByTerm,
-            findHighestRatedBusinesses: findHighestRatedBusinesses
-        }
-
+            findApiBusinessById: findApiBusinessById,
+            findApiAllBusinessByTerm: findApiAllBusinessByTerm,
+            findApiHighestRatedBusinesses: findApiHighestRatedBusinesses,
+            createBusiness: createBusiness,
+            registerBusiness: registerBusiness,
+            findBusinessByBusinessId: findBusinessByBusinessId
+        };
         return api;
 
-/*        var apiKey = "8vec5mn5udnx";
-
-        function searchProjects(searchTerm) {
-            var key = "DONORSCHOOSE";
-            // var secret = "e49e05da6e0ed56a";
-            var urlBase = "https://api.donorschoose.org/common/json_feed.html?keywords=TEXT&APIKey=API_KEY&callback=JSON_CALLBACK";
-
-            var url = urlBase
-                .replace("API_KEY", key)
-                .replace("TEXT", searchTerm);
-
-            return $http.jsonp(url);
-        }
-
-        function search() {
-            return $http.get("/yelp/search");
-        }*/
-
-        function findBusinessById(businessId) {
-            var url = "/yelp/api/business/"+businessId;
+        function findApiBusinessById(businessId) {
+            var url = "/rest/yelp/business/"+businessId;
             return $http.get(url);
         }
         
-        function findAllBusinessByTerm(searchTerm) {
-            var url = "/yelp/api/searchByTerm?term="+searchTerm;
+        function findApiAllBusinessByTerm(searchTerm) {
+            var url = "/rest/yelp/searchByTerm?term="+searchTerm;
             return $http.get(url);
         }
         
-        function findHighestRatedBusinesses() {
-            var url = "/yelp/api/searchHighestRated";
+        function findApiHighestRatedBusinesses() {
+            var url = "/rest/yelp/searchHighestRated";
             return $http.get(url);
+        }
+        
+        function findBusinessByBusinessId(businessId) {
+            var url = "/rest/business/?businessId="+businessId;
+            return $http.get(url);
+        }
+        
+        function createBusiness(business) {
+            var url = "/rest/business";
+            return $http.post(url, business);
+        }
+        
+        function registerBusiness(business) {
+            var url = "/rest/registerBusiness";
+            return $http.post(url, business);
         }
     }
-
 })();

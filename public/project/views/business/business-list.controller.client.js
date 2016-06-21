@@ -5,12 +5,12 @@
     
     function BusinessListController($location, BusinessService) {
         var vm = this;
-        vm.findAllBusinessByTerm = findAllBusinessByTerm;
-        vm.findBusinessById = findBusinessById;
+        vm.findApiAllBusinessByTerm = findApiAllBusinessByTerm;
+        vm.findApiBusinessById = findApiBusinessById;
 
         function init() {
             BusinessService
-                .findHighestRatedBusinesses()
+                .findApiHighestRatedBusinesses()
                 .then(
                     function (res) {
                         vm.data = res.data;
@@ -20,9 +20,9 @@
 
         init();
         
-        function findAllBusinessByTerm(searchTerm) {
+        function findApiAllBusinessByTerm(searchTerm) {
             BusinessService
-                .findAllBusinessByTerm(searchTerm)
+                .findApiAllBusinessByTerm(searchTerm)
                 .then(
                     function (res) {
                         vm.data = res.data;
@@ -33,9 +33,9 @@
                 )
         }
 
-        function findBusinessById(businessId) {
+        function findApiBusinessById(businessId) {
             BusinessService
-                .findBusinessById(businessId)
+                .findApiBusinessById(businessId)
                 .then(
                     function (res) {
                         vm.data = res.data;

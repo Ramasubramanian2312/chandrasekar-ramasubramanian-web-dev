@@ -56,7 +56,7 @@
         <div class="input-group">
             <input ng-model="searchText" type="text" class="form-control">
         <span class="input-group-btn">
-            <a ng-click="model.findAllBusinessByTerm(searchText)" class="btn btn-default" type="button">
+            <a ng-click="model.findApiAllBusinessByTerm(searchText)" class="btn btn-default" type="button">
                 <span class="glyphicon glyphicon-search"></span>
             </a>
         </span>
@@ -67,7 +67,7 @@
                 <img width="100%"
                      ng-click="model.selectPhoto(photo)"
                      ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_s.jpg"/>-->
-                <div ng-click="model.findBusinessById(business.id)" class="panel panel-default">
+                <div ng-click="model.findApiBusinessById(business.id)" class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="text-center  panel-title">{{business.name}}</h3>
                     </div>
