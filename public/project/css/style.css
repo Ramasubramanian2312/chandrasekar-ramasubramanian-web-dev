@@ -119,3 +119,11 @@ a.project-card-title {
     color: darkgray;
     font-style: italic;
 }
+
+span.error-text {
+    color: red;
+}
+
+input.ng-invalid {
+    background-color: beige;
+}
