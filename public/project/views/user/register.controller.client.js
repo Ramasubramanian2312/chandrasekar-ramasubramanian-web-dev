@@ -33,9 +33,6 @@
                     vm.error = "Passwords do not match";
                 }
             }
-            else {
-                vm.error = "Username/passwords cannot be blank"
-            }
         }
     }
 })();
