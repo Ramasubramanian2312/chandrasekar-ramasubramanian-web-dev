@@ -3,17 +3,33 @@
         {{model.error}}
     </div>
     <h1>Login</h1>
-    <input ng-model="username"
-           type="text"
-           class="form-control"
-           placeholder="username" />
-    <input ng-model="password"
-           type="password"
-           class="form-control"
-           placeholder="password">
-    <a ng-click="model.login(username, password)" class="btn btn-primary btn-block">Login</a>
+    <form name="loginForm" novalidate>
+        <input ng-model="username"
+               name="username"
+               type="text"
+               required
+               class="form-control"
+               placeholder="username" />
+        <span class="error-text" ng-show="loginForm.username.$invalid && loginForm.$submitted">
+            Please enter a valid username
+        </span>
+        <input ng-model="password"
+               name="password"
+               type="password"
+               required
+               class="form-control"
+               placeholder="password">
+        <span class="error-text" ng-show="loginForm.password.$invalid && loginForm.$submitted">
+            Please enter a valid password
+        </span>
+        <button ng-click="model.login(username, password)"
+                type="submit"
+                class="btn btn-primary btn-block">Login</button>
+    </form>
     <a class="btn btn-success btn-block"
        href="#/register">Register</a>
-    <a class="btn btn-success btn-block"
-       href="#/search/project/2030511">Register</a>
+    <a href="/projectAuth/facebook" class="btn btn-primary btn-block">
+        <span class="fa fa-facebook-official"></span>
+        Facebook
+    </a>
 </div>

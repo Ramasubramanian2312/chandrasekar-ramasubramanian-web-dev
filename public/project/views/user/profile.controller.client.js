@@ -3,12 +3,13 @@
         .module("Project")
         .controller("ProfileController", ProfileController);
     
-    function ProfileController($location, $routeParams, UserService) {
+    function ProfileController($location, $routeParams, UserService, $rootScope) {
         var vm = this;
         vm.updateUser = updateUser;
         vm.unregister = unregister;
+        vm.logout = logout;
 
-        var id = $routeParams.userId;
+        var id = $rootScope.currentUser._id;
         function init() {
             UserService
                 .findUserById(id)
@@ -41,6 +42,20 @@
                     function (error) {
                     vm.error = "Error updating profile";
                     });
+        }
+        
+        function logout() {
+            UserService
+                .logout()
+                .then(
+                    function (response) {
+                        $rootScope.currentUser = null;
+                        $location.url("/login");
+                    },
+                    function () {
+                        $location.url("/login");
+                    }
+                )
         }
     }
 })();

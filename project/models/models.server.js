@@ -1,5 +1,5 @@
 module.exports = function () {
-    
+/*    
     var mongoose = require("mongoose");
     var connectionString = 'mongodb://127.0.0.1:27017/cs5610summer1';
 
@@ -11,13 +11,10 @@ module.exports = function () {
             process.env.OPENSHIFT_APP_NAME;
     }
     
-    mongoose.connect(connectionString);
+    mongoose.connect(connectionString);*/
 
     var models = {
-        userModel: require("./user/user.model.server")(),
-        websiteModel: require("./website/website.model.server")(),
-        pageModel: require("./page/page.model.server")(),
-        widgetModel: require("./widget/widget.model.server")()
+        userModel: require("./user/user.model.server")()
     };
     
     return models;

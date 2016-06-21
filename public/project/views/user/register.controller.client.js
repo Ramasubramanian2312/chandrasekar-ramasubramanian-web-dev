@@ -15,21 +15,26 @@
                         password: password
                     };
                     UserService
-                        .createUser(newUser)
-                        .then(function (response) {
-                            var user = response.data;
-                            if(user._id) {
-                                $location.url("/user/"+user._id);
-                            } else {
-                                vm.error = "User not created";
+                        .register(username, password)
+                        .then(
+                            function (response) {
+                                var user = response.data;
+                                if(user) {
+                                    $location.url("/user/");
+                                } else {
+                                    vm.error = "User not created";
+                                }
+                            },
+                            function (err) {
+                                vm.error = "User already exists";
                             }
-                        });
+                        );
                 } else {
                     vm.error = "Passwords do not match";
                 }
             }
             else {
-                vm.error = "Username/password cannot be blank"
+                vm.error = "Username/passwords cannot be blank"
             }
         }
     }
