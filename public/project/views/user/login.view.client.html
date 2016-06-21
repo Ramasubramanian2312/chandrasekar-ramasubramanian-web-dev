@@ -2,6 +2,9 @@
     <div ng-if="model.error" class="alert alert-danger" role="alert">
         {{model.error}}
     </div>
+    <div class="alert alert-danger" ng-show="loginForm.$invalid && loginForm.$submitted">
+        There are errors in the form
+    </div>
     <h1>Login</h1>
     <form name="loginForm" novalidate>
         <input ng-model="username"
@@ -10,8 +13,9 @@
                required
                class="form-control"
                placeholder="username" />
-        <span class="error-text" ng-show="loginForm.username.$invalid && loginForm.$submitted">
-            Please enter a valid username
+        <span class="error-text"
+              ng-show="loginForm.username.$error.required && loginForm.$submitted">
+            *Please enter a username
         </span>
         <input ng-model="password"
                name="password"
@@ -19,17 +23,17 @@
                required
                class="form-control"
                placeholder="password">
-        <span class="error-text" ng-show="loginForm.password.$invalid && loginForm.$submitted">
-            Please enter a valid password
+        <span class="error-text" ng-show="loginForm.$error.required && loginForm.$submitted">
+            *Please enter a password
         </span>
         <button ng-click="model.login(username, password)"
                 type="submit"
                 class="btn btn-primary btn-block">Login</button>
+        <a class="btn btn-success btn-block"
+           href="#/register">Register</a>
+        <a href="/projectAuth/facebook" class="btn btn-primary btn-block">
+            <span class="fa fa-facebook-official"></span>
+            Facebook
+        </a>
     </form>
-    <a class="btn btn-success btn-block"
-       href="#/register">Register</a>
-    <a href="/projectAuth/facebook" class="btn btn-primary btn-block">
-        <span class="fa fa-facebook-official"></span>
-        Facebook
-    </a>
 </div>
