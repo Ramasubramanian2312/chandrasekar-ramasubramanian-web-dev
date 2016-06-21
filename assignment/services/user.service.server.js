@@ -196,7 +196,7 @@ module.exports = function (app, models) {
                     res.json(user);
                 },
                 function (error) {
-                    res.statusCode(404).send(error);
+                    res.status(404).send(error);
                 }
             );
     }
@@ -211,7 +211,7 @@ module.exports = function (app, models) {
                     res.json(user);
                 },
                 function (error) {
-                    res.statusCode(404).send(error);
+                    res.status(404).send(error);
                 }
             );
     }
@@ -228,7 +228,7 @@ module.exports = function (app, models) {
                     res.send(200);
                 },
                 function (error) {
-                    res.statusCode(404).send(error);
+                    res.status(404).send(error);
                 }
             );
     }
@@ -244,7 +244,7 @@ module.exports = function (app, models) {
                     res.send(200);
                 },
                 function (error) {
-                    res.statusCode(404).send(error);
+                    res.status(404).send(error);
                 }
             );
     }
