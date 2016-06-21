@@ -2,7 +2,7 @@
     angular
         .module("Project")
         .controller("ProfileController", ProfileController);
-    
+
     function ProfileController($location, $routeParams, UserService, $rootScope) {
         var vm = this;
         vm.updateUser = updateUser;
@@ -37,13 +37,13 @@
                 .updateUser(id, newUser)
                 .then(
                     function (response) {
-                    vm.success = "Your Profile was saved.";
+                        vm.success = "Your Profile was saved.";
                     },
                     function (error) {
-                    vm.error = "Error updating profile";
+                        vm.error = "Error updating profile";
                     });
         }
-        
+
         function logout() {
             UserService
                 .logout()
