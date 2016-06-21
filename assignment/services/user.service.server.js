@@ -1,11 +1,11 @@
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+/*var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;*/
 var FacebookStrategy = require('passport-facebook').Strategy;
 var bcrypt = require("bcrypt-nodejs");
 
-module.exports = function (app, models) {
+module.exports = function (app, userModel, passport) {
 
-    var userModel = models.userModel;
+//    var userModel = models.userModel;
 
     app.get("/auth/facebook", passport.authenticate('facebook'));
     app.get('/auth/facebook/callback',
@@ -15,7 +15,7 @@ module.exports = function (app, models) {
         }));
     app.post("/api/user", createUser);
     app.post("/api/register", register);
-    app.post("/api/login", passport.authenticate('local'), login);
+    app.post("/api/login", passport.authenticate('assignment'), login);
     app.post("/api/logout", logout);
     app.get("/api/loggedIn", loggedIn);
     app.get("/api/user", getUsers);
@@ -23,9 +23,9 @@ module.exports = function (app, models) {
     app.put("/api/user/:userId", updateUser);
     app.delete("/api/user/:userId", deleteUser);
 
-    passport.use(new LocalStrategy(localStrategy));
+/*    passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
-    passport.deserializeUser(deserializeUser);
+    passport.deserializeUser(deserializeUser);*/
 
     var facebookConfig = {
         clientID     : process.env.FACEBOOK_CLIENT_ID,
@@ -36,7 +36,7 @@ module.exports = function (app, models) {
     
     passport.use('facebook', new FacebookStrategy(facebookConfig, facebookLogin));
 
-    function localStrategy(username, password, done) {
+/*    function localStrategy(username, password, done) {
         userModel
             .findUserByUsername(username)
             .then(
@@ -69,7 +69,7 @@ module.exports = function (app, models) {
                     done(err, null);
                 }
             );
-    }
+    }*/
 
     function facebookLogin(token, refreshToken, profile, done) {
         console.log(profile);

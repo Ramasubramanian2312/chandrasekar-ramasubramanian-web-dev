@@ -23,11 +23,16 @@ app.use(express.static(__dirname + '/public'));
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
 var port      = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
+var assignmentUserModel = require("./assignment/models/user/user.model.server")();
+var projectUserModel = require("./project/models/user/user.model.server")();
+var securityService = require("./security/security.js")(assignmentUserModel, projectUserModel);
+var passport = securityService.getPassport();
+
 var assignment = require("./assignment/app.js");
-assignment(app);
+assignment(app, assignmentUserModel, passport);
 
 var project = require("./project/app.js");
-project(app);
+project(app, projectUserModel, passport);
 
 require("./experiments/todos")(app);
 

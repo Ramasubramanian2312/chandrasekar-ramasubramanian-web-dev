@@ -9,6 +9,7 @@ module.exports = function (app, models) {
         token_secret: process.env.YELP_TOKEN_SECRET,
     });
 
+    app.get("/yelp/api/searchHighestRated", findHighestRatedBusinesses);
     app.get("/yelp/api/searchByTerm/", findAllBusinessByTerm);
     app.get("/yelp/api/business/:businessId", findBusinessById);
 
@@ -34,7 +35,7 @@ module.exports = function (app, models) {
         var parameters = {
             term: searchTerm,
             location: 'Boston',
-            limit: 10
+            limit: 15
         };
 
         yelp
@@ -44,7 +45,20 @@ module.exports = function (app, models) {
                     res.send(data);
                 },
                 function (err) {
-                    res.status(400).send(error);
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function findHighestRatedBusinesses(req, res) {
+        yelp
+            .search({location: 'Boston', sort: 2, limit: 15})
+            .then(
+                function (data) {
+                    res.send(data);
+                },
+                function (err) {
+                    res.status(400).send(err);
                 }
             );
     }

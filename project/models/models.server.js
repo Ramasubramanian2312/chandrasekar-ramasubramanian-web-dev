@@ -14,7 +14,7 @@ module.exports = function () {
     mongoose.connect(connectionString);*/
 
     var models = {
-        userModel: require("./user/user.model.server")()
+        //userModel: require("./user/user.model.server")()
     };
     
     return models;

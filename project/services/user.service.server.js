@@ -1,11 +1,11 @@
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+/*var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;*/
 var FacebookStrategy = require('passport-facebook').Strategy;
 var bcrypt = require("bcrypt-nodejs");
 
-module.exports = function (app, models) {
+module.exports = function (app, userModel, passport) {
 
-    var userModel = models.userModel;
+    // var userModel = models.userModel;
 
     app.get("/projectAuth/facebook", passport.authenticate('projectFacebook'));
     app.get('/projectAuth/facebook/callback',
@@ -15,7 +15,7 @@ module.exports = function (app, models) {
         }));
     app.post("/rest/user", createUser);
     app.post("/rest/register", register);
-    app.post("/rest/login", passport.authenticate('localProject'), login);
+    app.post("/rest/login", passport.authenticate('project'), login);
     app.post("/rest/logout", logout);
     app.get("/rest/loggedIn", loggedIn);
     app.get("/rest/user", getUsers);
@@ -23,9 +23,9 @@ module.exports = function (app, models) {
     app.put("/rest/user/:userId", updateUser);
     app.delete("/rest/user/:userId", deleteUser);
 
-    passport.use('localProject', new LocalStrategy(localStrategy));
+/*    passport.use('localProject', new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
-    passport.deserializeUser(deserializeUser);
+    passport.deserializeUser(deserializeUser);*/
 
     var facebookConfig = {
         clientID     : process.env.PROJECT_FACEBOOK_CLIENT_ID,
@@ -36,7 +36,7 @@ module.exports = function (app, models) {
 
     passport.use('projectFacebook', new FacebookStrategy(facebookConfig, facebookLogin));
 
-    function localStrategy(username, password, done) {
+/*    function localStrategy(username, password, done) {
         userModel
             .findUserByUsername(username)
             .then(
@@ -69,7 +69,7 @@ module.exports = function (app, models) {
                     done(err, null);
                 }
             );
-    }
+    }*/
 
     function facebookLogin(token, refreshToken, profile, done) {
         console.log(profile);

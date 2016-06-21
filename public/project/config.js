@@ -33,6 +33,11 @@
                 controller: "BusinessListController",
                 controllerAs: "model"
             })
+            .when("/business/:businessId", {
+                templateUrl: "views/business/business-detail.view.client.html",
+                controller: "BusinessDetailController",
+                controllerAs: "model"
+            })
             .otherwise({
                 redirectTo: "/login"
             });

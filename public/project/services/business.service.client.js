@@ -8,7 +8,8 @@
 /*            search: search,
             searchProjects: searchProjects,*/
             findBusinessById: findBusinessById,
-            findAllBusinessByTerm: findAllBusinessByTerm
+            findAllBusinessByTerm: findAllBusinessByTerm,
+            findHighestRatedBusinesses: findHighestRatedBusinesses
         }
 
         return api;
@@ -38,6 +39,11 @@
         
         function findAllBusinessByTerm(searchTerm) {
             var url = "/yelp/api/searchByTerm?term="+searchTerm;
+            return $http.get(url);
+        }
+        
+        function findHighestRatedBusinesses() {
+            var url = "/yelp/api/searchHighestRated";
             return $http.get(url);
         }
     }

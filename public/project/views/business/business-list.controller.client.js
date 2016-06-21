@@ -5,11 +5,20 @@
     
     function BusinessListController($location, BusinessService) {
         var vm = this;
-        
         vm.findAllBusinessByTerm = findAllBusinessByTerm;
         vm.findBusinessById = findBusinessById;
-/*        vm.searchProjectById = searchProjectById;
-        vm.search = search;*/
+
+        function init() {
+            BusinessService
+                .findHighestRatedBusinesses()
+                .then(
+                    function (res) {
+                        vm.data = res.data;
+                    }
+                );
+        }
+
+        init();
         
         function findAllBusinessByTerm(searchTerm) {
             BusinessService
@@ -30,12 +39,14 @@
                 .then(
                     function (res) {
                         vm.data = res.data;
+                        $location.url("/business/"+businessId);
                     },
                     function (err) {
                         vm.error = "Sorry! We could not find a business matching the Id";
                     }
                 )
         }
+
 /*
         function search() {
             ProjectService

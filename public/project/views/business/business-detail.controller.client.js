@@ -3,16 +3,16 @@
         .module("Project")
         .controller("BusinessDetailController", BusinessDetailController);
 
-    function BusinessDetailController(ProjectService, $routeParams) {
+    function BusinessDetailController(BusinessService, $routeParams) {
         var vm = this;
-        var projectId = $routeParams.projectId;
+        var businessId = $routeParams.businessId;
 
         function init() {
-            ProjectService
-                .findBusinessById(projectId)
+            BusinessService
+                .findBusinessById(businessId)
                 .then(
-                    function (response) {
-                        vm.proposal = response.data;
+                    function (res) {
+                        vm.data = res.data;
                     }
                 );
         }
