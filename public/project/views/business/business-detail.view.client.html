@@ -1,34 +1,83 @@
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="">Start Bootstrap</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="">About</a>
-                    </li>
-                    <li>
-                        <a href="">Services</a>
-                    </li>
-                    <li>
-                        <a href="">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/"><b>Home</b></a>
         </div>
-        <!-- /.container -->
-    </nav>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input ng-model="model.searchText" type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <a href="#/searchTerm/{{model.searchText}}" class="btn btn-default">Submit</a>
+                </form>
+                <li ng-if="model.currentUser == null">
+                    <a href="#/register"><b>Register</b></a>
+                </li>
+                <li ng-if="model.currentUser == null">
+                    <a href="#/login"><b>Login</b></a>
+                </li>
+                <li ng-if="model.currentUser" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">Welcome <b>{{model.currentUser.username}}</b><b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#/user">Profile</a>
+                        </li>
+                        <li>
+                            <a ng-click="model.logout()">Logout</a>
+                        </li>
+                    </ul>
+                </li>
+                <!--
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="blog-home-1.html">Blog Home 1</a>
+                        </li>
+                        <li>
+                            <a href="blog-home-2.html">Blog Home 2</a>
+                        </li>
+                        <li>
+                            <a href="blog-post.html">Blog Post</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="full-width.html">Full Width Page</a>
+                        </li>
+                        <li>
+                            <a href="sidebar.html">Sidebar Page</a>
+                        </li>
+                        <li>
+                            <a href="faq.html">FAQ</a>
+                        </li>
+                        <li>
+                            <a href="404.html">404</a>
+                        </li>
+                        <li>
+                            <a href="pricing.html">Pricing Table</a>
+                        </li>
+                    </ul>
+                </li>-->
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
 
     <!-- Page Content -->
     <div class="container">
@@ -48,7 +97,7 @@
                 <div class="thumbnail">
                     <img class="img-responsive" src="http://placehold.it/800x300" alt="">
                     <div class="caption-full">
-                        <a ng-click="model.likeBusiness(model.data)"><span class="glyphicon glyphicon-thumbs-up pull-right"></span></a>
+                        <a ng-if="model.currentUser" ng-click="model.likeBusiness(model.data)"><span class="glyphicon glyphicon-thumbs-up pull-right"></span></a>
                         <h4 class="pull-right">$24.99</h4>
                         <h4><a href="">Product Name</a>
                         </h4>

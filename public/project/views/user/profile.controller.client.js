@@ -3,18 +3,25 @@
         .module("Project")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($location, $routeParams, UserService, $rootScope) {
+    function ProfileController($location, $routeParams, UserService, BusinessService, $rootScope) {
         var vm = this;
         vm.updateUser = updateUser;
         vm.unregister = unregister;
         vm.logout = logout;
 
-        var id = $rootScope.currentUser._id;
         function init() {
+            vm.currentUser = $rootScope.currentUser;
+            console.log(vm.currentUser);
+            
+            if(vm.currentUser) {
+                var id = $rootScope.currentUser._id;
+            }
+            
             UserService
                 .findUserById(id)
                 .then(function (response) {
                     vm.user = response.data;
+                    vm.currentUser = $rootScope.currentUser;
                 });
         }
         init();

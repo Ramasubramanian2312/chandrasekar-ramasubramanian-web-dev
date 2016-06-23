@@ -3,9 +3,17 @@
         .module("Project")
         .controller("LoginController", LoginController);
 
-    function LoginController($location, UserService) {
+    function LoginController($location, UserService, $rootScope) {
         var vm = this;
         vm.login = login;
+        vm.logout = logout;
+        
+        function init() {
+            vm.currentUser = $rootScope.currentUser;
+            console.log(vm.currentUser);
+        }
+
+        init();
 
         function login(username, password) {
             if(username && password) {
@@ -26,6 +34,20 @@
                         }
                     );
             }
+        }
+
+        function logout() {
+            UserService
+                .logout()
+                .then(
+                    function (response) {
+                        $rootScope.currentUser = null;
+                        $location.url("/login");
+                    },
+                    function () {
+                        $location.url("/login");
+                    }
+                )
         }
     }
 })();

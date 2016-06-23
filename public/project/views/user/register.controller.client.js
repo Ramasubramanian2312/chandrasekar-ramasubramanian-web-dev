@@ -3,10 +3,17 @@
         .module("Project")
         .controller("RegisterController", RegisterController);
 
-    function RegisterController($location, UserService) {
+    function RegisterController($location, UserService, $rootScope) {
         var vm = this;
         vm.registerUser = registerUser;
-
+        vm.logout = logout;
+        
+        function init() {
+            vm.currentUser = $rootScope.currentUser;
+            console.log(vm.currentUser);
+        }
+        init();
+        
         function registerUser (username, password, verifypassword) {
             if(username && password && verifypassword){
                 if(password === verifypassword) {
@@ -33,6 +40,20 @@
                     vm.error = "Passwords do not match";
                 }
             }
+        }
+
+        function logout() {
+            UserService
+                .logout()
+                .then(
+                    function (response) {
+                        $rootScope.currentUser = null;
+                        $location.url("/login");
+                    },
+                    function () {
+                        $location.url("/login");
+                    }
+                )
         }
     }
 })();

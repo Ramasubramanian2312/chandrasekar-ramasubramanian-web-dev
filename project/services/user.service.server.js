@@ -72,7 +72,6 @@ module.exports = function (app, userModel, passport) {
     }*/
 
     function facebookLogin(token, refreshToken, profile, done) {
-        console.log(profile);
         userModel
             .findUserByFacebookId(profile.id)
             .then(

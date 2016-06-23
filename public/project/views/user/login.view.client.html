@@ -1,12 +1,113 @@
-<div class="container-fluid">
-    <div ng-if="model.error" class="alert alert-danger" role="alert">
-        {{model.error}}
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/"><b>Home</b></a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input ng-model="model.searchText" type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <a href="#/searchTerm/{{model.searchText}}" class="btn btn-default">Submit</a>
+                </form>
+                <li ng-if="model.currentUser == null">
+                    <a href="#/register"><b>Register</b></a>
+                </li>
+                <li ng-if="model.currentUser == null">
+                    <a href="#/login"><b>Login</b></a>
+                </li>
+                <li ng-if="model.currentUser" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">Welcome <b>{{model.currentUser.username}}</b><b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#/user">Profile</a>
+                        </li>
+                        <li>
+                            <a ng-click="model.logout()">Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
     </div>
-    <div class="alert alert-danger" ng-show="loginForm.$invalid && loginForm.$submitted">
-        There are errors in the form
+    <!-- /.container -->
+</nav>
+
+<div class="login-page bk-img" style="background-image: url(img/resturant.jpg);">
+    <div class="form-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <h2 class="text-center text-bold text-light mt-4x">Sign in</h2>
+                    <div class="well row pt-2x pb-3x bk-light">
+                        <div class="col-md-8 col-md-offset-2">
+                            <form class="mt" name="loginForm" novalidate>
+                                <div ng-if="model.error" class="alert alert-danger" role="alert">
+                                    {{model.error}}
+                                </div>
+                                <div class="alert alert-danger" ng-show="loginForm.$invalid && loginForm.$submitted">
+                                    There are errors in the form
+                                </div>
+                                <label for="username" class="text-uppercase text-sm">Username</label>
+                                <input ng-model="username"
+                                       name="username"
+                                       id="username"
+                                       type="text"
+                                       required
+                                       class="form-control mb"
+                                       placeholder="Username" />
+                                <span class="error-text"
+                                      ng-show="loginForm.username.$error.required && loginForm.$submitted">
+                                    *Please enter a username
+                                </span>
+
+                                <div class="checkbox checkbox-circle checkbox-info">
+
+                                </div>
+
+                                <label for="password" class="text-uppercase text-sm">Password</label>
+                                <input ng-model="password"
+                                       id="password"
+                                       name="password"
+                                       type="password"
+                                       required
+                                       class="form-control mb"
+                                       placeholder="Password">
+                                <span class="error-text" ng-show="loginForm.$error.required && loginForm.$submitted">
+                                    *Please enter a password
+                                </span>
+
+                                <div class="checkbox checkbox-circle checkbox-info">
+
+                                </div>
+
+                                <button ng-click="model.login(username, password)"
+                                        type="submit"
+                                        class="btn btn-primary btn-block">LOGIN</button>
+
+                            </form>
+                        </div>
+                    </div>
+                    <div class="text-center text-light">
+                        <a href="#/register" class="text-light">New User? Register here</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <!--<h1>Login</h1>-->
-    <div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+</div>
+
+    <!--<div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -22,7 +123,7 @@
                 <div class="modal-body">
                     <form class="form col-lg-12 center-block" name="loginForm" novalidate>
                         <div class="form-group">
-                            <!--<span class="input-group-addon">@</span>-->
+                            &lt;!&ndash;<span class="input-group-addon">@</span>&ndash;&gt;
                             <input ng-model="username"
                                    name="username"
                                    type="text"
@@ -35,7 +136,7 @@
                             </span>
                         </div>
                         <div class="form-group">
-                            <!--<span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>-->
+                            &lt;!&ndash;<span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>&ndash;&gt;
                             <input ng-model="password"
                                    name="password"
                                    type="password"
@@ -70,6 +171,4 @@
                 </div>
             </div>
         </div>
-    </div>
-
-</div>
+    </div>-->

@@ -3,22 +3,57 @@
         .module("Project")
         .controller("BusinessListController", BusinessListController);
     
-    function BusinessListController($location, BusinessService) {
+    function BusinessListController($location, BusinessService, $routeParams, $rootScope) {
         var vm = this;
+        vm.logout = logout;
         vm.findApiAllBusinessByTerm = findApiAllBusinessByTerm;
         vm.findApiBusinessById = findApiBusinessById;
+        vm.findApiAllBusinessByCategory = findApiAllBusinessByCategory;
+
+        var category = $routeParams.category;
+        var searchTerm = $routeParams.searchTerm;
+        console.log(category);
 
         function init() {
-            BusinessService
-                .findApiHighestRatedBusinesses()
-                .then(
-                    function (res) {
-                        vm.data = res.data;
-                    }
-                );
+            vm.currentUser = $rootScope.currentUser;
+            console.log(vm.currentUser);
+            
+            if(category) {
+                BusinessService
+                    .findApiAllBusinessByCategory(category)
+                    .then(
+                        function (res) {
+                            vm.data = res.data;
+                        }
+                    );
+            }
+            
+            if(searchTerm) {
+                BusinessService
+                    .findApiAllBusinessByTerm(searchTerm)
+                    .then(
+                        function (res) {
+                            vm.data = res.data;
+                        }
+                    );
+            }
         }
 
         init();
+
+        function logout() {
+            UserService
+                .logout()
+                .then(
+                    function (response) {
+                        $rootScope.currentUser = null;
+                        $location.url("/login");
+                    },
+                    function () {
+                        $location.url("/login");
+                    }
+                )
+        }
         
         function findApiAllBusinessByTerm(searchTerm) {
             BusinessService
@@ -47,20 +82,18 @@
                 )
         }
 
-/*
-        function search() {
-            ProjectService
-                .search()
+        function findApiAllBusinessByCategory(category) {
+            BusinessService
+                .findApiAllBusinessByCategory(category)
                 .then(
-                    function (response) {
-                        console.log(response.data);
-                        vm.data = response.data;
+                    function (res) {
+                        vm.data = res.data;
+                        $location.url("/search/"+category);
+                    },
+                    function (error) {
+                        vm.error = "Sorry. There are no search results available.";
                     }
-                );
+                )
         }
-        
-        function searchProjectById(projectId) {
-            $location.url("/business/"+projectId);
-        }*/
     }
 })();

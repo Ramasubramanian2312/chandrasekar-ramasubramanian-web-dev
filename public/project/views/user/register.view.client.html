@@ -1,3 +1,129 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/"><b>Home</b></a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input ng-model="model.searchText" type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <a href="#/searchTerm/{{model.searchText}}" class="btn btn-default">Submit</a>
+                </form>
+                <li ng-if="model.currentUser == null">
+                    <a href="#/register"><b>Register</b></a>
+                </li>
+                <li ng-if="model.currentUser == null">
+                    <a href="#/login"><b>Login</b></a>
+                </li>
+                <li ng-if="model.currentUser" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">Welcome <b>{{model.currentUser.username}}</b><b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#/user">Profile</a>
+                        </li>
+                        <li>
+                            <a ng-click="model.logout()">Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<div class="login-page bk-img" style="background-image: url(img/resturant.jpg);">
+    <div class="form-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <h2 class="text-center text-bold text-light mt-4x">Register</h2>
+                    <div class="well row pt-2x pb-3x bk-light">
+                        <div class="col-md-8 col-md-offset-2">
+                            <form class="mt" name="registerForm" novalidate>
+                                <div ng-if="model.error" class="alert alert-danger" role="alert">
+                                    {{model.error}}
+                                </div>
+                                <div class="alert alert-danger" ng-show="registerForm.$invalid && registerForm.$submitted">
+                                    There are errors in the form
+                                </div>
+                                <label for="username" class="text-uppercase text-sm">Username</label>
+                                <input ng-model="username"
+                                       name="username"
+                                       id="username"
+                                       type="text"
+                                       required
+                                       class="form-control"
+                                       placeholder="username" autocomplete="off" />
+                                <span class="error-text"
+                                      ng-show="registerForm.username.$invalid && registerForm.$submitted">
+                                    *Please enter a username
+                                </span>
+
+                                <div class="checkbox checkbox-circle checkbox-info">
+
+                                </div>
+
+                                <label for="password" class="text-uppercase text-sm">Password</label>
+                                <input ng-model="password"
+                                       name="password"
+                                       id="password"
+                                       type="password"
+                                       required
+                                       class="form-control"
+                                       placeholder="password">
+                                <span class="error-text"
+                                      ng-show="registerForm.password.$invalid && registerForm.$submitted">
+                                    *Please enter a password
+                                </span>
+
+                                <div class="checkbox checkbox-circle checkbox-info">
+
+                                </div>
+
+                                <label for="password" class="text-uppercase text-sm">Verify Password</label>
+                                <input ng-model="verifyPassword"
+                                       type="password"
+                                       id="verifyPassword"
+                                       name="verifyPassword"
+                                       required
+                                       class="form-control"
+                                       placeholder="verify password">
+                                <span class="error-text"
+                                      ng-show="registerForm.verifyPassword.$invalid && registerForm.$submitted">
+                                    *Please enter a verify password value
+                                </span>
+
+                                <div class="checkbox checkbox-circle checkbox-info">
+
+                                </div>
+
+                                <button type="submit"
+                                        ng-click="model.registerUser(username, password, verifyPassword)"
+                                        class="btn btn-primary btn-block">REGISTER
+                                </button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
 <div class="container-fluid">
     <div ng-if="model.error" class="alert alert-danger" role="alert">
         {{model.error}}
@@ -43,4 +169,4 @@
         <a class="btn btn-danger btn-block"
            href="#/login">Cancel</a>
     </form>
-</div>
+</div>-->

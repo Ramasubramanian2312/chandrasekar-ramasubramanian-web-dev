@@ -6,40 +6,67 @@
     function Config($routeProvider) {
         $routeProvider
             .when("/", {
-                templateUrl: "views/user/login.view.client.html",
-                controller: "LoginController",
-                controllerAs: "model"
+                templateUrl: "views/home/home.view.client.html",
+                controller: "HomeController",
+                controllerAs: "model",
+                resolve: {
+                    loggedIn: checkForLogin
+                }
             })
             .when("/login", {
                 templateUrl: "views/user/login.view.client.html",
                 controller: "LoginController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    loggedIn: checkForLogin
+                }
             })
             .when("/register", {
                 templateUrl: "views/user/register.view.client.html",
                 controller: "RegisterController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    loggedIn: checkForLogin
+                }
+            })
+            .when("/index1", {
+                templateUrl: "index1.html"
             })
             .when("/user/", {
                 templateUrl: "views/user/profile.view.client.html",
+                //templateUrl: "index1.html",
                 controller: "ProfileController",
                 controllerAs: "model",
                 resolve: {
                     loggedIn: checkLoggedIn
                 }
             })
-            .when("/search", {
+            .when("/search/:category", {
                 templateUrl: "views/business/business-list.view.client.html",
                 controller: "BusinessListController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    loggedIn: checkForLogin
+                }
+            })
+            .when("/searchTerm/:searchTerm", {
+                templateUrl: "views/business/business-list.view.client.html",
+                controller: "BusinessListController",
+                controllerAs: "model",
+                resolve: {
+                    loggedIn: checkForLogin
+                }
             })
             .when("/business/:businessId", {
                 templateUrl: "views/business/business-detail.view.client.html",
                 controller: "BusinessDetailController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    loggedIn: checkForLogin
+                }
             })
             .otherwise({
-                redirectTo: "/login"
+                redirectTo: "/"
             });
 
         function checkLoggedIn(UserService, $q, $location, $rootScope) {
@@ -50,7 +77,7 @@
                 .then(
                     function (response) {
                         var user = response.data;
-                        console.log(user);
+                        //console.log(user);
                         if(user == '0'){
                             $rootScope.currentUser = null;
                             deferred.reject();
@@ -62,6 +89,29 @@
                     },
                     function (err) {
                         $location.url("/login");
+                    }
+                );
+
+            return deferred.promise;
+        }
+
+        function checkForLogin(UserService, $q, $location, $rootScope) {
+            var deferred = $q.defer();
+
+            UserService
+                .loggedIn()
+                .then(
+                    function (response) {
+                        var user = response.data;
+                        if(user == '0'){
+                            $rootScope.currentUser = null;
+                        } else {
+                            $rootScope.currentUser = user;
+                        }
+                        deferred.resolve();
+                    },
+                    function (err) {
+                        $location.url("/");
                     }
                 );
 

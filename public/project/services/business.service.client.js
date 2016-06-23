@@ -8,9 +8,12 @@
             findApiBusinessById: findApiBusinessById,
             findApiAllBusinessByTerm: findApiAllBusinessByTerm,
             findApiHighestRatedBusinesses: findApiHighestRatedBusinesses,
+            findApiAllBusinessByCategory: findApiAllBusinessByCategory,
             createBusiness: createBusiness,
+            findBusinessById: findBusinessById,
             registerBusiness: registerBusiness,
-            findBusinessByBusinessId: findBusinessByBusinessId
+            findBusinessByBusinessId: findBusinessByBusinessId,
+            findAllBusinessesForUser: findAllBusinessesForUser
         };
         return api;
 
@@ -29,6 +32,11 @@
             return $http.get(url);
         }
         
+        function findApiAllBusinessByCategory(category) {
+            var url = "/rest/yelp/searchByCategory?category="+category;
+            return $http.get(url);
+        }
+        
         function findBusinessByBusinessId(businessId) {
             var url = "/rest/business/?businessId="+businessId;
             return $http.get(url);
@@ -39,9 +47,19 @@
             return $http.post(url, business);
         }
         
-        function registerBusiness(business) {
-            var url = "/rest/registerBusiness";
+        function findBusinessById(businessId) {
+            var url = "/rest/business/"+businessId;
+            return $http.get(url);
+        }
+        
+        function registerBusiness(business, userId) {
+            var url = "/rest/user/"+userId+"/registerBusiness";
             return $http.post(url, business);
+        }
+        
+        function findAllBusinessesForUser(userID) {
+            var url = "/rest/user/"+userID+"/business";
+            return $http.get(url);
         }
     }
 })();
