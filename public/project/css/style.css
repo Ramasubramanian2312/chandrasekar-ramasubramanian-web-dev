@@ -892,10 +892,16 @@ li {
 
 .panel-body.panel-list-display {/*
     background-color: rgba(0, 0, 0, 0.6);*/
+    border: 3px ridge #111;
+}
+
+.panel {
+    border: 3px ridge #111;
 }
 
 .business-list-view {
-    background-image: url(../img/background.jpg);
+    background-image: url(../img/background_home.jpg);
+    /*background-image: url(../img/background.jpg);*/
 }
 
 .home-view {
@@ -910,9 +916,43 @@ li {
 .fixed-panel {
     min-height: 180px;
     max-height: 180px;
-    overflow-y: scroll;
+}
+
+.fixed-panel-detail {
+    min-height: 280px;
+    max-height: 280px;
 }
 
 .profile-view {
     background-image: url(../img/background_home.jpg);
+}
+
+
+.like-button {
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+}
+
+.like-button:hover img, .like-button:focus img {
+    margin-left: -2px;
+    margin-top: -3px;
+}
+
+.pic {
+    border: 3px ridge #111;
+    float: left;
+    height: 300px;
+    width: 300px;
+    margin: 20px;
+    overflow: hidden;
+
+    -webkit-box-shadow: 5px 5px 5px #fff;
+    box-shadow: 5px 5px 5px #fff;
+}
+
+.profile-business-list {
+    margin-top: 5px;
 }

@@ -43,7 +43,6 @@
     <!-- /.container -->
 </nav>
 
-
 <div class="profile-view">
     <div class="container">
         <div class="container-fluid">
@@ -121,7 +120,6 @@
                                         <div class="hr-dashed"></div>
                                         <div class="form-group">
                                             <div class="col-sm-8 col-sm-offset-2">
-                                                <button class="btn btn-default" type="submit">Cancel</button>
                                                 <button class="btn btn-primary" ng-click="model.updateUser(model.user)">Save changes</button>
                                             </div>
                                         </div>
@@ -131,11 +129,44 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
+                            <h3 class="page-title business-list-title">Liked Content</h3>
                             <div class="panel panel-default">
-                                <div class="panel-heading">Awesome bootstrap checkboxes</div>
-                                <div class="panel-body">
+                                <div class="panel-heading"><h4><b>MY FAVORITES ({{model.currentUser.businesses.length}})</b></h4></div>
+                                <div ng-repeat="business in model.currentUser.businesses" class="col-md-3 portfolio-item">
+                                    <!--<div class="panel panel-default">
+                                        <a ng-click="model.findApiBusinessById(business.id)">
+                                            <img class="img-responsive"
+                                                 width="700"
+                                                 height="300"
+                                                 ng-src="{{business.imageUrl}}" alt="">
+                                        </a>
+                                        <div class="panel-body fixed-panel">
+                                            <h5>
+                                                <a ng-click="model.findApiBusinessById(business.id)"><h3>{{business.name}}</h3></a>
+                                            </h5>
 
+                                            <p>
+                                                <img class="img-responsive"
+                                                     ng-src="{{business.ratingUrl}}" alt="">
+                                            </p>
+                                        </div>
+                                    </div>-->
+                                    <div class="panel panel-default profile-business-list">
+                                        <div class="panel-body">
+                                            <div class="stat-panel text-center">
+                                                <h4>{{business.name}}</h4>
+                                                <div class="thumbnail">
+                                                    <img src="{{business.imageUrl}}" class="img-responsive">
+                                                    <div class="caption">
+                                                        <p>Phone: {{business.phone}}</p>
+                                                        <center><img src="{{business.ratingUrl}}" class="img-responsive"></center>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="#/business/{{business._id}}" class="block-anchor panel-footer text-center">View Details &nbsp; <i class="fa fa-arrow-right"></i></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -332,44 +363,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="page-title">My Favorite Places ({{model.user.businesses.length}})</h3>
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div ng-repeat="business in model.user.businesses" class="col-md-3">
-                                    <div class="panel panel-default">
-                                        <div class="panel-body bk-success text-light">
-                                            <div class="stat-panel text-center">
-                                                <h4>{{business.name}}</h4>
-                                                <div class="thumbnail">
-                                                    <img src="{{business.imageUrl}}" class="img-responsive">
-                                                    <div class="caption">
-                                                        <p>Phone: {{business.phone}}</p>
-                                                        <img src="{{business.ratingUrl}}" class="img-responsive">
-                                                        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a href="#/business/{{business._id}}" class="block-anchor panel-footer text-center">View Details &nbsp; <i class="fa fa-arrow-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">Sales Report</div>
-                                <div class="panel-body">
-                                    <div class="chart">
-                                        <canvas id="dashReport" height="310" width="600"></canvas>
-                                    </div>
-                                    <div id="legendDiv"></div>
-                                </div>
-                            </div>
-                        </div>
                         <div class="col-md-6">
                             <div class="panel panel-default">
                                 <div class="panel-heading">Recent Oreders</div>

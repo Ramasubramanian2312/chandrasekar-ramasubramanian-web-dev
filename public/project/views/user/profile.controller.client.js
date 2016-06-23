@@ -28,7 +28,7 @@
 
         function unregister() {
             UserService
-                .deleteUser(id)
+                .deleteUser(vm.currentUser._id)
                 .then(
                     function () {
                         $location.url("/login");
@@ -41,7 +41,7 @@
 
         function updateUser(newUser) {
             UserService
-                .updateUser(id, newUser)
+                .updateUser(vm.currentUser._id, newUser)
                 .then(
                     function (response) {
                         vm.success = "Your Profile was saved.";

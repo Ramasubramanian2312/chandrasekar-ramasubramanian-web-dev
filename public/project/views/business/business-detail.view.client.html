@@ -80,100 +80,181 @@
 </nav>
 
     <!-- Page Content -->
-    <div class="container">
-        {{model.data}}
+<div class="container-fluid business-list-view">
+    <div class="container ">
+        <!-- Page Header -->
         <div class="row">
-
-            <div class="col-md-3">
+            <div class="col-lg-12">
+                <h1 class="page-header business-list-title">{{model.data.name}}
+                    <small></small>
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <!--<div class="col-md-3">
                 <p class="lead">Shop Name</p>
                 <div class="list-group">
                     <a href="" class="list-group-item active">Category 1</a>
                     <a href="" class="list-group-item">Category 2</a>
                     <a href="" class="list-group-item">Category 3</a>
                 </div>
-            </div>
+            </div>-->
 
-            <div class="col-md-9">
-                <div class="thumbnail">
-                    <img class="img-responsive" src="http://placehold.it/800x300" alt="">
-                    <div class="caption-full">
-                        <a ng-if="model.currentUser" ng-click="model.likeBusiness(model.data)"><span class="glyphicon glyphicon-thumbs-up pull-right"></span></a>
-                        <h4 class="pull-right">$24.99</h4>
-                        <h4><a href="">Product Name</a>
-                        </h4>
-                        <p>See more snippets like these online store reviews at <a target="_blank" href="http://bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
-                        <p>Want to make these reviews work? Check out
-                            <strong><a href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">this building a review system tutorial</a>
-                            </strong>over at maxoffsky.com!</p>
-                        <p>{{model.proposal}}</p>
+            <div class="panel panel-default">
+            <div class="panel-body panel-list-display">
+                <div class="row">
+                    <div class="col-md-3">
+                        <p class="lead">Popular Lookouts</p>
+                        <div class="list-group">
+                            <a class="list-group-item disabled"><h4><b>Entertainment</b></h4></a>
+                            <a ng-click="model.findApiAllBusinessByCategory('musicvenues')" class="list-group-item">Music Venues</a>
+                            <a ng-click="model.findApiAllBusinessByCategory('festivals')" class="list-group-item">Festivals</a>
+                            <a ng-click="model.findApiAllBusinessByCategory('casinos')" class="list-group-item">Casinos</a>
+                            <a class="list-group-item disabled"><h4><b>Nightlife</b></h4></a>
+                            <a ng-click="model.findApiAllBusinessByCategory('bars')" class="list-group-item">Bars</a>
+                            <a ng-click="model.findApiAllBusinessByCategory('danceclubs')" class="list-group-item">Dance Clubs</a>
+                            <a ng-click="model.findApiAllBusinessByCategory('sportsbars')" class="list-group-item">Sports Bars</a>
+                            <a ng-click="model.findApiAllBusinessByCategory('hotels')" class="list-group-item"><h4><b>Hotels</b></h4></a>
+                            <a ng-click="model.findApiAllBusinessByCategory('homeservices')" class="list-group-item"><h4><b>Home Services</b></h4></a>
+                            <a ng-click="model.findApiAllBusinessByCategory('localservices')" class="list-group-item"><h4><b>Local Services</b></h4></a>
+                        </div>
                     </div>
-                    <div class="ratings">
-                        <p class="pull-right">3 reviews</p>
-                        <p>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            4.0 stars
-                        </p>
+
+                    <div class="col-md-9">
+                        <div class="thumbnail">
+                            <div class="panel panel-default">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="panel-body fixed-panel-detail">
+                                            <img class="img-responsive pic"
+                                                 width="400"
+                                                 height="300"
+                                                 ng-src="{{model.data.image_url}}" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="panel-body fixed-panel-detail">
+                                            <p>
+                                                <h4>
+                                                    <i>
+                                                        <b>Address:</b><br>
+                                                        <div ng-repeat="element in model.data.location.display_address">
+                                                            {{element}}
+                                                        </div>
+                                                        {{model.data.location.country_code}}
+                                                    </i>
+                                                </h4>
+                                                <p>
+                                                    <h4>
+                                                        <b>Phone:</b>
+                                                        {{model.data.display_phone}}
+                                                    </h4>
+                                                </p>
+                                                <p>
+                                                    <h4>
+                                                        <i>
+                                                            <b>Neighborhoods:</b><br>
+                                                            <div ng-repeat="element in model.data.location.neighborhoods">
+                                                                {{element}}
+                                                            </div>
+                                                        </i>
+                                                    </h4>
+                                                </p>
+                                                <p>
+                                                    <div ng-if="model.currentUser">
+                                                        <div ng-if="!model.liked" class="like-button">
+                                                            <img class="img-responsive"
+                                                                 ng-src="http://biz.leoraw.com/wp-content/uploads/2010/08/LikeButton_100px.gif"
+                                                                 ng-if="model.currentUser"
+                                                                 ng-click="model.likeBusiness(model.data)"
+                                                                 alt="">
+                                                        </div>
+                                                        <div ng-if="model.liked" class="like-button">
+                                                            <img class="img-responsive"
+                                                                 ng-src="http://theunwiredpeople.com/wp-content/uploads/sites/5/2011/05/dislike5.jpg"
+                                                                 ng-if="model.currentUser"
+                                                                 ng-click="model.dislikeBusiness(model.data.id)"
+                                                                 alt="">
+                                                        </div>
+                                                    </div>
+                                                </p>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="caption-full">
+                                <h3>{{model.data.name}}</h3>
+                                <h4><p><i>{{model.data.reviews[0].excerpt}}</i></p></h4>
+                            </div>
+                            <div class="ratings">
+                                <p>
+                                    <img class="img-responsive"
+                                         ng-src="{{model.data.rating_img_url}}" alt="">
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="well">
+
+                            <div class="text-right">
+                                <a class="btn btn-success">Leave a Review</a>
+                            </div>
+
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                    Anonymous
+                                    <span class="pull-right">10 days ago</span>
+                                    <p>This product was great in terms of quality. I would definitely buy another!</p>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                    Anonymous
+                                    <span class="pull-right">12 days ago</span>
+                                    <p>I've alredy ordered another one!</p>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                    Anonymous
+                                    <span class="pull-right">15 days ago</span>
+                                    <p>I've seen some better than this, but not at this price. I definitely recommend this item.</p>
+                                </div>
+                            </div>
+
+                        </div>
+
                     </div>
+
                 </div>
-
-                <div class="well">
-
-                    <div class="text-right">
-                        <a class="btn btn-success">Leave a Review</a>
-                    </div>
-
-                    <hr>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            Anonymous
-                            <span class="pull-right">10 days ago</span>
-                            <p>This product was great in terms of quality. I would definitely buy another!</p>
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            Anonymous
-                            <span class="pull-right">12 days ago</span>
-                            <p>I've alredy ordered another one!</p>
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            Anonymous
-                            <span class="pull-right">15 days ago</span>
-                            <p>I've seen some better than this, but not at this price. I definitely recommend this item.</p>
-                        </div>
-                    </div>
-
-                </div>
-
             </div>
+        </div>
+
+
 
         </div>
 
@@ -195,3 +276,4 @@
 
     </div>
     <!-- /.container -->
+</div>

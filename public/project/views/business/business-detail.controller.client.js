@@ -8,6 +8,7 @@
         vm.logout = logout;
         var businessId = $routeParams.businessId;
         vm.likeBusiness = likeBusiness;
+        vm.dislikeBusiness = dislikeBusiness;
 
         function init() {
             vm.currentUser = $rootScope.currentUser;
@@ -20,6 +21,31 @@
                         vm.data = res.data;
                     }
                 );
+
+            if(vm.currentUser) {
+                UserService
+                    .findUserById(vm.currentUser._id)
+                    .then(
+                        function (res) {
+                            var user = res.data;
+                            var businessArray = user.businesses;
+                            vm.liked = search(businessId, businessArray);
+                            console.log(vm.liked);
+                        },
+                        function (err) {
+                            vm.error = "User not found";
+                        }
+                    )
+            }
+        }
+
+        function search(businessId, businessArray) {
+            for (var i=0; i < businessArray.length; i++) {
+                if (businessArray[i]._id === businessId) {
+                    return true;
+                }
+            }
+            return false;
         }
         init();
 
@@ -98,7 +124,7 @@
                                 .updateUser(user._id, user)
                                 .then(
                                     function (stats) {
-                                        console.log(stats);
+                                        vm.liked = true;
                                     },
                                     function (err) {
                                         console.log(err);
@@ -114,6 +140,48 @@
                 $location.url("/login");
             }
 
+        }
+
+        function dislikeBusiness(businessId) {
+            console.log(businessId);
+            var currentUser = $rootScope.currentUser;
+
+            if(currentUser) {
+                UserService
+                    .findUserById(currentUser._id)
+                    .then(
+                        function (res) {
+                            var user = res.data;
+                            user.businesses.splice(user.businesses.indexOf(businessId, 1));
+
+                            UserService
+                                .updateUser(user._id, user)
+                                .then(
+                                    function (stats) {
+                                        vm.liked = false;
+                                    },
+                                    function (err) {
+                                        console.log(err);
+                                    }
+                                );
+                        },
+                        function (err) {
+                            console.log(err);
+                        }
+                    )
+
+            } else {
+                $location.url("/login");
+            }
+
+        }
+
+        function removeElement(businessId, businessArray) {
+            for(var i=0; i< businessArray.length; i++) {
+                if(businessArray[i]._id === businessId) {
+                    return businessArray.splice(i, 1);
+                }
+            }
         }
     }
 })();

@@ -36,6 +36,14 @@
                         </li>
                     </ul>
                 </li>
+                <li role="presentation" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        Dropdown <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        ...
+                    </ul>
+                </li>
                 <!--<li>
                     <a href="contact.html">Contact</a>
                 </li>
@@ -94,6 +102,7 @@
                     </ul>
                 </li>-->
             </ul>
+
         </div>
         <!-- /.navbar-collapse -->
     </div>
@@ -115,7 +124,23 @@
         <div class="panel panel-default">
             <div class="panel-body panel-list-display">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-3 hidden-xs">
+                        <p class="lead">Popular Lookouts</p>
+                        <div class="list-group">
+                            <a class="list-group-item disabled"><h4><b>Entertainment</b></h4></a>
+                            <a ng-click="model.findApiAllBusinessByCategory('musicvenues')" class="list-group-item">Music Venues</a>
+                            <a ng-click="model.findApiAllBusinessByCategory('festivals')" class="list-group-item">Festivals</a>
+                            <a ng-click="model.findApiAllBusinessByCategory('casinos')" class="list-group-item">Casinos</a>
+                            <a class="list-group-item disabled"><h4><b>Nightlife</b></h4></a>
+                            <a ng-click="model.findApiAllBusinessByCategory('bars')" class="list-group-item">Bars</a>
+                            <a ng-click="model.findApiAllBusinessByCategory('danceclubs')" class="list-group-item">Dance Clubs</a>
+                            <a ng-click="model.findApiAllBusinessByCategory('sportsbars')" class="list-group-item">Sports Bars</a>
+                            <a ng-click="model.findApiAllBusinessByCategory('hotels')" class="list-group-item"><h4><b>Hotels</b></h4></a>
+                            <a ng-click="model.findApiAllBusinessByCategory('homeservices')" class="list-group-item"><h4><b>Home Services</b></h4></a>
+                            <a ng-click="model.findApiAllBusinessByCategory('localservices')" class="list-group-item"><h4><b>Local Services</b></h4></a>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 visible-xs">
                         <p class="lead">Popular Lookouts</p>
                         <div class="list-group">
                             <a class="list-group-item disabled"><h4><b>Entertainment</b></h4></a>
@@ -141,7 +166,7 @@
                             </a>
                             <div class="panel-body fixed-panel">
                                 <h5>
-                                    <a ng-click="model.findApiBusinessById(business.id)"><h3>{{business.name}}<h3></a>
+                                    <a ng-click="model.findApiBusinessById(business.id)"><h3>{{business.name}}</h3></a>
                                 </h5>
 
                                 <p>
