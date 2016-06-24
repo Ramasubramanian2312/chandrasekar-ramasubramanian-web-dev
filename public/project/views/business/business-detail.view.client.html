@@ -1,3 +1,6 @@
+<!--
+    REFERENCE:
+ Bootstrap template: http://startbootstrap.com/template-overviews/shop-item/-->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -19,6 +22,20 @@
                     </div>
                     <a href="#/searchTerm/{{model.searchText}}" class="btn btn-default">Submit</a>
                 </form>
+                <li class="dropdown visible-xs">
+                    <a class="dropdown-toggle" data-toggle="dropdown"><b>Popular Categories</b><b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#/search/musicvenues">Music Venues</a></li>
+                        <li><a href="#/search/festivals">Festivals</a></li>
+                        <li><a href="#/search/casinos">Casinos</a></li>
+                        <li><a href="#/search/bars">Bars</a></li>
+                        <li><a href="#/search/danceclubs">Dance Clubs</a></li>
+                        <li><a href="#/search/sportsbars">Sports Bars</a></li>
+                        <li><a href="#/search/hotels">Hotels</a></li>
+                        <li><a href="#/search/homeservices">Home Services</a></li>
+                        <li><a href="#/search/localservices">Local Services</a></li>
+                    </ul>
+                </li>
                 <li ng-if="model.currentUser == null">
                     <a href="#/register"><b>Register</b></a>
                 </li>
@@ -36,42 +53,6 @@
                         </li>
                     </ul>
                 </li>
-                <!--
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="blog-home-1.html">Blog Home 1</a>
-                        </li>
-                        <li>
-                            <a href="blog-home-2.html">Blog Home 2</a>
-                        </li>
-                        <li>
-                            <a href="blog-post.html">Blog Post</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="full-width.html">Full Width Page</a>
-                        </li>
-                        <li>
-                            <a href="sidebar.html">Sidebar Page</a>
-                        </li>
-                        <li>
-                            <a href="faq.html">FAQ</a>
-                        </li>
-                        <li>
-                            <a href="404.html">404</a>
-                        </li>
-                        <li>
-                            <a href="pricing.html">Pricing Table</a>
-                        </li>
-                    </ul>
-                </li>-->
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -91,33 +72,22 @@
             </div>
         </div>
         <div class="row">
-            <!--<div class="col-md-3">
-                <p class="lead">Shop Name</p>
-                <div class="list-group">
-                    <a href="" class="list-group-item active">Category 1</a>
-                    <a href="" class="list-group-item">Category 2</a>
-                    <a href="" class="list-group-item">Category 3</a>
-                </div>
-            </div>-->
-
             <div class="panel panel-default">
             <div class="panel-body panel-list-display">
                 <div class="row">
-                    <div class="col-md-3">
-                        <p class="lead">Popular Lookouts</p>
-                        <div class="list-group">
-                            <a class="list-group-item disabled"><h4><b>Entertainment</b></h4></a>
-                            <a ng-click="model.findApiAllBusinessByCategory('musicvenues')" class="list-group-item">Music Venues</a>
-                            <a ng-click="model.findApiAllBusinessByCategory('festivals')" class="list-group-item">Festivals</a>
-                            <a ng-click="model.findApiAllBusinessByCategory('casinos')" class="list-group-item">Casinos</a>
-                            <a class="list-group-item disabled"><h4><b>Nightlife</b></h4></a>
-                            <a ng-click="model.findApiAllBusinessByCategory('bars')" class="list-group-item">Bars</a>
-                            <a ng-click="model.findApiAllBusinessByCategory('danceclubs')" class="list-group-item">Dance Clubs</a>
-                            <a ng-click="model.findApiAllBusinessByCategory('sportsbars')" class="list-group-item">Sports Bars</a>
-                            <a ng-click="model.findApiAllBusinessByCategory('hotels')" class="list-group-item"><h4><b>Hotels</b></h4></a>
-                            <a ng-click="model.findApiAllBusinessByCategory('homeservices')" class="list-group-item"><h4><b>Home Services</b></h4></a>
-                            <a ng-click="model.findApiAllBusinessByCategory('localservices')" class="list-group-item"><h4><b>Local Services</b></h4></a>
-                        </div>
+                    <div class="col-md-3 hidden-xs">
+                        <p class="lead">Popular Categories</p>
+                        <ul class="ts-sidebar-menu">
+                            <li class="open"><a href="#/search/musicvenues"><h4><b>Music Venues</b></h4></a></li>
+                            <li class="open"><a href="#/search/festivals"><h4><b>Festivals</b></h4></a></li>
+                            <li class="open"><a href="#/search/casinos"><h4><b>Casinos</b></h4></a></li>
+                            <li class="open"><a href="#/search/bars"><h4><b>Bars</b></h4></a></li>
+                            <li class="open"><a href="#/search/danceclubs"><h4><b>Dance Clubs</b></h4></a></li>
+                            <li class="open"><a href="#/search/sportsbars"><h4><b>Sports Bars</b></h4></a></li>
+                            <li class="open"><a href="#/search/hotels"><h4><b>Hotels</b></h4></a></li>
+                            <li class="open"><a href="#/search/homeservices"><h4><b>Home Services</b></h4></a></li>
+                            <li class="open"><a href="#/search/localservices"><h4><b>Local Services</b></h4></a></li>
+                        </ul>
                     </div>
 
                     <div class="col-md-9">
@@ -194,25 +164,39 @@
                                 </p>
                             </div>
                         </div>
-
-                        <div class="well">
-
-                            <div class="text-right">
-                                <a class="btn btn-success">Leave a Review</a>
+                        <div class="well review">
+                            <div ng-if="model.currentUser && !model.reviewEnabled" class="text-right">
+                                <a class="btn btn-warning"
+                                   ng-click="model.enableReview()"
+                                   id="show-review-textarea">
+                                    Write a Review
+                                </a>
                             </div>
-
-                            <hr>
-
-                            <div class="row">
+                            <div ng-if="model.reviewEnabled" class="row" id="submit-review">
                                 <div class="col-md-12">
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                    Anonymous
-                                    <span class="pull-right">10 days ago</span>
-                                    <p>This product was great in terms of quality. I would definitely buy another!</p>
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <textarea ng-model="model.reviewText" class="form-control transition" cols="100" id="get-review" name="comment" placeholder="Submit a Review Here" rows="3"></textarea>
+
+                                            <div class="text-left">
+                                                <p>
+                                                    <ng-rating ng-if="model.currentUser"
+                                                               ng-model="model.rating"
+                                                               editable="true">
+                                                    </ng-rating>
+                                                </p>
+                                            </div>
+                                            <div class="text-right">
+                                                <a class="btn btn-danger" ng-click="model.disableReview()" id="reject-review">
+                                                    <span class="glyphicon glyphicon-remove"></span>Cancel</a>
+                                                <button class="btn btn-success"
+                                                        ng-click="model.createReview(model.data, model.reviewText, model.currentUser.username, model.rating)">
+                                                    <span class="glyphicon glyphicon-send"></span>
+                                                    Post
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 

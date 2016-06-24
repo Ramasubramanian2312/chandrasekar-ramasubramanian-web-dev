@@ -1,6 +1,8 @@
+<!--
+    REFERENCE:
+ Bootstrap template: http://startbootstrap.com/template-overviews/3-col-portfolio/-->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
@@ -10,7 +12,6 @@
             </button>
             <a class="navbar-brand" href="#/"><b>Home</b></a>
         </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <form class="navbar-form navbar-left" role="search">
@@ -19,6 +20,20 @@
                     </div>
                     <a href="#/searchTerm/{{model.searchText}}" class="btn btn-default">Submit</a>
                 </form>
+                <li class="dropdown visible-xs">
+                    <a class="dropdown-toggle" data-toggle="dropdown"><b>Popular Categories</b><b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#/search/musicvenues">Music Venues</a></li>
+                        <li><a href="#/search/festivals">Festivals</a></li>
+                        <li><a href="#/search/casinos">Casinos</a></li>
+                        <li><a href="#/search/bars">Bars</a></li>
+                        <li><a href="#/search/danceclubs">Dance Clubs</a></li>
+                        <li><a href="#/search/sportsbars">Sports Bars</a></li>
+                        <li><a href="#/search/hotels">Hotels</a></li>
+                        <li><a href="#/search/homeservices">Home Services</a></li>
+                        <li><a href="#/search/localservices">Local Services</a></li>
+                    </ul>
+                </li>
                 <li ng-if="model.currentUser == null">
                     <a href="#/register"><b>Register</b></a>
                 </li>
@@ -36,88 +51,19 @@
                         </li>
                     </ul>
                 </li>
-                <li role="presentation" class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        Dropdown <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        ...
-                    </ul>
-                </li>
-                <!--<li>
-                    <a href="contact.html">Contact</a>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="portfolio-1-col.html">1 Column Portfolio</a>
-                        </li>
-                        <li>
-                            <a href="portfolio-2-col.html">2 Column Portfolio</a>
-                        </li>
-                        <li>
-                            <a href="portfolio-3-col.html">3 Column Portfolio</a>
-                        </li>
-                        <li>
-                            <a href="portfolio-4-col.html">4 Column Portfolio</a>
-                        </li>
-                        <li>
-                            <a href="portfolio-item.html">Single Portfolio Item</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="blog-home-1.html">Blog Home 1</a>
-                        </li>
-                        <li>
-                            <a href="blog-home-2.html">Blog Home 2</a>
-                        </li>
-                        <li>
-                            <a href="blog-post.html">Blog Post</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="full-width.html">Full Width Page</a>
-                        </li>
-                        <li>
-                            <a href="sidebar.html">Sidebar Page</a>
-                        </li>
-                        <li>
-                            <a href="faq.html">FAQ</a>
-                        </li>
-                        <li>
-                            <a href="404.html">404</a>
-                        </li>
-                        <li>
-                            <a href="pricing.html">Pricing Table</a>
-                        </li>
-                    </ul>
-                </li>-->
             </ul>
-
         </div>
-        <!-- /.navbar-collapse -->
     </div>
-    <!-- /.container -->
 </nav>
-
 
 <div class="container-fluid business-list-view">
     <div class="container">
         <!-- Page Header -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header business-list-title">Places Around You
+                <h2 class="page-header business-list-title">Places Around You
                     <small></small>
-                </h1>
+                </h2>
             </div>
         </div>
         <!-- /.row -->
@@ -125,56 +71,40 @@
             <div class="panel-body panel-list-display">
                 <div class="row">
                     <div class="col-md-3 hidden-xs">
-                        <p class="lead">Popular Lookouts</p>
-                        <div class="list-group">
-                            <a class="list-group-item disabled"><h4><b>Entertainment</b></h4></a>
-                            <a ng-click="model.findApiAllBusinessByCategory('musicvenues')" class="list-group-item">Music Venues</a>
-                            <a ng-click="model.findApiAllBusinessByCategory('festivals')" class="list-group-item">Festivals</a>
-                            <a ng-click="model.findApiAllBusinessByCategory('casinos')" class="list-group-item">Casinos</a>
-                            <a class="list-group-item disabled"><h4><b>Nightlife</b></h4></a>
-                            <a ng-click="model.findApiAllBusinessByCategory('bars')" class="list-group-item">Bars</a>
-                            <a ng-click="model.findApiAllBusinessByCategory('danceclubs')" class="list-group-item">Dance Clubs</a>
-                            <a ng-click="model.findApiAllBusinessByCategory('sportsbars')" class="list-group-item">Sports Bars</a>
-                            <a ng-click="model.findApiAllBusinessByCategory('hotels')" class="list-group-item"><h4><b>Hotels</b></h4></a>
-                            <a ng-click="model.findApiAllBusinessByCategory('homeservices')" class="list-group-item"><h4><b>Home Services</b></h4></a>
-                            <a ng-click="model.findApiAllBusinessByCategory('localservices')" class="list-group-item"><h4><b>Local Services</b></h4></a>
-                        </div>
+                        <p class="lead">Popular Categories</p>
+                        <ul class="ts-sidebar-menu">
+                            <li class="open"><a href="#/search/musicvenues"><h4><b>Music Venues</b></h4></a></li>
+                            <li class="open"><a href="#/search/festivals"><h4><b>Festivals</b></h4></a></li>
+                            <li class="open"><a href="#/search/casinos"><h4><b>Casinos</b></h4></a></li>
+                            <li class="open"><a href="#/search/bars"><h4><b>Bars</b></h4></a></li>
+                            <li class="open"><a href="#/search/danceclubs"><h4><b>Dance Clubs</b></h4></a></li>
+                            <li class="open"><a href="#/search/sportsbars"><h4><b>Sports Bars</b></h4></a></li>
+                            <li class="open"><a href="#/search/hotels"><h4><b>Hotels</b></h4></a></li>
+                            <li class="open"><a href="#/search/homeservices"><h4><b>Home Services</b></h4></a></li>
+                            <li class="open"><a href="#/search/localservices"><h4><b>Local Services</b></h4></a></li>
+                        </ul>
                     </div>
-                    <div class="col-xs-12 visible-xs">
-                        <p class="lead">Popular Lookouts</p>
-                        <div class="list-group">
-                            <a class="list-group-item disabled"><h4><b>Entertainment</b></h4></a>
-                            <a ng-click="model.findApiAllBusinessByCategory('musicvenues')" class="list-group-item">Music Venues</a>
-                            <a ng-click="model.findApiAllBusinessByCategory('festivals')" class="list-group-item">Festivals</a>
-                            <a ng-click="model.findApiAllBusinessByCategory('casinos')" class="list-group-item">Casinos</a>
-                            <a class="list-group-item disabled"><h4><b>Nightlife</b></h4></a>
-                            <a ng-click="model.findApiAllBusinessByCategory('bars')" class="list-group-item">Bars</a>
-                            <a ng-click="model.findApiAllBusinessByCategory('danceclubs')" class="list-group-item">Dance Clubs</a>
-                            <a ng-click="model.findApiAllBusinessByCategory('sportsbars')" class="list-group-item">Sports Bars</a>
-                            <a ng-click="model.findApiAllBusinessByCategory('hotels')" class="list-group-item"><h4><b>Hotels</b></h4></a>
-                            <a ng-click="model.findApiAllBusinessByCategory('homeservices')" class="list-group-item"><h4><b>Home Services</b></h4></a>
-                            <a ng-click="model.findApiAllBusinessByCategory('localservices')" class="list-group-item"><h4><b>Local Services</b></h4></a>
-                        </div>
-                    </div>
-                    <div ng-repeat="business in model.data.businesses" class="col-md-3 portfolio-item">
-                        <div class="panel panel-default">
-                            <a ng-click="model.findApiBusinessById(business.id)">
-                                <img class="img-responsive"
-                                     width="700"
-                                     height="300"
-                                     ng-src="{{business.image_url}}" alt="">
-                            </a>
-                            <div class="panel-body fixed-panel">
-                                <h5>
-                                    <a ng-click="model.findApiBusinessById(business.id)"><h3>{{business.name}}</h3></a>
-                                </h5>
-
-                                <p>
+                    <div class="col-md-9">
+                        <div ng-repeat="business in model.data.businesses" class="col-md-4 portfolio-item">
+                            <div class="panel panel-default">
+                                <a ng-click="model.findApiBusinessById(business.id)">
                                     <img class="img-responsive"
-                                         ng-src="{{business.rating_img_url}}" alt="">
-                                </p>
-                                <p>Phone: {{business.display_phone}} <br>
-                                    Location: {{business.location.city}}, {{business.location.state_code}}</p>
+                                         width="700"
+                                         height="300"
+                                         ng-src="{{business.image_url}}" alt="">
+                                </a>
+                                <div class="panel-body fixed-panel">
+                                    <h5>
+                                        <a ng-click="model.findApiBusinessById(business.id)"><h4>{{business.name}}</h4></a>
+                                    </h5>
+
+                                    <p>
+                                        <img class="img-responsive"
+                                             ng-src="{{business.rating_img_url}}" alt="">
+                                    </p>
+                                    <p>Phone: {{business.display_phone}} <br>
+                                        Location: {{business.location.city}}, {{business.location.state_code}}</p>
+                                </div>
                             </div>
                         </div>
                     </div>

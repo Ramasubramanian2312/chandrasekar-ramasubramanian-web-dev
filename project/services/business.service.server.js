@@ -125,7 +125,7 @@ module.exports = function (app, models, userModel) {
             .findBusinessById(id)
             .then(
                 function (business) {
-                    res.send(business);
+                    res.json(business);
                 },
                 function (error) {
                     res.status(404).send(error);

@@ -3,12 +3,103 @@
         .module("Project")
         .controller("BusinessDetailController", BusinessDetailController);
 
-    function BusinessDetailController(BusinessService, UserService, $routeParams, $rootScope, $location) {
+    function BusinessDetailController(BusinessService, UserService, ReviewService, $routeParams, $rootScope, $location) {
         var vm = this;
         vm.logout = logout;
         var businessId = $routeParams.businessId;
         vm.likeBusiness = likeBusiness;
         vm.dislikeBusiness = dislikeBusiness;
+        vm.enableReview = enableReview;
+        vm.disableReview = disableReview;
+        vm.createReview = createReview;
+        
+        function enableReview() {
+            vm.reviewEnabled = true;
+        }
+
+        function disableReview() {
+            vm.reviewEnabled = false;
+        }
+        
+        function createReview(business, reviewText, username, rating) {
+            if(vm.currentUser) {
+                var newReview = {
+                    username: username,
+                    content: reviewText,
+                    rating: rating
+                };
+
+                var newBusiness = {
+                    _id: business.id,
+                    imageUrl: business.image_url,
+                    name: business.name,
+                    phone: business.phone,
+                    ratingUrl: business.rating_img_url
+                };
+
+
+                ReviewService
+                    .createReview(newReview)
+                    .then(
+                        function (res) {
+                            console.log(res.data);
+                        },
+                        function (err) {
+                            vm.error="Error creating review";
+                        }
+                    );
+
+                BusinessService
+                    .findBusinessById(business.id)
+                    .then(
+                        function (response) {
+                            var business = response.data;
+                            if(!business) {
+                                return BusinessService
+                                    .createBusiness(newBusiness);
+                            }   else {
+                                business.reviews.push(newReview);
+                                BusinessService
+                                    .updateBusiness(business._id, business)
+                                    .then(
+                                        function (stats) {
+                                            vm.reviewEnabled = false;
+                                            return;
+                                        },
+                                        function (err) {
+                                            vm.reviewEnabled = false;
+                                            console.log(err);
+                                            return;
+                                        }
+                                    );
+                            }
+                        },
+                        function (error) {
+                            vm.error = "Error finding business with id";
+                        }
+                    )
+                    .then(
+                        function (res) {
+                            var businessObtained = res.data;
+                            console.log(businessObtained);
+                            businessObtained.reviews.push(newReview);
+                            BusinessService
+                                .updateBusiness(businessObtained._id, businessObtained)
+                                .then(
+                                    function (stats) {
+                                        vm.reviewEnabled = false;
+                                    },
+                                    function (err) {
+                                        console.log(err);
+                                    }
+                                );
+                        },
+                        function (err) {
+                            console.log(error);
+                        }
+                    );
+            }
+        }
 
         function init() {
             vm.currentUser = $rootScope.currentUser;
@@ -75,22 +166,6 @@
                     ratingUrl: business.rating_img_url
                 };
 
-                /*BusinessService
-                    .registerBusiness(newBusiness, currentUser._id)
-                    .then(
-                        function (response) {
-                            var user = response.data;
-                            if(user) {
-                                console.log(user);
-                            } else {
-                                vm.error = "Business not added to user's favourite list";
-                            }
-                        },
-                        function (err) {
-                            vm.error = "Business not added to user's favourite list";
-                        }
-                    );*/
-
                 BusinessService
                     .findBusinessById(business.id)
                     .then(
@@ -134,7 +209,7 @@
                         function (err) {
                             console.log(err);
                         }
-                    )
+                    );
 
             } else {
                 $location.url("/login");
@@ -174,14 +249,6 @@
                 $location.url("/login");
             }
 
-        }
-
-        function removeElement(businessId, businessArray) {
-            for(var i=0; i< businessArray.length; i++) {
-                if(businessArray[i]._id === businessId) {
-                    return businessArray.splice(i, 1);
-                }
-            }
         }
     }
 })();

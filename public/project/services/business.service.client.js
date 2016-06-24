@@ -13,7 +13,8 @@
             findBusinessById: findBusinessById,
             registerBusiness: registerBusiness,
             findBusinessByBusinessId: findBusinessByBusinessId,
-            findAllBusinessesForUser: findAllBusinessesForUser
+            findAllBusinessesForUser: findAllBusinessesForUser,
+            updateBusiness: updateBusiness
         };
         return api;
 
@@ -60,6 +61,11 @@
         function findAllBusinessesForUser(userID) {
             var url = "/rest/user/"+userID+"/business";
             return $http.get(url);
+        }
+
+        function updateBusiness(businessId, business) {
+            var url = "/rest/business/"+businessId;
+            return $http.put(url, business);
         }
     }
 })();

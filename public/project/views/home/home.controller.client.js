@@ -9,6 +9,7 @@
         vm.findApiAllBusinessByCategory = findApiAllBusinessByCategory;
         vm.findApiAllBusinessByTerm = findApiAllBusinessByTerm;
         
+        
         function init() {
             vm.currentUser = $rootScope.currentUser;
             console.log(vm.currentUser);

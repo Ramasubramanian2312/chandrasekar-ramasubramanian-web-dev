@@ -855,6 +855,7 @@ li {
 }
 .ts-sidebar-menu > .open > a {
     background: #33383e;
+    /*background-image: url(../img/background_home.jpg);*/
     border-left: 3px solid #37a6c4;
 }
 .ts-sidebar-menu .open > .more i {
@@ -890,8 +891,7 @@ li {
     width: 100%;
 }
 
-.panel-body.panel-list-display {/*
-    background-color: rgba(0, 0, 0, 0.6);*/
+.panel-body.panel-list-display {
     border: 3px ridge #111;
 }
 
@@ -919,8 +919,8 @@ li {
 }
 
 .fixed-panel-detail {
-    min-height: 280px;
-    max-height: 280px;
+    min-height: 250px;
+    max-height: 250px;
 }
 
 .profile-view {
@@ -942,11 +942,11 @@ li {
 }
 
 .pic {
-    border: 3px ridge #111;
+    border: ridge #111;
     float: left;
     height: 300px;
     width: 300px;
-    margin: 20px;
+    margin: 0px;
     overflow: hidden;
 
     -webkit-box-shadow: 5px 5px 5px #fff;
@@ -955,4 +955,12 @@ li {
 
 .profile-business-list {
     margin-top: 5px;
+}
+
+.review {
+    background-color: #FFFFFF;
+}
+
+#reject-review {
+    margin-right: 10px;
 }

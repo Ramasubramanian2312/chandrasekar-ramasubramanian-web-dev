@@ -1,4 +1,4 @@
 (function () {
     angular
-        .module("Project", ["ngRoute"]);
+        .module("Project", ["ngRoute", "ngRating"]);
 })();
