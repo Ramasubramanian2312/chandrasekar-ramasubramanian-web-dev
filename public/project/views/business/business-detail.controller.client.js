@@ -12,6 +12,8 @@
         vm.enableReview = enableReview;
         vm.disableReview = disableReview;
         vm.createReview = createReview;
+        vm.deleteReview = deleteReview;
+        vm.findBusiness = findBusiness;
         
         function enableReview() {
             vm.reviewEnabled = true;
@@ -23,7 +25,7 @@
         
         function createReview(business, reviewText, username, rating) {
             if(vm.currentUser) {
-                var newReview = {
+                var originalReview = {
                     username: username,
                     content: reviewText,
                     rating: rating
@@ -39,65 +41,71 @@
 
 
                 ReviewService
-                    .createReview(newReview)
+                    .createReview(originalReview)
                     .then(
                         function (res) {
-                            console.log(res.data);
+                           var newReview = res.data;
+                            BusinessService
+                                .findBusinessById(business.id)
+                                .then(
+                                    function (response) {
+                                        var business = response.data;
+                                        if(!business) {
+                                            return BusinessService
+                                                .createBusiness(newBusiness);
+                                        }   else {
+                                            business.reviews.push(newReview);
+                                            BusinessService
+                                                .updateBusiness(business._id, business)
+                                                .then(
+                                                    function (stats) {
+                                                        vm.reviewEnabled = false;
+                                                        return;
+                                                    },
+                                                    function (err) {
+                                                        vm.reviewEnabled = false;
+                                                        console.log(err);
+                                                        return;
+                                                    }
+                                                );
+                                            findBusiness();
+                                        }
+                                    },
+                                    function (error) {
+                                        vm.error = "Error finding business with id";
+                                    }
+                                )
+                                .then(
+                                    function (res) {
+                                        if(res) {
+                                            var businessObtained = res.data;
+                                            console.log(businessObtained);
+                                            businessObtained.reviews.push(newReview);
+                                            BusinessService
+                                                .updateBusiness(businessObtained._id, businessObtained)
+                                                .then(
+                                                    function (stats) {
+                                                        vm.reviewEnabled = false;
+                                                        findBusiness();
+                                                    },
+                                                    function (err) {
+                                                        console.log(err);
+                                                    }
+                                                );
+                                            findBusiness();
+                                        }
+                                    },
+                                    function (err) {
+                                        console.log(error);
+                                    }
+                                );
                         },
                         function (err) {
                             vm.error="Error creating review";
                         }
                     );
 
-                BusinessService
-                    .findBusinessById(business.id)
-                    .then(
-                        function (response) {
-                            var business = response.data;
-                            if(!business) {
-                                return BusinessService
-                                    .createBusiness(newBusiness);
-                            }   else {
-                                business.reviews.push(newReview);
-                                BusinessService
-                                    .updateBusiness(business._id, business)
-                                    .then(
-                                        function (stats) {
-                                            vm.reviewEnabled = false;
-                                            return;
-                                        },
-                                        function (err) {
-                                            vm.reviewEnabled = false;
-                                            console.log(err);
-                                            return;
-                                        }
-                                    );
-                            }
-                        },
-                        function (error) {
-                            vm.error = "Error finding business with id";
-                        }
-                    )
-                    .then(
-                        function (res) {
-                            var businessObtained = res.data;
-                            console.log(businessObtained);
-                            businessObtained.reviews.push(newReview);
-                            BusinessService
-                                .updateBusiness(businessObtained._id, businessObtained)
-                                .then(
-                                    function (stats) {
-                                        vm.reviewEnabled = false;
-                                    },
-                                    function (err) {
-                                        console.log(err);
-                                    }
-                                );
-                        },
-                        function (err) {
-                            console.log(error);
-                        }
-                    );
+
             }
         }
 
@@ -113,12 +121,15 @@
                     }
                 );
 
+            findBusiness();
+
             if(vm.currentUser) {
                 UserService
                     .findUserById(vm.currentUser._id)
                     .then(
                         function (res) {
                             var user = res.data;
+                            vm.username = user.username;
                             var businessArray = user.businesses;
                             vm.liked = search(businessId, businessArray);
                             console.log(vm.liked);
@@ -126,8 +137,19 @@
                         function (err) {
                             vm.error = "User not found";
                         }
-                    )
+                    );
+                vm.deleteEnable = true;
             }
+        }
+
+        function findBusiness() {
+            BusinessService
+                .findBusinessById(businessId)
+                .then(
+                    function (res) {
+                        vm.localBusiness = res.data;
+                    }
+                );
         }
 
         function search(businessId, businessArray) {
@@ -249,6 +271,32 @@
                 $location.url("/login");
             }
 
+        }
+
+        function deleteReview(business, reviewId) {
+            BusinessService
+                .findBusinessById(businessId)
+                .then(
+                    function (res) {
+                        var business = res.data;
+                        business.reviews.splice(business.reviews.indexOf(reviewId, 1));
+
+                        BusinessService
+                            .updateBusiness(business._id, business)
+                            .then(
+                                function (stats) {
+                                    vm.deleteEnable = false;
+                                    init();
+                                },
+                                function (err) {
+                                    console.log(err);
+                                }
+                            );
+                    },
+                    function (err) {
+                        console.log(err);
+                    }
+                )
         }
     }
 })();

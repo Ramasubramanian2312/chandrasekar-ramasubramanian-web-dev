@@ -854,9 +854,9 @@ li {
     background: rgba(51, 56, 62, 0.35);
 }
 .ts-sidebar-menu > .open > a {
-    background: #33383e;
-    /*background-image: url(../img/background_home.jpg);*/
-    border-left: 3px solid #37a6c4;
+    /*background: #33383e;*/
+    background-image: url(../img/background_home.jpg);
+    /*border-left: 3px solid #37a6c4;*/
 }
 .ts-sidebar-menu .open > .more i {
     transform: rotate(180deg);

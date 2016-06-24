@@ -202,31 +202,35 @@
 
                             <hr>
 
-                            <div class="row">
+                            <div ng-repeat="review in model.localBusiness.reviews"
+                                 ng-if="model.localBusiness"
+                                 class="row">
                                 <div class="col-md-12">
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                    Anonymous
-                                    <span class="pull-right">12 days ago</span>
-                                    <p>I've alredy ordered another one!</p>
-                                </div>
-                            </div>
-
-                            <hr>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                    Anonymous
-                                    <span class="pull-right">15 days ago</span>
-                                    <p>I've seen some better than this, but not at this price. I definitely recommend this item.</p>
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="text-left">
+                                                <textarea ng-model="review.content"
+                                                          contenteditable="false"
+                                                          disabled
+                                                          class="form-control transition"
+                                                          cols="100"
+                                                          rows="3">
+                                                </textarea>
+                                                <p>
+                                                    <ng-rating
+                                                               ng-model="review.rating"
+                                                               editable="false">
+                                                    </ng-rating>
+                                                    <br>
+                                                    Posted by: &nbsp; {{review.username}}
+                                                </p>
+                                                <div class="text-right" ng-if="model.username === review.username && model.deleteEnable">
+                                                    <a class="btn btn-danger" ng-click="model.deleteReview(model.localBusiness, review._id)">
+                                                        <span class="glyphicon glyphicon-remove"></span>Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
