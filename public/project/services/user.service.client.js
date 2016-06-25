@@ -13,6 +13,7 @@
             findUserById: findUserById,
             findUserByUsername: findUserByUsername,
             findUserByCredentials : findUserByCredentials,
+            findAllUsersWithUsername: findAllUsersWithUsername,
             updateUser: updateUser,
             deleteUser: deleteUser
         };
@@ -63,6 +64,11 @@
         function findUserByCredentials(username, password) {
             var url = "/rest/user?username="+username+"&password="+password;
             return $http.get(url);
+        }
+        
+        function findAllUsersWithUsername(userNameList) {
+            var url = "/rest/getAllUsers";
+            return $http.post(url, userNameList);
         }
 
         function updateUser(userId, user) {

@@ -30,6 +30,7 @@ module.exports = function (app, userModel, passport) {
     app.post("/rest/logout", logout);
     app.get("/rest/loggedIn", loggedIn);
     app.get("/rest/user", getUsers);
+    app.post("/rest/getAllUsers", findAllUsersWithUsername);
     app.get("/rest/user/:userId", findUserById);
     app.put("/rest/user/:userId", updateUser);
     app.delete("/rest/user/:userId", deleteUser);
@@ -275,6 +276,21 @@ module.exports = function (app, userModel, passport) {
         else {
             res.send(users);
         }
+    }
+    
+    function findAllUsersWithUsername(req, res) {
+        var usernameList = req.body;
+        
+        userModel
+            .findAllUsersWithUsername(usernameList)
+            .then(
+                function (users) {
+                    res.json(users)
+                },
+                function (err) {
+                    res.status(404).send(error);
+                }
+            )
     }
 
     function findUserByUsername(username, res) {

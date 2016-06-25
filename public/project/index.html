@@ -10,27 +10,16 @@
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
-
     <link rel="stylesheet" href="https://rawgit.com/esleducation/ng-rating/master/css/ng-rating.css"/>
-    <!--<link href="css/ng-rating.css" rel="styletheet" type="text/css" />-->
-    <!-- Custom CSS -->
     <link href="css/modern-business.css" rel="stylesheet">
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<!--    &lt;!&ndash; Custom Fonts &ndash;&gt;
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
 
     <script src="js/bootstrap.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
-
-<!--     HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
-     WARNING: Respond.js doesn't work if you view the page via file://
-    [if lt IE 9]><!--
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->
-    <![endif]-->
 
     <script src="app.js"></script>
     <script src="config.js"></script>
@@ -41,17 +30,63 @@
     <script src="views/user/profile-display.controller.client.js"></script>
     <script src="views/business/business-list.controller.client.js"></script>
     <script src="views/business/business-detail.controller.client.js"></script>
-    <script src="views/project.controller.client.js"></script>
     <script src="services/user.service.client.js"></script>
     <script src="services/business.service.client.js"></script>
     <script src="services/review.service.client.js"></script>
+    <script src="services/follow.service.client.js"></script>
 
     <script src="https://rawgit.com/esleducation/ng-rating/master/js/ng-rating.js"></script>
     <!--<script src="js/ng-rating.js"></script>-->
 
 </head>
-<body>
-    <span ng-view></span>
+
+<body ng-controller="MainController as model">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#/"><b>Home</b></a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input ng-model="model.searchText" type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <a href="#/searchTerm/{{model.searchText}}" class="btn btn-default">Submit</a>
+                    </form>
+                    <li ng-if="currentUser == null">
+                        <a href="#/register"><b>Register</b></a>
+                    </li>
+                    <li ng-if="currentUser == null">
+                        <a href="#/login"><b>Login</b></a>
+                    </li>
+                    <li ng-if="currentUser" class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">Welcome &nbsp; &nbsp; <b>{{currentUser.username}}</b><b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#/user"><i class="fa fa-user" aria-hidden="true"></i>&nbsp; &nbsp; Edit Profile</a>
+                            </li>
+                            <li>
+                                <a href="#/user/{{currentUser.username}}"><i class="fa fa-heart" aria-hidden="true"></i>&nbsp; &nbsp; Liked Activity</a>
+                            </li>
+                            <li>
+                                <a ng-click="model.logout()"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp; &nbsp;Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <span ng-view>
+    </span>
 
 </body>
 </html>

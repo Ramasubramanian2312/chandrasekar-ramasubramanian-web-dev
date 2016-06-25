@@ -5,17 +5,9 @@
 
     function HomeController($location, BusinessService, UserService, $rootScope) {
         var vm = this;
-        vm.logout = logout;
         vm.findApiAllBusinessByCategory = findApiAllBusinessByCategory;
         vm.findApiAllBusinessByTerm = findApiAllBusinessByTerm;
         
-        
-        function init() {
-            vm.currentUser = $rootScope.currentUser;
-            console.log(vm.currentUser);
-        }
-        
-        init();
 
         function findApiAllBusinessByCategory(category) {
             BusinessService
@@ -41,20 +33,6 @@
                     },
                     function (error) {
                         vm.error = "Sorry. There are no search results available.";
-                    }
-                )
-        }
-
-        function logout() {
-            UserService
-                .logout()
-                .then(
-                    function (response) {
-                        $rootScope.currentUser = null;
-                        $location.url("/login");
-                    },
-                    function () {
-                        $location.url("/login");
                     }
                 )
         }

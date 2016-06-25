@@ -1,39 +1,34 @@
 module.exports = function () {
 
     var mongoose = require("mongoose");
-    var FollowerSchema = require("./review.schema.server")();
-    var Review = mongoose.model("ProjectReview", ReviewSchema);
+    var FollowerSchema = require("./follower.schema.server")();
+    var Follower = mongoose.model("ProjectFollower", FollowerSchema);
 
     var api = {
-        createReview: createReview,
-        //findBusinessByBusinessId: findBusinessByBusinessId,
-        findReviewById: findReviewById,
-        updateReview: updateReview,
-        deleteReview: deleteReview
+        createFollower: createFollower,
+        findAllFollowersForUser: findAllFollowersForUser,
+        updateFollower: updateFollower,
+        deleteFollower: deleteFollower
     };
     return api;
 
-    function createReview(review) {
-        return Review.create(review);
+    function createFollower(follower) {
+        return Follower.create(follower);
     }
 
-/*    function findBusinessByBusinessId(businessId) {
-        return Business.findOne({businessId: businessId});
-    }*/
-
-    function findReviewById(reviewId) {
-        return Review.findById(reviewId);
+    function findAllFollowersForUser(username) {
+        return Follower.find({username: username});
     }
 
-    function updateReview(id, review) {
-        delete review._id;
-        return Review
+    function updateFollower(id, follower) {
+        delete follower._id;
+        return Follower
             .update({_id: id}, {
-                $set: review
+                $set: follower
             });
     }
 
-    function deleteReview(id) {
-        return Review.remove({_id: id});
+    function deleteFollower(id) {
+        return Follower.remove({_id: id});
     }
 }

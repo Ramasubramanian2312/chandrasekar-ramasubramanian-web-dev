@@ -10,6 +10,7 @@ module.exports = function () {
         findUserById: findUserById,
         findUserByUsername: findUserByUsername,
         findUserByCredentials: findUserByCredentials,
+        findAllUsersWithUsername: findAllUsersWithUsername,
         updateUser: updateUser,
         deleteUser: deleteUser
     };
@@ -33,6 +34,10 @@ module.exports = function () {
     
     function findUserByCredentials(username, password) {
         return User.findOne({username: username, password: password});
+    }
+
+    function findAllUsersWithUsername(usernameList) {
+        return User.find({'username': {$in : usernameList}})
     }
 
     function updateUser(userId, user) {

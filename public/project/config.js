@@ -34,7 +34,6 @@
             })
             .when("/user/", {
                 templateUrl: "views/user/profile.view.client.html",
-                //templateUrl: "index1.html",
                 controller: "ProfileController",
                 controllerAs: "model",
                 resolve: {
