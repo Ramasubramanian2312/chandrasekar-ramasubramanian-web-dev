@@ -5,9 +5,10 @@ module.exports = function () {
     var UserSchema = mongoose.Schema({
         username: {type: String, required: true},
         type: {type: String, default: 'customer'},
+        role: {type: String, default: 'user'},
         password: String,
         firstName: String,
-        facebook: {
+        google: {
             token: String,
             id: String,
             displayName: String
@@ -16,6 +17,8 @@ module.exports = function () {
         lastName: String,
         email: String,
         phone: String,
+        company: String,
+        url: String,
         dateCreated: {type: Date, default: Date.now()}
     }, {collection: "project.user"});
 

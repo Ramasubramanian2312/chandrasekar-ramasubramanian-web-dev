@@ -1,15 +1,26 @@
 /*var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;*/
-var FacebookStrategy = require('passport-facebook').Strategy;
+/*var FacebookStrategy = require('passport-facebook').Strategy;*/
 var bcrypt = require("bcrypt-nodejs");
+
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 module.exports = function (app, userModel, passport) {
 
     // var userModel = models.userModel;
+    var multer = require('multer'); // npm install multer --save
+    var upload = multer({ dest: __dirname+'/../../public/uploads' });
 
-    app.get("/projectAuth/facebook", passport.authenticate('projectFacebook'));
+    app.post("/rest/uploads", upload.single('myFile'), uploadImage);
+/*    app.get("/projectAuth/facebook", passport.authenticate('projectFacebook'));
     app.get('/projectAuth/facebook/callback',
         passport.authenticate('facebook', {
+            successRedirect: '/project/#/user',
+            failureRedirect: '/project/#/login'
+        }));*/
+    app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+    app.get('/auth/google/callback',
+        passport.authenticate('google', {
             successRedirect: '/project/#/user',
             failureRedirect: '/project/#/login'
         }));
@@ -27,15 +38,57 @@ module.exports = function (app, userModel, passport) {
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);*/
 
-    var facebookConfig = {
+/*    var facebookConfig = {
         clientID     : process.env.PROJECT_FACEBOOK_CLIENT_ID,
         clientSecret : process.env.PROJECT_FACEBOOK_CLIENT_SECRET,
         callbackURL  : process.env.PROJECT_FACEBOOK_CALLBACK_URL
+    };*/
+
+    var googleConfig = {
+        clientID     : process.env.GOOGLE_CLIENT_ID,
+        clientSecret : process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL  : process.env.GOOGLE_CALLBACK_URL
     };
 
 
-    passport.use('projectFacebook', new FacebookStrategy(facebookConfig, facebookLogin));
+    //passport.use('projectFacebook', new FacebookStrategy(facebookConfig, facebookLogin));
+    passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+    
+    function uploadImage(req, res) {
+        var userId      = req.body.userId;
+        var width         = req.body.width;
+        var myFile        = req.file;
 
+        if(myFile == null) {
+            res.redirect("/project/#/user/");
+            return;
+        }
+
+        var originalname  = myFile.originalname; // file name on user's computer
+        var filename      = myFile.filename;     // new file name in upload folder
+        var path          = myFile.path;         // full path of uploaded file
+        var destination   = myFile.destination;  // folder where file is saved to
+        var size          = myFile.size;
+        var mimetype      = myFile.mimetype;
+
+        var newUser = {
+            url: "/uploads/" +filename
+        };
+
+        userModel
+            .updateUser(userId, newUser)
+            .then(
+                function (stats) {
+                    console.log(stats);
+                    res.redirect("/project/#/user/");
+                },
+                function (error) {
+                    res.status(404).send(error);
+                }
+            );
+
+    }
+    
 /*    function localStrategy(username, password, done) {
         userModel
             .findUserByUsername(username)
@@ -71,7 +124,7 @@ module.exports = function (app, userModel, passport) {
             );
     }*/
 
-    function facebookLogin(token, refreshToken, profile, done) {
+/*    function facebookLogin(token, refreshToken, profile, done) {
         userModel
             .findUserByFacebookId(profile.id)
             .then(
@@ -98,6 +151,43 @@ module.exports = function (app, userModel, passport) {
                 }
             );
         //res.send(200);
+    }*/
+
+    function googleStrategy(token, refreshToken, profile, done) {
+        userModel
+            .findUserByGoogleId(profile.id)
+            .then(
+                function(user) {
+                    if(user) {
+                        return done(null, user);
+                    } else {
+                        var email = profile.emails[0].value;
+                        var emailParts = email.split("@");
+                        var newGoogleUser = {
+                            username:  emailParts[0],
+                            firstName: profile.name.givenName,
+                            lastName:  profile.name.familyName,
+                            email:     email,
+                            google: {
+                                id:    profile.id,
+                                token: token
+                            }
+                        };
+                        return userModel.createUser(newGoogleUser);
+                    }
+                },
+                function(err) {
+                    if (err) { return done(err); }
+                }
+            )
+            .then(
+                function(user){
+                    return done(null, user);
+                },
+                function(err){
+                    if (err) { return done(err); }
+                }
+            );
     }
 
     function login(req, res) {

@@ -26,13 +26,16 @@
                     <a href="#/login"><b>Login</b></a>
                 </li>
                 <li ng-if="model.currentUser" class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown">Welcome <b>{{model.currentUser.username}}</b><b class="caret"></b></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown">Welcome &nbsp; &nbsp; <b>{{model.currentUser.username}}</b><b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#/user">Profile</a>
+                            <a href="#/user"><i class="fa fa-user" aria-hidden="true"></i>&nbsp; &nbsp; Edit Profile</a>
                         </li>
                         <li>
-                            <a ng-click="model.logout()">Logout</a>
+                            <a href="#/user/{{model.currentUser.username}}"><i class="fa fa-heart" aria-hidden="true"></i>&nbsp; &nbsp; Liked Activity</a>
+                        </li>
+                        <li>
+                            <a ng-click="model.logout()"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp; &nbsp;Logout</a>
                         </li>
                     </ul>
                 </li>

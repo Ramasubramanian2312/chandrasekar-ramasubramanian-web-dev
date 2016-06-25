@@ -41,6 +41,14 @@
                     loggedIn: checkLoggedIn
                 }
             })
+            .when("/user/:username", {
+                templateUrl: "views/user/profile-display.view.client.html",
+                controller: "ProfileDisplayController",
+                controllerAs: "model",
+                resolve: {
+                    loggedIn: checkForLogin
+                }
+            })
             .when("/search/:category", {
                 templateUrl: "views/business/business-list.view.client.html",
                 controller: "BusinessListController",

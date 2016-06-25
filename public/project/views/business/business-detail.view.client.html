@@ -202,7 +202,7 @@
 
                             <hr>
 
-                            <div ng-repeat="review in model.localBusiness.reviews"
+                            <div ng-repeat="review in model.localBusiness.reviews | orderBy:'dateCreated':true"
                                  ng-if="model.localBusiness"
                                  class="row">
                                 <div class="col-md-12">
@@ -222,7 +222,13 @@
                                                                editable="false">
                                                     </ng-rating>
                                                     <br>
-                                                    Posted by: &nbsp; {{review.username}}
+                                                    Posted by: &nbsp;
+                                                    <a href="#/user/{{review.username}}">
+                                                        {{review.username}}
+                                                    </a>
+                                                    <div class="text-right">
+                                                        Date posted: <b>{{review.dateCreated}}</b>
+                                                    </div>
                                                 </p>
                                                 <div class="text-right" ng-if="model.username === review.username && model.deleteEnable">
                                                     <a class="btn btn-danger" ng-click="model.deleteReview(model.localBusiness, review._id)">

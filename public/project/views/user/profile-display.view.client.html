@@ -1,0 +1,398 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/"><b>Home</b></a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input ng-model="model.searchText" type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <a href="#/searchTerm/{{model.searchText}}" class="btn btn-default">Submit</a>
+                </form>
+                <li ng-if="model.currentUser == null">
+                    <a href="#/register"><b>Register</b></a>
+                </li>
+                <li ng-if="model.currentUser == null">
+                    <a href="#/login"><b>Login</b></a>
+                </li>
+                <li ng-if="model.currentUser" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">Welcome <b>{{model.currentUser.username}}</b><b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#/user">Profile</a>
+                        </li>
+                        <li>
+                            <a ng-click="model.logout()">Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<div class="profile-view">
+    <div class="container" style="padding-top: 60px;">
+        <h2 class="page-header business-list-title">User Profile</h2>
+        <div class="row profile-view">
+            <!-- left column -->
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="text-center">
+                    <img ng-if="!model.profileUser.url"
+                         src="http://lorempixel.com/200/200/people/9/"
+                         class="avatar img-circle img-thumbnail"
+                         alt="avatar">
+                    <img ng-if="model.profileUser.url"
+                         id="img-profile"
+                         ng-src="{{model.profileUser.url}}"
+                         class="avatar img-circle img-thumbnail img-responsive"
+                         alt="avatar">
+                    <p ng-if="model.profileUser || model.currentUser">
+                        <h3 class="business-list-title">{{model.profileUser.firstName}} {{model.profileUser.lastName}}</h3>
+                    </p>
+                    <p>
+                        <form ng-if="model.currentUser && !(model.currentUser._id === model.profileUser._id)">
+                            <button ng-click="model.followUser(currentUser, profileUser)" type="submit" class="btn btn-primary new-upload">Follow</button>
+                        </form>
+                    </p>
+                </div>
+            </div>
+            <!-- edit form column -->
+            <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+                <div ng-if="model.success" class="alert alert-success alert-dismissible" role="alert">
+                    <a class="panel-close close" data-dismiss="alert">×</a>
+                    <strong>Success!</strong>  {{model.success}}
+                </div>
+                <div ng-if="model.error" class="alert alert-danger alert-dismissible" role="alert">
+                    <a class="panel-close close" data-dismiss="alert">×</a>
+                    <strong>Error!</strong> {{model.error}}
+                </div>
+                <h3 class="business-list-title">Personal info</h3>
+                <form class="form-horizontal" role="form" name="profileInformation" novalidate>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label business-list-title">First name:</label>
+                        <div class="col-lg-8">
+                            <input ng-model="model.profileUser.firstName"
+                                   class="form-control"
+                                   id="firstName"
+                                   name="firstName"
+                                   disabled
+                                   type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label business-list-title">Last name:</label>
+                        <div class="col-lg-8">
+                            <input ng-model="model.profileUser.lastName"
+                                   class="form-control"
+                                   id="lastName"
+                                   name="lastName"
+                                   type="text"
+                                   disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label business-list-title">Company:</label>
+                        <div class="col-lg-8">
+                            <input ng-model="model.profileUser.company"
+                                   class="form-control"
+                                   id="company"
+                                   name="company"
+                                   type="text"
+                                   disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label business-list-title ">Email:</label>
+                        <div class="col-lg-8">
+                            <input ng-model="model.profileUser.email"
+                                   class="form-control"
+                                   id="email"
+                                   name="email"
+                                   type="email"
+                                   disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label business-list-title ">Phone:</label>
+                        <div class="col-lg-8">
+                            <input ng-model="model.profileUser.phone"
+                                   class="form-control"
+                                   id="phone"
+                                   name="phone"
+                                   type="text"
+                                   disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label business-list-title">Username:</label>
+                        <div class="col-lg-8">
+                            <input ng-model="model.profileUser.username"
+                                   class="form-control"
+                                   id="username"
+                                   type="text"
+                                   disabled>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="profile-view">
+    <div class="container">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2 class="page-title business-list-title">Liked Content</h2>
+                            <!--<div class="panel panel-default">
+                                <div class="panel-heading"><h4><b>MY FAVORITES ({{model.profileUser.businesses.length}})</b></h4></div>-->
+                                <div ng-repeat="business in model.profileUser.businesses" class="col-md-3 portfolio-item">
+                                    <!--<div class="panel panel-default profile-business-list">
+                                        <div class="panel-body">-->
+                                            <div class="stat-panel text-center">
+                                                <h4>{{business.name}}</h4>
+                                                <div class="thumbnail">
+                                                    <img src="{{business.imageUrl}}" class="img-responsive">
+                                                    <div class="caption">
+                                                        <p>Phone: {{business.phone}}</p>
+                                                        <center><img src="{{business.ratingUrl}}" class="img-responsive"></center>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <!--</div>
+                                        <a href="#/business/{{business._id}}" class="block-anchor panel-footer text-center">View Details &nbsp; <i class="fa fa-arrow-right"></i></a>
+                                    </div>-->
+                                </div>
+                            <!--</div>
+                        </div>-->
+                        <div class="col-md-12">
+                            <h2 class="page-title business-list-title">Followers</h2>
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><h4><b>MY FAVORITES ({{model.profileUser.businesses.length}})</b></h4></div>
+                                <div ng-repeat="business in model.profileUser.businesses" class="col-md-3 portfolio-item">
+                                    <div class="panel panel-default profile-business-list">
+                                        <div class="panel-body">
+                                            <div class="stat-panel text-center">
+                                                <h4>{{business.name}}</h4>
+                                                <div class="thumbnail">
+                                                    <img src="{{business.imageUrl}}" class="img-responsive">
+                                                    <div class="caption">
+                                                        <p>Phone: {{business.phone}}</p>
+                                                        <center><img src="{{business.ratingUrl}}" class="img-responsive"></center>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="#/business/{{business._id}}" class="block-anchor panel-footer text-center">View Details &nbsp; <i class="fa fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <h2 class="page-title business-list-title">Following</h2>
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><h4><b>MY FAVORITES ({{model.profileUser.businesses.length}})</b></h4></div>
+                                <div ng-repeat="business in model.profileUser.businesses" class="col-md-3 portfolio-item">
+                                    <div class="panel panel-default profile-business-list">
+                                        <div class="panel-body">
+                                            <div class="stat-panel text-center">
+                                                <h4>{{business.name}}</h4>
+                                                <div class="thumbnail">
+                                                    <img src="{{business.imageUrl}}" class="img-responsive">
+                                                    <div class="caption">
+                                                        <p>Phone: {{business.phone}}</p>
+                                                        <center><img src="{{business.ratingUrl}}" class="img-responsive"></center>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="#/business/{{business._id}}" class="block-anchor panel-footer text-center">View Details &nbsp; <i class="fa fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Recent Oreders</div>
+                                <div class="panel-body">
+                                    <div class="alert alert-dismissible alert-success">
+                                        <button type="button" class="close" data-dismiss="alert"><i class="fa fa-close"></i></button>
+                                        <strong>Well done!</strong> You successfully read <a href="#" class="alert-link">this important alert message</a>.
+                                    </div>
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Username</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td>Larry</td>
+                                            <td>the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<div class="row">
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Pie Chart</div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <ul class="chart-dot-list">
+                                                <li class="a1">date 1</li>
+                                                <li class="a2">data 2</li>
+                                                <li class="a3">data 3</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="chart chart-doughnut">
+                                                <canvas id="chart-area3" width="1200" height="900" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Doughnut</div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <ul class="chart-dot-list">
+                                                <li class="a1">date 1</li>
+                                                <li class="a2">data 2</li>
+                                                <li class="a3">data 3</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="chart chart-doughnut">
+                                                <canvas id="chart-area4" width="1200" height="900" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="container-fluid">
+    <div ng-if="model.success" class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+        <strong>Success!</strong>  {{model.success}}
+    </div>
+    <div ng-if="model.error" class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+        <strong>Error!</strong> {{model.error}}
+    </div>
+    <!--<div class="form-group">-->
+        <!--<label for="username">Username</label>-->
+        <!--<input ng-model="model.user.username"-->
+               <!--type="text"-->
+               <!--class="form-control"-->
+               <!--id="username"-->
+               <!--placeholder="alicew">-->
+    <!--</div>-->
+<!--    <div class="form-group">
+        <label for="email">Email</label>
+        <input ng-model="model.user.email"
+               type="email"
+               class="form-control"
+               id="email"
+               placeholder="alice@wonderland.com">
+    </div>
+    <div class="form-group">
+        <label for="first-name">First Name</label>
+        <input ng-model="model.user.firstName"
+               type="text"
+               class="form-control"
+               id="first-name"
+               placeholder="Alice">
+    </div>
+    <div class="form-group">
+        <label for="last-name">Last Name</label>
+        <input ng-model="model.user.lastName"
+               type="text"
+               class="form-control"
+               id="last-name"
+               placeholder="Wonderland">
+    </div>-->
+<!--    <a class="btn btn-primary btn-block"
+       href="#/user/{{model.user._id}}/website">Websites</a>
+    <a ng-click="model.logout()" class="btn btn-danger btn-block">Logout</a>-->
+    <!--    <a class="btn btn-danger btn-block"
+           ng-click="model.unregister()">Unregister</a>-->
+</div>
+<!--
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="row navbar-text">
+            <div class="col-xs-3 text-center">
+            </div>
+            <div class="col-xs-3 text-center">
+            </div>
+            <div class="col-xs-3 text-center">
+            </div>
+            <div class="col-xs-3 text-center">
+            </div>
+        </div>
+    </div>
+</nav>-->
