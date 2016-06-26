@@ -12,12 +12,9 @@
                 </h2>
             </div>
         </div>
-        <!-- /.row -->
-<!--        <div class="panel panel-default">
-            <div class="panel-body panel-list-display">-->
                 <div class="row">
-                    <div class="col-md-3 hidden-xs">
-                        <p class="lead">Popular Categories</p>
+                    <div class="col-md-3 col-sm-2 hidden-xs">
+                        <p class="lead business-list-title">Popular Categories</p>
                         <ul class="ts-sidebar-menu">
                             <li class="open"><a href="#/search/musicvenues"><h4><b>Music Venues</b></h4></a></li>
                             <li class="open"><a href="#/search/festivals"><h4><b>Festivals</b></h4></a></li>
@@ -30,8 +27,8 @@
                             <li class="open"><a href="#/search/localservices"><h4><b>Local Services</b></h4></a></li>
                         </ul>
                     </div>
-                    <div class="col-md-9">
-                        <div ng-repeat="business in model.data.businesses" class="col-md-4 portfolio-item">
+                    <div class="col-md-9 col-sm-10">
+                        <div ng-repeat="business in model.data.businesses" class="col-md-4 col-sm-6 portfolio-item">
                             <div class="panel panel-default">
                                 <a ng-click="model.findApiBusinessById(business.id)">
                                     <img class="img-responsive"

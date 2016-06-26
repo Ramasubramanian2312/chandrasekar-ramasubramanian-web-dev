@@ -2,11 +2,10 @@
     <div class="container" style="padding-top: 60px;">
         <h2 class="page-header business-list-title">User Profile</h2>
         <div class="row profile-view">
-            <!-- left column -->
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="text-center">
                     <img ng-if="!model.profileUser.url"
-                         src="../../img/profile.jpg"
+                         ng-src="/public/project/img/staff-profile-blank.jpg"
                          id="img-profile"
                          class="avatar img-circle img-thumbnail"
                          alt="avatar">
@@ -174,7 +173,7 @@
                                                  class="avatar img-circle img-thumbnail img-responsive"
                                                  alt="avatar">
                                             <img ng-if="!follower.url"
-                                                 src="/project/img/profile.jpg"
+                                                 ng-src="/public/project/img/staff-profile-blank.jpg"
                                                  id="img-profile-small"
                                                  class="avatar img-circle img-thumbnail img-responsive"
                                                  alt="avatar">
@@ -195,7 +194,7 @@
                                                  class="avatar img-circle img-thumbnail img-responsive"
                                                  alt="avatar">
                                             <img ng-if="!following.url"
-                                                 src="/project/img/profile.jpg"
+                                                 ng-src="/public/project/img/staff-profile-blank.jpg"
                                                  id="img-profile-small"
                                                  class="avatar img-circle img-thumbnail img-responsive"
                                                  alt="avatar">

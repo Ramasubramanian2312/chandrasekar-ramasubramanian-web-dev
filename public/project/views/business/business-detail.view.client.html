@@ -14,8 +14,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="panel panel-default">
-            <div class="panel-body panel-list-display">
+<!--            <div class="panel panel-default">
+            <div class="panel-body panel-list-display">-->
                 <div class="row">
                     <div class="col-md-3 hidden-xs">
                         <p class="lead">Popular Categories</p>
@@ -34,18 +34,16 @@
 
                     <div class="col-md-9">
                         <div class="thumbnail">
-                            <div class="panel panel-default">
+                            <!--<div class="panel panel-default">-->
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <div class="panel-body fixed-panel-detail">
+                                        <div class="panel-body">
                                             <img class="img-responsive pic"
-                                                 width="400"
-                                                 height="300"
                                                  ng-src="{{model.data.image_url}}" alt="">
                                         </div>
                                     </div>
                                     <div class="col-md-8">
-                                        <div class="panel-body fixed-panel-detail">
+                                        <div class="panel-body">
                                             <p>
                                                 <h4>
                                                     <i>
@@ -75,18 +73,26 @@
                                                 <p>
                                                     <div ng-if="model.currentUser">
                                                         <div ng-if="!model.liked" class="like-button">
-                                                            <img class="img-responsive"
+                                                            <span class="fa-stack fa-lg">
+                                                                <i class="fa fa-circle-o fa-stack-2x" ng-click="model.likeBusiness(model.data)"></i>
+                                                                <i class="fa fa-thumbs-up fa-stack-1x" ng-click="model.likeBusiness(model.data)"></i>
+                                                            </span>
+                                                            <!--<img class="img-responsive"
                                                                  ng-src="http://biz.leoraw.com/wp-content/uploads/2010/08/LikeButton_100px.gif"
                                                                  ng-if="model.currentUser"
                                                                  ng-click="model.likeBusiness(model.data)"
-                                                                 alt="">
+                                                                 alt="">-->
                                                         </div>
                                                         <div ng-if="model.liked" class="like-button">
-                                                            <img class="img-responsive"
+                                                            <span class="fa-stack fa-lg">
+                                                                <i class="fa fa-circle-o fa-stack-2x" ng-click="model.dislikeBusiness(model.data.id)"></i>
+                                                                <i class="fa fa-thumbs-down fa-stack-1x" ng-click="model.dislikeBusiness(model.data.id)"></i>
+                                                            </span>
+                                                            <!--<img class="img-responsive"
                                                                  ng-src="http://theunwiredpeople.com/wp-content/uploads/sites/5/2011/05/dislike5.jpg"
                                                                  ng-if="model.currentUser"
                                                                  ng-click="model.dislikeBusiness(model.data.id)"
-                                                                 alt="">
+                                                                 alt="">-->
                                                         </div>
                                                     </div>
                                                 </p>
@@ -94,7 +100,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            <!--</div>-->
                             <div class="caption-full">
                                 <h3>{{model.data.name}}</h3>
                                 <h4><p><i>{{model.data.reviews[0].excerpt}}</i></p></h4>
@@ -187,8 +193,8 @@
                     </div>
 
                 </div>
-            </div>
-        </div>
+            <!--</div>
+        </div>-->
 
 
 
