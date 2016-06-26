@@ -7,6 +7,7 @@
         var vm = this;
         var profileUser;
         vm.followUser = followUser;
+        vm.unfollowUser = unfollowUser;
 
         function init() {
             var username = $routeParams.username;
@@ -34,6 +35,7 @@
 
             console.log(username);
 
+            // Finding followers
             FollowService
                 .findAllFollowersForUser(username)
                 .then(
@@ -46,12 +48,51 @@
                                 usernameList.push(followers[i]._follower);
                             }
                             console.log(usernameList);
+                            console.log(usernameList.indexOf(vm.currentUser.username));
+                            if(usernameList.indexOf(vm.currentUser.username) >= 0) {
+                                vm.unfollow = true;
+                            }
                             UserService
                                 .findAllUsersWithUsername(usernameList)
                                 .then(
                                     function (res) {
                                         vm.followers = res.data;
                                         console.log(vm.followers);
+                                    },
+                                    function (err) {
+                                        console.log(err);
+                                    }
+                                )
+                        }
+                    },
+                    function (err) {
+                        console.log(err);
+                    }
+                );
+
+            // Finding followings
+            FollowService
+                .findAllFollowingsForUser(username)
+                .then(
+                    function (response) {
+                        var followings = response.data;
+                        console.log(followings);
+                        if(followings.length > 0) {
+                            var usernameList = [];
+                            for(var i=0; i < followings.length; i++) {
+                                usernameList.push(followings[i].username);
+                            }
+                            /*console.log(usernameList);
+                            console.log(usernameList.indexOf(vm.currentUser.username));
+                            if(usernameList.indexOf(vm.currentUser.username) >= 0) {
+                                vm.unfollow = true;
+                            }*/
+                            UserService
+                                .findAllUsersWithUsername(usernameList)
+                                .then(
+                                    function (res) {
+                                        vm.followings = res.data;
+                                        console.log(vm.followings);
                                     },
                                     function (err) {
                                         console.log(err);
@@ -84,7 +125,21 @@
                     }
                 );
         }
-
         
+        function unfollowUser(currentUser, profileUser) {
+            FollowService
+                .deleteFollowerByUsernames(currentUser.username, profileUser.username)
+                .then(
+                    function (response) {
+                        console.log(response.data);
+                        vm.unfollow = false;
+                        init();
+                    },
+                    function (err) {
+                        console.log(err);
+                        init();
+                    }
+                );
+        }
     }
 })();

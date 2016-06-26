@@ -1,6 +1,8 @@
 body {	color:#666;	font:300 15px/15px Roboto,Arial,Helvetica;background-color:#fff;-webkit-font-smoothing:antialiased;background-color: #eee;}
 
 a{color:#FFFFFF; text-decoration:none;}
+.fa-2x {color: #681D4D}
+a.fa-small{color:#681D4D}
 a:hover{color:#67b168;}
 .btn,a,.btn:hover,a:hover {
 -webkit-transition: all 0.3s ease-in-out;

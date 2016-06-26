@@ -3,7 +3,7 @@
         .module("Project", ["ngRoute", "ngRating"])
         .controller("MainController", MainController);
     
-    function MainController($rootScope, $location) {
+    function MainController($rootScope, $location, UserService) {
         var vm = this;
         vm.logout = logout;
 

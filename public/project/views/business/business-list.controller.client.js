@@ -5,7 +5,6 @@
     
     function BusinessListController($location, BusinessService, $routeParams, $rootScope) {
         var vm = this;
-        vm.logout = logout;
         vm.findApiAllBusinessByTerm = findApiAllBusinessByTerm;
         vm.findApiBusinessById = findApiBusinessById;
         vm.findApiAllBusinessByCategory = findApiAllBusinessByCategory;
@@ -40,20 +39,6 @@
         }
 
         init();
-
-        function logout() {
-            UserService
-                .logout()
-                .then(
-                    function (response) {
-                        $rootScope.currentUser = null;
-                        $location.url("/login");
-                    },
-                    function () {
-                        $location.url("/login");
-                    }
-                )
-        }
         
         function findApiAllBusinessByTerm(searchTerm) {
             BusinessService

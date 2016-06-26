@@ -1,3 +1,5 @@
+/*Referernce - https://rawgit.com/esleducation/ng-rating/master/js/ng-rating.js*/
+
 (function() {
     var ngRating;
     ngRating = angular.module('ngRating', []);
