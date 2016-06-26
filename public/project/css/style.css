@@ -1063,3 +1063,7 @@ li {
 .btn-pref .btn {
     -webkit-border-radius:0 !important;
 }
+
+#navbar-search-field {
+    margin-bottom: 0px;
+}
