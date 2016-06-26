@@ -10,21 +10,27 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
         <div class="item active">
-            <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide One');"></div>
+            <div class="fill" style="background-image:url('http://www.globalsteam.net/sandy/wp-content/uploads/2014/03/g3.jpg');"></div>
             <div class="carousel-caption">
-                <h2>Caption 1</h2>
+                <p><img ng-src="img/logo.png" /></p><h2><i>We help you choose the finest places around !!</i></h2>
             </div>
         </div>
         <div class="item">
-            <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');"></div>
+            <div class="fill" style="background-image:url('http://www.spicegardenuk.com/images/slider/slider1.jpg');"></div>
             <div class="carousel-caption">
-                <h2>Caption 2</h2>
+                <!--<form>
+                    <div class="form-group">
+                        <input ng-model="model.searchText" type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <a href="#/searchTerm/{{model.searchText}}" class="btn btn-default">Submit</a>
+                </form>-->
+                <p><img ng-src="img/logo.png" /></p><h2><i>Use our search to look up places of your choice !!</i></h2>
             </div>
         </div>
         <div class="item">
-            <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>
+            <div class="fill" style="background-image:url('http://www.spicegardenuk.com/images/slider/slider3.jpg');"></div>
             <div class="carousel-caption">
-                <h2>Caption 3</h2>
+                <p><img ng-src="img/logo.png" /></p><h2><i>Check out our top categories below</i></h2>
             </div>
         </div>
     </div>
@@ -45,51 +51,51 @@
         <!-- Marketing Icons Section -->
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h1>
-                    Welcome to TopReviews <h2><i>We help you choose the finest places around !!</i></h2>
-                </h1>
+                <!--<h1>
+                    <p><img ng-src="img/logo.png" /></p><h3><i>We help you choose the finest places around !!</i></h3>
+                </h1>-->
             </div>
         </div>
 
         <!-- Portfolio Section -->
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">Pick a Category</h2>
+                <h2 class="page-header">Categories</h2>
             </div>
             <div class="col-md-4 col-sm-6">
-                <h3 class="text-center">Food</h3>
-                <a ng-click="model.findApiAllBusinessByCategory('food')">
-                    <img class="img-responsive img-portfolio img-hover" width="700" height="500" ng-src="http://shareyourwallpapers.com/upload/wallpaper/photo-art/restaurant-and-bar-designs/restaurant-and-bar-designs_4dd73947.jpg" alt="">
+                <h3 class="text-center">Bakeries</h3>
+                <a ng-click="model.findApiAllBusinessByCategory('bakeries')">
+                    <img class="img-responsive img-portfolio img-hover" ng-src="http://static.cms.yp.ca/ecms/media/1/Jeffrey-Gunn-YP-20140729-71-700x500.jpg" alt="">
                 </a>
             </div>
             <div class="col-md-4 col-sm-6">
-                <h3 class="text-center">Coffee Places</h3>
+                <h3 class="text-center">Coffee & Tea</h3>
                 <a ng-click="model.findApiAllBusinessByCategory('coffee')">
-                    <img class="img-responsive img-portfolio img-hover" width="700" height="500" ng-src="http://3moonscoffee.com/wp-content/uploads/2015/01/coffee_beans-1521212.jpg" alt="">
+                    <img class="img-responsive img-portfolio img-hover" ng-src="https://www.ozmo.io/wp-content/uploads/2015/07/9cc68882056515050b29669407fba5832.jpg" alt="">
                 </a>
             </div>
             <div class="col-md-4 col-sm-6">
-                <h3 class="text-center">Bars</h3>
-                <a ng-click="model.findApiAllBusinessByCategory('bars')">
-                    <img class="img-responsive img-portfolio img-hover" width="700" height="500" ng-src="http://img1.10bestmedia.com/Images/Photos/229644/31049-110361769007105-1252903-n_54_990x660_201406020216.jpg" alt="">
+                <h3 class="text-center">Breweries</h3>
+                <a ng-click="model.findApiAllBusinessByCategory('breweries')">
+                    <img class="img-responsive img-portfolio img-hover" ng-src="https://buffalodandy.files.wordpress.com/2011/10/southerntier2.jpg" alt="">
                 </a>
             </div>
             <div class="col-md-4 col-sm-6">
-                <h3 class="text-center">Hotels & Travel</h3>
-                <a ng-click="model.findApiAllBusinessByCategory('hotelstravel')">
-                    <img class="img-responsive img-portfolio img-hover" width="700" height="500" ng-src="http://www.offtoeurope.com/wp-content/uploads/2010/06/radisson-pool.jpg" alt="">
+                <h3 class="text-center">Ice Cream & Yogurt</h3>
+                <a ng-click="model.findApiAllBusinessByCategory('icecream')">
+                    <img class="img-responsive img-portfolio img-hover" ng-src="http://sijcreams.com/images/g1.jpg" alt="">
                 </a>
             </div>
             <div class="col-md-4 col-sm-6">
-                <h3 class="text-center">Education</h3>
-                <a ng-click="model.findApiAllBusinessByCategory('education')">
-                    <img class="img-responsive img-portfolio img-hover" width="700" height="500" ng-src="http://maestrobytumlare.com/wp-content/uploads/2011/11/EDUCATION-text.jpg" alt="">
+                <h3 class="text-center">Juice Bars</h3>
+                <a ng-click="model.findApiAllBusinessByCategory('juicebars')">
+                    <img class="img-responsive img-portfolio img-hover" ng-src="http://instiks.com/wp-content/uploads/2015/09/cabbagekidne-1443181731gk48n-700x500.jpg" alt="">
                 </a>
             </div>
             <div class="col-md-4 col-sm-6">
-                <h3 class="text-center">Event Services</h3>
-                <a ng-click="model.findApiAllBusinessByCategory('eventservices')">
-                    <img class="img-responsive img-portfolio img-hover" width="700" height="500" ng-src="http://velocityproductions.com/wp-content/uploads/2014/11/Event-Services-E-1024x682.jpg" alt="">
+                <h3 class="text-center">Donuts</h3>
+                <a ng-click="model.findApiAllBusinessByCategory('donuts')">
+                    <img class="img-responsive img-portfolio img-hover" ng-src="https://s-media-cache-ak0.pinimg.com/736x/a6/39/30/a6393002fad63980bebd9d4b49d5b342.jpg" alt="">
                 </a>
             </div>
         </div>
@@ -101,7 +107,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; TopReviews</p>
+                    <p class="text-right"><img class="text-center" ng-src="img/logo.png" /></p>
                 </div>
             </div>
         </footer>
