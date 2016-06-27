@@ -44,15 +44,19 @@
                 password: user.password,
                 role: user.role,
                 firstName: user.firstName,
-                lastName: user.lastname,
+                lastName: user.lastName,
                 email: user.email,
                 phone: user.phone
             };
-            $http.post("/rest/user", obj)
+           UserService
+               .createUser(obj)
                 .then(
-                    findAllUsers,
+                    function (res) {
+                        vm.success = "User creation successful";
+                        findAllUsers();
+                    },
                     function(err) {
-                        vm.error = err;
+                        vm.error = "Unable to create user";
                     }
                 );
         }
@@ -61,7 +65,10 @@
             if(user.role != 'admin') {
                 $http.delete("/rest/user/" + user._id)
                     .then(
-                        findAllUsers,
+                        function (res) {
+                            vm.success = "User delete successful";
+                            findAllUsers();
+                        },
                         function(err) {
                             vm.error = err;
                         }
@@ -74,10 +81,12 @@
 
         function updateUser(user) {
             delete user.password
-            $http.put("/rest/user/" + user._id, user)
+            UserService
+                .updateUser(user._id, user)
                 .then(
                     function (res) {
                         vm.user = {};
+                        vm.success = "User update successful";
                         findAllUsers();
                     },
                     function(err) {

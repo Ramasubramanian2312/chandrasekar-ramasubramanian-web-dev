@@ -1,3 +1,5 @@
+/*REFERENCES: - https://github.com/jannunzi/WebAppMaker/commit/c981e3d894a48ebddc2621e87d7ec6a22d5fc730*/
+
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require("bcrypt-nodejs");

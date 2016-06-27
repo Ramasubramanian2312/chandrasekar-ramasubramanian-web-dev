@@ -20,11 +20,7 @@
         return api;
         
         function createUser(user) {
-            var newUser = {
-                username: user.username,
-                password: user.password
-            };
-            return $http.post("/rest/user", newUser);
+            return $http.post("/rest/user", user);
         }
 
         function register(username, password) {
