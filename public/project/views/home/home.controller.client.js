@@ -7,7 +7,6 @@
         var vm = this;
         vm.findApiAllBusinessByCategory = findApiAllBusinessByCategory;
         vm.findApiAllBusinessByTerm = findApiAllBusinessByTerm;
-        
 
         function findApiAllBusinessByCategory(category) {
             BusinessService

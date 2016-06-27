@@ -11,7 +11,6 @@
 
         var category = $routeParams.category;
         var searchTerm = $routeParams.searchTerm;
-        console.log(category);
 
         function init() {
             vm.currentUser = $rootScope.currentUser;

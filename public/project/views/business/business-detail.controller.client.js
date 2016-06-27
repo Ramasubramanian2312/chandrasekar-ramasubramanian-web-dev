@@ -38,7 +38,6 @@
                     ratingUrl: business.rating_img_url
                 };
 
-
                 ReviewService
                     .createReview(originalReview)
                     .then(
@@ -107,7 +106,6 @@
 
         function init() {
             vm.currentUser = $rootScope.currentUser;
-            console.log(vm.currentUser);
             
             BusinessService
                 .findApiBusinessById(businessId)
@@ -128,7 +126,6 @@
                             vm.username = user.username;
                             var businessArray = user.businesses;
                             vm.liked = search(businessId, businessArray);
-                            console.log(vm.liked);
                         },
                         function (err) {
                             vm.error = "User not found";
@@ -222,7 +219,6 @@
         }
 
         function dislikeBusiness(businessId) {
-            console.log(businessId);
             var currentUser = $rootScope.currentUser;
 
             if(currentUser) {
