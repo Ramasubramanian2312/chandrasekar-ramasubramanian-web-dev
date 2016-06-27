@@ -210,7 +210,7 @@ module.exports = function (app, userModel, passport) {
     }
 
     function createUser(req, res) {
-        var user = req.body;
+/*        var user = req.body;
 
         userModel
             .createUser(user)
@@ -222,7 +222,36 @@ module.exports = function (app, userModel, passport) {
                 function (error) {
                     res.status(404).send(error);
                 }
-            );
+            );*/
+        var username = req.body.username;
+        var password = req.body.password;
+
+        userModel
+            .findUserByUsername(username)
+            .then(
+                function (user) {
+                    if(user) {
+                        res.status(400).send("Username already in use");
+                    } else {
+                        req.body.password = bcrypt.hashSync(req.body.password);
+                        return userModel
+                            .createUser(req.body);
+                    }
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function (user) {
+                    if(user) {
+                        res.send(user);
+                    }
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            )
     }
 
     function register(req, res) {

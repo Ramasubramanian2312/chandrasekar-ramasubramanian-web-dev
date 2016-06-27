@@ -48,7 +48,7 @@
                 email: user.email,
                 phone: user.phone
             };
-            $http.post("/rest/register", obj)
+            $http.post("/rest/user", obj)
                 .then(
                     findAllUsers,
                     function(err) {
