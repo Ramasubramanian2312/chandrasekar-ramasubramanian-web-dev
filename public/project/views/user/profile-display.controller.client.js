@@ -22,6 +22,9 @@
                 .findUserById(id)
                 .then(function (response) {
                     vm.user = response.data;
+                    if(!vm.user) {
+                        $location.url("/");
+                    }
                     vm.currentUser = $rootScope.currentUser;
                 });
 

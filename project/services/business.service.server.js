@@ -181,7 +181,7 @@ module.exports = function (app, models, userModel) {
     // API Service implementations.
     function findApiHighestRatedBusinesses(req, res) {
         yelp
-            .search({location: 'Boston', sort: 2, limit: 15})
+            .search({location: 'Boston', sort: 2, limit: 18})
             .then(
                 function (data) {
                     res.send(data);
@@ -198,7 +198,7 @@ module.exports = function (app, models, userModel) {
         var parameters = {
             term: searchTerm,
             location: 'Boston',
-            limit: 17
+            limit: 18
         };
 
         yelp
@@ -235,7 +235,7 @@ module.exports = function (app, models, userModel) {
         var parameters = {
             category_filter: category,
             location: 'Boston',
-            limit: 17
+            limit: 18
         };
 
         yelp

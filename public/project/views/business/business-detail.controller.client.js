@@ -5,7 +5,6 @@
 
     function BusinessDetailController(BusinessService, UserService, ReviewService, $routeParams, $rootScope, $location) {
         var vm = this;
-        vm.logout = logout;
         var businessId = $routeParams.businessId;
         vm.likeBusiness = likeBusiness;
         vm.dislikeBusiness = dislikeBusiness;
@@ -64,7 +63,6 @@
                                                     },
                                                     function (err) {
                                                         vm.reviewEnabled = false;
-                                                        console.log(err);
                                                         return;
                                                     }
                                                 );
@@ -79,7 +77,6 @@
                                     function (res) {
                                         if(res) {
                                             var businessObtained = res.data;
-                                            console.log(businessObtained);
                                             businessObtained.reviews.push(newReview);
                                             BusinessService
                                                 .updateBusiness(businessObtained._id, businessObtained)
@@ -89,7 +86,6 @@
                                                         findBusiness();
                                                     },
                                                     function (err) {
-                                                        console.log(err);
                                                     }
                                                 );
                                             findBusiness();
@@ -161,20 +157,6 @@
             return false;
         }
         init();
-
-        function logout() {
-            UserService
-                .logout()
-                .then(
-                    function (response) {
-                        $rootScope.currentUser = null;
-                        $location.url("/login");
-                    },
-                    function () {
-                        $location.url("/login");
-                    }
-                )
-        }
         
         function likeBusiness(business) {
             var currentUser = $rootScope.currentUser;

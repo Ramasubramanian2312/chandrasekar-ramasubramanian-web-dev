@@ -15,7 +15,6 @@
 
         function init() {
             vm.currentUser = $rootScope.currentUser;
-            console.log(vm.currentUser);
             
             if(category) {
                 BusinessService
