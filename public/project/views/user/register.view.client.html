@@ -25,11 +25,8 @@
                                       ng-show="registerForm.username.$invalid && registerForm.$submitted">
                                     *Please enter a username
                                 </span>
-
                                 <div class="checkbox checkbox-circle checkbox-info">
-
                                 </div>
-
                                 <label for="password" class="text-uppercase text-sm">Password</label>
                                 <input ng-model="password"
                                        name="password"
@@ -42,11 +39,8 @@
                                       ng-show="registerForm.password.$invalid && registerForm.$submitted">
                                     *Please enter a password
                                 </span>
-
                                 <div class="checkbox checkbox-circle checkbox-info">
-
                                 </div>
-
                                 <label for="password" class="text-uppercase text-sm">Verify Password</label>
                                 <input ng-model="verifyPassword"
                                        type="password"
@@ -59,16 +53,12 @@
                                       ng-show="registerForm.verifyPassword.$invalid && registerForm.$submitted">
                                     *Please enter a verify password value
                                 </span>
-
                                 <div class="checkbox checkbox-circle checkbox-info">
-
                                 </div>
-
                                 <button type="submit"
                                         ng-click="model.registerUser(username, password, verifyPassword)"
                                         class="btn btn-primary btn-block">REGISTER
                                 </button>
-
                             </form>
                         </div>
                     </div>
@@ -77,51 +67,3 @@
         </div>
     </div>
 </div>
-
-<!--
-<div class="container-fluid">
-    <div ng-if="model.error" class="alert alert-danger" role="alert">
-        {{model.error}}
-    </div>
-    <div class="alert alert-danger" ng-show="registerForm.$invalid && registerForm.$submitted">
-        There are errors in the form
-    </div>
-    <h1>Register</h1>
-    <form name="registerForm" novalidate>
-        <input ng-model="username"
-               name="username"
-               type="text"
-               required
-               class="form-control"
-               placeholder="username" autocomplete="off" />
-        <span class="error-text"
-              ng-show="registerForm.username.$invalid && registerForm.$submitted">
-            *Please enter a username
-        </span>
-        <input ng-model="password"
-               name="password"
-               type="password"
-               required
-               class="form-control"
-               placeholder="password">
-        <span class="error-text"
-              ng-show="registerForm.password.$invalid && registerForm.$submitted">
-            *Please enter a password
-        </span>
-        <input ng-model="verifyPassword"
-               type="password"
-               name="verifyPassword"
-               required
-               class="form-control"
-               placeholder="verify password">
-        <span class="error-text"
-              ng-show="registerForm.verifyPassword.$invalid && registerForm.$submitted">
-            *Please enter a verify password value
-        </span>
-        <button type="submit" ng-click="model.registerUser(username, password, verifyPassword)"
-                class="btn btn-primary btn-block">Register
-        </button>
-        <a class="btn btn-danger btn-block"
-           href="#/login">Cancel</a>
-    </form>
-</div>-->

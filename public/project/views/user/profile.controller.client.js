@@ -7,11 +7,9 @@
         var vm = this;
         vm.updateUser = updateUser;
         vm.unregister = unregister;
-        vm.logout = logout;
 
         function init() {
             vm.currentUser = $rootScope.currentUser;
-            console.log(vm.currentUser);
             
             if(vm.currentUser) {
                 var id = $rootScope.currentUser._id;
@@ -49,20 +47,6 @@
                     function (error) {
                         vm.error = "Error updating profile";
                     });
-        }
-
-        function logout() {
-            UserService
-                .logout()
-                .then(
-                    function (response) {
-                        $rootScope.currentUser = null;
-                        $location.url("/login");
-                    },
-                    function () {
-                        $location.url("/login");
-                    }
-                )
         }
     }
 })();

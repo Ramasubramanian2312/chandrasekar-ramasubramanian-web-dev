@@ -10,7 +10,6 @@
 
     function AdminController($location, UserService, $rootScope, $http) {
         var vm = this;
-        vm.logout = logout;
         vm.createUser = createUser;
         vm.deleteUser = deleteUser;
         vm.updateUser = updateUser;
@@ -22,20 +21,6 @@
         }
 
         init();
-
-        function logout() {
-            UserService
-                .logout()
-                .then(
-                    function (response) {
-                        $rootScope.currentUser = null;
-                        $location.url("/login");
-                    },
-                    function () {
-                        $location.url("/login");
-                    }
-                )
-        }
 
         function createUser(user) {
             vm.user = "";

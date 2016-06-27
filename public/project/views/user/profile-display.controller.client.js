@@ -12,7 +12,6 @@
         function init() {
             var username = $routeParams.username;
             vm.currentUser = $rootScope.currentUser;
-            console.log(vm.currentUser);
             
             if(vm.currentUser) {
                 var id = $rootScope.currentUser._id;
