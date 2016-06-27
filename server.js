@@ -15,7 +15,6 @@ app.use(session({secret: process.env.SESSION_SECRET}));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// configure a public directory to host static content
 app.use(express.static(__dirname + '/public'));
 
 //require ("./test/app.js")(app);
