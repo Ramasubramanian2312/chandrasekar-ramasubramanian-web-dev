@@ -40,6 +40,14 @@
                     loggedIn: checkLoggedIn
                 }
             })
+            .when("/admin/", {
+                templateUrl: "views/user/admin.view.client.html",
+                controller: "AdminController",
+                controllerAs: "model",
+                resolve: {
+                    loggedIn: checkForAdminLogin
+                }
+            })
             .when("/user/:username", {
                 templateUrl: "views/user/profile-display.view.client.html",
                 controller: "ProfileDisplayController",
@@ -119,6 +127,38 @@
                     },
                     function (err) {
                         $location.url("/");
+                    }
+                );
+
+            return deferred.promise;
+        }
+
+        function checkForAdminLogin(UserService, $q, $location, $rootScope) {
+            var deferred = $q.defer();
+
+            UserService
+                .loggedIn()
+                .then(
+                    function (response) {
+                        var user = response.data;
+                        //console.log(user);
+                        if(user == '0'){
+                            $rootScope.currentUser = null;
+                            deferred.reject();
+                            $location.url("/login");
+                        } else {
+                            $rootScope.currentUser = user;
+                            if(user.role === 'admin') {
+                                deferred.resolve();
+                            }
+                            else {
+                                deferred.reject();
+                                $location.url("/");
+                            }
+                        }
+                    },
+                    function (err) {
+                        $location.url("/login");
                     }
                 );
 

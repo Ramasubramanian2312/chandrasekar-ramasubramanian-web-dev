@@ -11,6 +11,7 @@ module.exports = function () {
         findUserByUsername: findUserByUsername,
         findUserByCredentials: findUserByCredentials,
         findAllUsersWithUsername: findAllUsersWithUsername,
+        findAllUsers: findAllUsers,
         updateUser: updateUser,
         deleteUser: deleteUser
     };
@@ -38,6 +39,10 @@ module.exports = function () {
 
     function findAllUsersWithUsername(usernameList) {
         return User.find({'username': {$in : usernameList}})
+    }
+    
+    function findAllUsers() {
+        return User.find();
     }
 
     function updateUser(userId, user) {

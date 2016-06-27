@@ -274,7 +274,16 @@ module.exports = function (app, userModel, passport) {
             findUserByUsername(username, res);
         }
         else {
-            res.send(users);
+            userModel
+                .findAllUsers()
+                .then(
+                    function (users) {
+                        res.json(users)
+                    },
+                    function (err) {
+                        res.status(404).send(error);
+                    }
+                );
         }
     }
     
@@ -290,7 +299,7 @@ module.exports = function (app, userModel, passport) {
                 function (err) {
                     res.status(404).send(error);
                 }
-            )
+            );
     }
 
     function findUserByUsername(username, res) {

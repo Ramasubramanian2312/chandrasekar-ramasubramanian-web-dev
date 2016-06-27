@@ -28,6 +28,7 @@
     <script src="views/user/register.controller.client.js"></script>
     <script src="views/user/profile.controller.client.js"></script>
     <script src="views/user/profile-display.controller.client.js"></script>
+    <script src="views/user/admin.controller.client.js"></script>
     <script src="views/business/business-list.controller.client.js"></script>
     <script src="views/business/business-detail.controller.client.js"></script>
     <script src="services/user.service.client.js"></script>
@@ -40,7 +41,7 @@
 
 </head>
 
-<body ng-controller="MainController as model">
+<body ng-controller="MainController as model" class="profile-view">
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -60,6 +61,9 @@
                         </div>
                         <a href="#/searchTerm/{{model.searchText}}" class="btn btn-default">Submit</a>
                     </form>
+                    <li ng-if="currentUser.role === 'admin'">
+                        <a href="#/admin"><b>Admin</b></a>
+                    </li>
                     <li ng-if="currentUser == null">
                         <a href="#/register"><b>Register</b></a>
                     </li>
@@ -88,5 +92,15 @@
     <span ng-view>
     </span>
 
+<!--    <nav class="navbar navbar-fixed-bottom">
+        <hr>
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Your Website 2014</p>
+                </div>
+            </div>
+        </footer>
+    </nav>-->
 </body>
 </html>

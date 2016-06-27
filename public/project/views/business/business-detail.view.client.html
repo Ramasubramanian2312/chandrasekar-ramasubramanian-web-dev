@@ -101,15 +101,27 @@
                                     </div>
                                 </div>
                             <!--</div>-->
-                            <div class="caption-full">
-                                <h3>{{model.data.name}}</h3>
-                                <h4><p><i>{{model.data.reviews[0].excerpt}}</i></p></h4>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel-body">
+                                        <div class="caption-full text-left">
+                                            <h3>{{model.data.name}}</h3>
+                                            <h4><p><i>{{model.data.reviews[0].excerpt}}</i></p></h4>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="ratings">
-                                <p>
-                                    <img class="img-responsive"
-                                         ng-src="{{model.data.rating_img_url}}" alt="">
-                                </p>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel-body">
+                                        <div class="ratings">
+                                            <p>
+                                                <img class="img-responsive"
+                                                     ng-src="{{model.data.rating_img_url}}" alt="">
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="well review">
@@ -178,7 +190,7 @@
                                                         Date posted: <b>{{review.dateCreated}}</b>
                                                     </div>
                                                 </p>
-                                                <div class="text-right" ng-if="model.username === review.username && model.deleteEnable">
+                                                <div class="text-right" ng-if="(model.username === review.username && model.deleteEnable) || model.currentUser.role === 'admin'">
                                                     <a class="btn btn-danger" ng-click="model.deleteReview(model.localBusiness, review._id)">
                                                         <span class="glyphicon glyphicon-remove"></span>Delete</a>
                                                 </div>
