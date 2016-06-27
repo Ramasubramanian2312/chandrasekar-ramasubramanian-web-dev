@@ -58,13 +58,18 @@
         }
 
         function deleteUser(user) {
-            $http.delete("/rest/user/" + user._id)
-                .then(
-                    findAllUsers,
-                    function(err) {
-                        vm.error = err;
-                    }
-                );
+            if(user.role != 'admin') {
+                $http.delete("/rest/user/" + user._id)
+                    .then(
+                        findAllUsers,
+                        function(err) {
+                            vm.error = err;
+                        }
+                    );
+            }
+            else {
+                vm.error = "Cannot delete admin";
+            }
         }
 
         function updateUser(user) {
