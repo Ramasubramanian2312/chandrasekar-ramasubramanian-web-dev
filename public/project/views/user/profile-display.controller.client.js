@@ -81,7 +81,6 @@
                                 .then(
                                     function (res) {
                                         vm.followings = res.data;
-                                        console.log(vm.followings);
                                     },
                                     function (err) {
                                         console.log(err);
@@ -119,7 +118,6 @@
                 .deleteFollowerByUsernames(currentUser.username, profileUser.username)
                 .then(
                     function (response) {
-                        console.log(response.data);
                         vm.unfollow = false;
                         init();
                     },
